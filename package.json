@@ -19,6 +19,7 @@
     "*.css": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.2.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.17.0",
