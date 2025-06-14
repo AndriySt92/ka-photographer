@@ -1,7 +1,16 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+
+import { Layout } from './components';
+import { Home } from './pages';
 
 const App = () => {
-  return <div></div>;
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
