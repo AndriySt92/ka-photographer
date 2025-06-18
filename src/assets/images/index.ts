@@ -1,1 +1,12 @@
+export { default as avatar } from './avatar.jpg';
 export { default as bannerImg } from './bannerImg.png';
+export { default as galleryPhoto1 } from './gallery-photo_1.jpg';
+export { default as galleryPhoto2 } from './gallery-photo_2.jpg';
+export { default as galleryPhoto3 } from './gallery-photo_3.jpg';
+export { default as galleryPhoto4 } from './gallery-photo_4.jpg';
+export { default as galleryPhoto5 } from './gallery-photo_5.jpg';
+export { default as galleryPhoto6 } from './gallery-photo_6.jpg';
+export { default as servicesExpress } from './services_express.jpg';
+export { default as servicesGroup } from './services_group.jpg';
+export { default as servicesIndividual } from './services_individual.jpg';
+export { default as servicesLoveStory } from './services_love-story.jpg';
