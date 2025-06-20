@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Footer, Header } from './';
+import { Footer, Header, ScrollToTopButton } from './';
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -19,6 +19,9 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
+      <div className="fixed bottom-[2%] right-[2%] z-[100]">
+        <ScrollToTopButton />
+      </div>
       <Footer />
     </div>
   );
