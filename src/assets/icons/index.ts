@@ -1,7 +1,16 @@
 export { default as arrowLeft } from './arrowLeft.svg';
+export { default as arrowRight } from './arrowRight.svg';
 export { default as arrowTop } from './arrowTop.svg';
 export { default as arrowTopLeft } from './arrowTopLeft.svg';
 export { default as circle } from './circle.svg';
+export { default as email } from './email.svg';
+export { default as facebook } from './facebook.svg';
+export { default as instagram } from './instagram.svg';
 export { default as location } from './location.svg';
+export { default as locationBanner } from './location_banner.svg';
 export { default as logo } from './logo.png';
+export { default as phone } from './phone.svg';
 export { default as star } from './star.svg';
+export { default as starLeft } from './star_left.svg';
+export { default as starRight } from './star_right.svg';
+export { default as telegram } from './telegram.svg';
