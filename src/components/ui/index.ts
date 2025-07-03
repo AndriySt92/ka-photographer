@@ -1,3 +1,4 @@
+export { default as BannerWrapper } from './BannerWrapper';
 export { default as CursorFollower } from './CursorFollower';
 export { default as GroupButtons } from './GroupButtons';
 export { default as HoverCircles } from './HoverCircles';
