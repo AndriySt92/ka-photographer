@@ -6,12 +6,13 @@ import { motion, type Variants } from 'framer-motion';
 import { cn } from '../../lib';
 
 const buttonVariants = cva(
-  'rounded-full text-secondary transition-all duration-300 font-title uppercase hover:bg-accent/30',
+  'rounded-full text-secondary transition-all duration-300 font-title uppercase',
   {
     variants: {
       intent: {
-        primary: 'border border-secondary',
-        secondary: 'bg-primary border border-secondary',
+        primary: 'border border-secondary hover:bg-accent/30',
+        secondary: 'bg-primary border border-secondary hover:bg-accent/30',
+        minimal: 'bg-transarent text-white border-none',
       },
       size: {
         textSm: 'px-5 py-2 lg:text-lg',
