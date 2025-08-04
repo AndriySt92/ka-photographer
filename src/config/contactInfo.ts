@@ -1,6 +1,7 @@
 import { email, location, phone } from '../assets/icons';
+import type { ContactInfoItem } from '../types';
 
-const contactInfo = [
+const contactInfo: ContactInfoItem[] = [
   {
     type: 'location',
     icon: location,
