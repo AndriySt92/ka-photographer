@@ -11,5 +11,6 @@ export { default as Gallery } from './Gallery';
 export { default as GroupButtons } from './GroupButtons';
 export { default as HoverCircles } from './HoverCircles';
 export { default as Icon } from './Icon';
+export { default as NavLink } from './NavLink';
 export { default as SessionOrderForm } from './SessionOrderForm';
 export { default as Typography } from './Typography';
