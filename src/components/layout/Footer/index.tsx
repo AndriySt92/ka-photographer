@@ -1,7 +1,7 @@
 import { contactInfo, navigation, socialMediaPlatforms } from '../../../config';
-import { ContactInfo, Typography } from '../../ui';
+import { cn } from '../../../lib';
+import { ContactInfo, NavLink, Typography } from '../../ui';
 
-import FooterLink from './FooterLink';
 import FooterSection from './FooterSection';
 
 const PAGE_ITEMS = [
@@ -11,54 +11,55 @@ const PAGE_ITEMS = [
   { label: 'Контакти', path: '/contacts' },
 ];
 
+const servicesItem = navigation.find((item) => item.label === 'Послуги');
+const servicesChildren = servicesItem?.children || [];
+
 const Footer = () => {
-  const servicesItem = navigation.find((item) => item.label === 'Послуги');
-  const linkClasses =
-    'p-1 opacity-80 transition-all duration-300 hover:bg-accent/40 hover:opacity-100';
+  const navLinkClasses = 'w-fit p-1 opacity-80 hover:opacity-100';
 
   return (
-    <footer className="font-title bg-primary text-secondary">
+    <footer className="bg-primary">
       <div className="container">
         {/* Top Navigation */}
         <div className="hidden justify-center border-t border-secondary/60 sm:flex sm:p-3">
-          <div className="flex xl:gap-8 2xl:text-lg">
+          <nav className="flex sm:gap-8 2xl:text-lg">
             {navigation.slice(0, 2).map((item) => (
-              <FooterLink key={item.path} to={item.path}>
+              <NavLink key={item.path} to={item.path} className={navLinkClasses}>
                 {item.label}
-              </FooterLink>
+              </NavLink>
             ))}
             <a
               href={socialMediaPlatforms[2].link}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={socialMediaPlatforms[2].name}
-              className={linkClasses}
+              className={cn('cursor-pointer', navLinkClasses)}
             >
               <Typography parentAs="span" size="lg">
                 ФОТОГРАФ ІВАНО-ФРАНКІВСЬК, ЛЬВІВ
               </Typography>
             </a>
-          </div>
+          </nav>
         </div>
 
         {/* Main Footer Sections */}
-        <div className="border-t border-secondary/60 py-3 sm:py-7 xl:py-10">
-          <div className="grid grid-cols-2 grid-rows-2 place-items-start gap-5 sm:gap-3 md:grid-cols-3 md:grid-rows-1">
+        <nav className="border-t border-secondary/60 py-3 sm:py-7 xl:py-10">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-3">
             {/* Services & Prices */}
             <FooterSection title="ПОСЛУГИ ТА ЦІНИ">
-              {servicesItem?.children?.map((item) => (
-                <FooterLink key={item.path} to={item.path}>
+              {servicesChildren.map((item) => (
+                <NavLink key={item.path} to={item.path} className={navLinkClasses}>
                   {item.label === 'Love Story' ? item.label : item.label.split(' ')[0]}
-                </FooterLink>
+                </NavLink>
               ))}
             </FooterSection>
 
             {/* Pages */}
             <FooterSection title="СТОРІНКИ">
               {PAGE_ITEMS.map((item) => (
-                <FooterLink key={item.path} to={item.path}>
+                <NavLink key={item.path} to={item.path} className={navLinkClasses}>
                   {item.label}
-                </FooterLink>
+                </NavLink>
               ))}
             </FooterSection>
 
@@ -66,7 +67,7 @@ const Footer = () => {
               <ContactInfo items={contactInfo} role="footer" />
             </FooterSection>
           </div>
-        </div>
+        </nav>
 
         {/* Copyright */}
         <div className="p-2 sm:pb-4">
