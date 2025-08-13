@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import type { NavItem } from '../../../types';
+import { NavLink } from '../../ui';
 
 interface DesktopNavProps {
   item: NavItem;
@@ -13,16 +13,18 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
 
   return (
     <div
-      className="relative"
+      className="relative h-full"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <Link
+      <NavLink
+        key={item.path}
         to={item.path}
-        className="h-full px-3 py-7 font-body text-lg uppercase text-secondary transition-colors duration-300 hover:bg-accent/50"
+        font="secondary"
+        className="flex h-full items-center px-3 py-4"
       >
         {item.label}
-      </Link>
+      </NavLink>
 
       {item.children && (
         <AnimatePresence>
@@ -33,16 +35,12 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="absolute left-0 top-[51.5px] z-50 min-w-[200px] bg-primary/65"
+              className="absolute left-0 top-full z-50 min-w-[200px] bg-primary/85 shadow-md backdrop-blur-3xl backdrop-filter"
             >
-              {item.children.map((child) => (
-                <Link
-                  key={child.label}
-                  to={child.path}
-                  className="block px-4 py-3 font-body text-base font-medium uppercase text-secondary transition-colors duration-300 hover:bg-accent/50"
-                >
-                  {child.label}
-                </Link>
+              {item.children.map((item) => (
+                <NavLink key={item.path} to={item.path} font="secondary" className="block p-3 ">
+                  {item.label}
+                </NavLink>
               ))}
             </motion.div>
           )}
