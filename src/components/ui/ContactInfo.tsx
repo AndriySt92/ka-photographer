@@ -6,7 +6,7 @@ import type { ContactInfoItem } from '../../types';
 
 import { Icon, Typography } from './';
 
-type Role = 'contacts' | 'footer';
+type Role = 'contacts' | 'footer' | 'menu';
 
 const ROLE_STYLES: Record<
   Role,
@@ -31,6 +31,14 @@ const ROLE_STYLES: Record<
     containerClasses: 'sm:py-1',
     textWrapperClasses:
       'ml-2 xl:ml-3 w-fit rounded-sm opacity-80 px-1 py-1 transition-all duration-300 hover:bg-accent/40 hover:opacity-100',
+    socialWrapperClasses: 'mt-2 xl:mt-3',
+  },
+  menu: {
+    iconSize: 'h-6 w-6',
+    textSize: 'lg',
+    containerClasses: 'border-b border-b-secondary/60 py-2',
+    textWrapperClasses:
+      'ml-2 w-fit px-1 py-1 transition-all duration-300 hover:bg-accent/40 hover:opacity-100',
     socialWrapperClasses: 'mt-2 xl:mt-3',
   },
 };
@@ -59,7 +67,7 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
           <div
             className={cn(
               roleStyles.textWrapperClasses,
-              type === 'location' && 'hover:bg-transparent hover:opacity-80',
+              type === 'location' && role === 'footer' && 'hover:bg-transparent hover:opacity-80',
             )}
           >
             {type === 'location' ? (
