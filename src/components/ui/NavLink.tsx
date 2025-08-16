@@ -7,16 +7,29 @@ import { Typography } from '.';
 interface NavLinkProps {
   to: string;
   children: string;
-  className: string;
+  className?: string;
   textSize?: 'lg' | 'base';
   font?: 'secondary' | 'primary';
+  onClick?: () => void;
 }
 
-const NavLink = ({ to, children, className, textSize = 'lg', font = 'primary' }: NavLinkProps) => (
-  <Link to={to} className={cn('transition-all duration-300 hover:bg-accent/40', className)}>
+const NavLink = ({
+  to,
+  children,
+  className,
+  textSize = 'lg',
+  font = 'primary',
+  onClick,
+}: NavLinkProps) => (
+  <Link
+    to={to}
+    onClick={onClick}
+    className={cn('transition-all duration-300 hover:bg-accent/40', className)}
+  >
     <Typography parentAs="span" size={textSize} font={font}>
       {children}
     </Typography>
   </Link>
 );
+
 export default NavLink;
