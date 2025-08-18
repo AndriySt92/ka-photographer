@@ -4,6 +4,7 @@ import { navigation } from '../../../config';
 
 import DesktopNav from './DesktopNav';
 import Logo from './Logo';
+import MobileNav from './MobileNav';
 
 export const Header = () => {
   return (
@@ -19,6 +20,7 @@ export const Header = () => {
         {/* Navigation */}
         <div className="flex items-center">
           <DesktopNav navigation={navigation} />
+          <MobileNav navigation={navigation} />
         </div>
       </div>
     </header>
