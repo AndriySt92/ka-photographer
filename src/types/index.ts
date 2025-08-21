@@ -1,5 +1,6 @@
 export type { default as ContactInfoItem } from './ContactInfoItem';
 export type { default as NavItem } from './NavItem';
+export type { default as ReviewSlide } from './ReviewSlide';
 export type { default as ServicesItem } from './ServicesItem';
 export type { default as SessionOption } from './SessionOption';
 export type { default as SessionOrderData } from './SessionOrderData';

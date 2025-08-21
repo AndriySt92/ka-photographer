@@ -1,0 +1,125 @@
+import { motion } from 'framer-motion';
+
+import { BackgroundGradient, MButton, Typography } from '../../../../components/ui';
+import { reviews } from '../../../../config';
+import {
+  cn,
+  expandFadeIn,
+  fadeIn,
+  fadeInBottom,
+  fadeInLeft,
+  fadeInRight,
+  fadeInWithOpacity,
+  staggerContainer,
+} from '../../../../lib';
+
+import ReviewsSlider from './ReviewsSlider';
+
+const Reviews = () => {
+  return (
+    <motion.div
+      className="space-y-6 sm:space-y-8 xl:space-y-12"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer()}
+    >
+      {/* Title */}
+      <Typography
+        parentAs="h1"
+        size="extraLarge"
+        animated
+        parentMotionProps={{ variants: fadeInLeft }}
+      >
+        Враження
+      </Typography>
+
+      <div className="relative flex flex-col justify-between space-y-6 sm:space-y-8 lg:flex-row xl:space-y-12">
+        {/* Text for mobile */}
+        <div className="relative flex items-center justify-end py-2 sm:py-1 lg:hidden">
+          <BackgroundGradient
+            className={cn(
+              'h-full w-[90vw] sm:w-[60vw] lg:w-[38vw]',
+              'right-[calc(50%-50vw)] rotate-[180deg] bg-gradient-to-r from-[#1a00ff] to-transparent',
+            )}
+            motionProps={{ variants: expandFadeIn }}
+          />
+
+          <Typography
+            parentAs="h3"
+            size="5xl"
+            align="right"
+            content={['Говорять ті,', 'хто був по той бік', 'об’єктива']}
+            className="!leading-[1] 2xl:text-5xl"
+            animated
+            parentMotionProps={{
+              variants: staggerContainer(0),
+            }}
+            childrenVariants={fadeInRight}
+          />
+        </div>
+
+        {/* Right side - Reviews slider */}
+        <motion.div
+          className="relative border-y-[1px] border-secondary/40 py-8 sm:py-12 lg:w-[55%] lg:border-0 lg:py-0 xl:w-[40%]"
+          variants={fadeIn}
+        >
+          <ReviewsSlider slides={reviews} />
+        </motion.div>
+
+        {/* Left side - Text block */}
+        <motion.div
+          className="flex flex-col justify-between lg:w-[45%] xl:w-[55%]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer()}
+        >
+          <Typography
+            parentAs="h3"
+            size="3xl"
+            align="right"
+            content={['Говорять ті,', 'хто був по той бік', 'об’єктива']}
+            className="hidden !leading-[0.95] lg:block 2xl:text-5xl"
+            animated
+            parentMotionProps={{
+              variants: staggerContainer(0),
+            }}
+            childrenVariants={fadeInRight}
+          />
+
+          <div className="relative flex items-center py-2 sm:py-1 lg:block">
+            <BackgroundGradient
+              className={cn(
+                'block h-full w-[90vw] sm:w-[60vw] lg:hidden lg:w-[38vw] [@media(min-width:1950px)]:w-[30vw]',
+                'left-[calc(50%-50vw)] bg-gradient-to-l from-[#1a00ff] to-transparent',
+              )}
+              motionProps={{ variants: expandFadeIn }}
+            />
+
+            <Typography
+              parentAs="h3"
+              size="custom"
+              content={['Готові створити свою історію?', ' Пиши мені — і ми зробимо це разом.']}
+              className="text-base !leading-[0.95] xl:text-xl 2xl:text-2xl"
+              childrenClasses={{ 1: 'text-right mt-2 lg:mt-0' }}
+              animated
+              parentMotionProps={{
+                variants: staggerContainer(0.2),
+              }}
+              childrenVariants={fadeInBottom}
+            />
+          </div>
+
+          <div className="mt-6 w-fit self-center sm:mt-8 lg:mt-0 lg:self-end">
+            <MButton size="textLg" variants={fadeInWithOpacity}>
+              Замовити
+            </MButton>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Reviews;
