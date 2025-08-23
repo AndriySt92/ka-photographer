@@ -5,6 +5,7 @@ export { default as arrowTopLeft } from './arrowTopLeft.svg';
 export { default as burgerMenu } from './burgerMenu.svg';
 export { default as circle } from './circle.svg';
 export { default as close } from './close.svg';
+export { default as detailsArrow } from './detailsArrow.svg';
 export { default as dropdownArrow } from './dropdownArrow.svg';
 export { default as email } from './email.svg';
 export { default as facebook } from './facebook.svg';

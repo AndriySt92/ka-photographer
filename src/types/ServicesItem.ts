@@ -1,7 +1,9 @@
-interface ServicesItem {
+interface ServiceItem {
   title: string;
   img: string;
   path: string;
+  description: string;
+  icon: string;
 }
 
-export default ServicesItem;
+export default ServiceItem;
