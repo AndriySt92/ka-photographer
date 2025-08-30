@@ -1,5 +1,7 @@
 import { arrowTop } from '../../assets/icons';
 import { useScrollToTopVisibility } from '../../hooks';
+import { cn } from '../../lib';
+import { Button, Icon } from '../ui';
 
 const ScrollToTopButton = () => {
   const showScrollTop = useScrollToTopVisibility();
@@ -12,14 +14,14 @@ const ScrollToTopButton = () => {
   };
 
   return (
-    <button
-      className={`flex cursor-pointer items-center justify-center rounded-full border border-secondary bg-primary p-3 text-white transition-all duration-300 hover:scale-110 hover:bg-accent/40 sm:p-2 xl:h-14 xl:w-14 2xl:h-16 2xl:w-16 ${
-        showScrollTop ? 'translate-x-0 opacity-100' : 'translate-x-[150%] opacity-0'
-      }`}
+    <Button
+      size="iconLg"
+      intent="secondary"
+      className={cn(showScrollTop ? 'translate-x-0 opacity-100' : 'translate-x-[170%] opacity-0')}
       onClick={scrollToTop}
     >
-      <img src={arrowTop} alt="arrow-top" className="h-full w-full object-contain p-0.5" />
-    </button>
+      <Icon icon={arrowTop} name="arrow-top" size="h-9 w-9 lg:h-12 lg:w-12" className="mt-2" />
+    </Button>
   );
 };
 
