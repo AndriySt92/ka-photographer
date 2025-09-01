@@ -1,5 +1,6 @@
 export { default as avatar } from './avatar.jpg';
 export { default as bannerImg } from './bannerImg.jpg';
+export { default as galleryBanner } from './gallery_banner.webp';
 export { default as galleryPhoto1 } from './gallery-photo_1.jpg';
 export { default as galleryPhoto2 } from './gallery-photo_2.jpg';
 export { default as galleryPhoto3 } from './gallery-photo_3.jpg';
