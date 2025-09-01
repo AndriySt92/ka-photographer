@@ -8,6 +8,7 @@ export { default as FancyboxAnchor } from './FancyboxAnchor';
 export { default as FancyboxLayout } from './FancyboxLayout';
 export { default as FormField } from './FormField';
 export { default as Gallery } from './Gallery';
+export { default as GoBackButton } from './GoBackButton';
 export { default as GroupButtons } from './GroupButtons';
 export { default as HoverCircles } from './HoverCircles';
 export { default as Icon } from './Icon';
