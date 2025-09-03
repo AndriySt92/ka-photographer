@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 import { BackgroundGradient, Circles, Typography } from '../../../../components/ui';
 import { cn, expandFadeIn, fadeInLeft, fadeInRight, staggerContainer } from '../../../../lib';
 
-const DescriptionSection = () => {
+interface DescriptionProps {
+  description: string;
+  title: string;
+}
+
+const DescriptionSection = ({ description, title }: DescriptionProps) => {
   return (
     <motion.div
       className="container space-y-6 sm:space-y-8 xl:space-y-12"
@@ -14,7 +19,7 @@ const DescriptionSection = () => {
     >
       {/* Title */}
       <Typography parentAs="h2" size="6xl" animated parentMotionProps={{ variants: fadeInRight }}>
-        Найяскравіші моменти моїх зйомок
+        {title}
       </Typography>
 
       {/* Text with gradient */}
@@ -36,19 +41,14 @@ const DescriptionSection = () => {
             animated
             parentMotionProps={{ variants: fadeInLeft }}
           >
-            Різні жанри, настрої й історії усе, що формує мій стиль. Просто гортай і відчуй
-            атмосферу кожного кадру. Тут немає шаблонності лише живі миті, творчий підхід і щире
-            бачення. Кожна фотографія це результат взаємодії, довіри та уваги до деталей. У кожному
-            кадрі трохи кінематографу, трохи мрій і багато правди. Ця галерея не просто фото. Це
-            візуальна мова, якою я розповідаю про емоції, характери та моменти, які хочеться
-            зберегти.
+            {description}
           </Typography>
         </div>
 
         {/* Circles */}
         <div className="absolute left-0 top-0 z-30 h-full w-full">
           <div className="relative -top-[50%] aspect-square h-full -translate-x-[100%] xl:-translate-x-[110%] 2xl:-translate-x-[150%]">
-            <Circles className="h-[200%]" />
+            <Circles className="h-[200%]" custom={10} />
           </div>
         </div>
       </div>

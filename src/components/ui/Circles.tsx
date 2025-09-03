@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion';
 
-import { cn, fadeInScale } from '../../lib';
+import { cn, smallCircleVariants } from '../../lib';
 
-interface CircleProps {
+interface CirclesProps {
   className?: string;
+  custom?: number;
 }
 
-const Circles = ({ className }: CircleProps) => {
+const Circles = ({ className, custom }: CirclesProps) => {
   return (
     <motion.div
-      variants={fadeInScale}
+      variants={smallCircleVariants}
+      custom={custom}
       className={cn(
-        'absolute left-0 top-0 flex aspect-square h-full items-center justify-center rounded-full border border-secondary/40',
+        'absolute top-0 flex aspect-square h-full items-center justify-center rounded-full border border-secondary/40',
         className,
       )}
     >
