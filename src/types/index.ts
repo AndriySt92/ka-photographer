@@ -4,3 +4,4 @@ export type { default as ReviewSlide } from './ReviewSlide';
 export type { default as ServicesItem } from './ServicesItem';
 export type { default as SessionOption } from './SessionOption';
 export type { default as SessionOrderData } from './SessionOrderData';
+export type { default as TermsItem } from './TermsItem';
