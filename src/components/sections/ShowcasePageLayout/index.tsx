@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import { cn } from '../../../lib';
+import { cn } from '@/lib';
 
 import { Banner, DescriptionSection, GallerySection } from './components';
 
 interface BannerProps {
   bannerPhoto: string;
+  bannerPhotoMobile?: string;
   imageClassName?: string;
 }
 
@@ -39,7 +40,7 @@ const ShowcasePageLayout = ({
   return (
     <motion.div
       className={cn(
-        'relative min-h-screen w-full space-y-10 sm:space-y-14 xl:space-y-16 xl:pb-14 2xl:pb-20',
+        'relative min-h-screen w-full space-y-10 pb-10 sm:space-y-14 xl:space-y-16 xl:pb-14 2xl:pb-20',
         className,
       )}
       key={motionKey}

@@ -1,19 +1,21 @@
 import { motion } from 'framer-motion';
 
-import { BannerWrapper } from '../../../../components/ui';
-import GoBackButton from '../../../../components/ui/GoBackButton';
-import { fadeIn, staggerContainer } from '../../../../lib';
+import { BannerWrapper } from '@/components/ui';
+import GoBackButton from '@/components/ui/GoBackButton';
+import { fadeIn, staggerContainer } from '@/lib';
 
 interface BannerProps {
   bannerContent: React.ReactNode;
   imageClassName?: string;
   bannerPhoto: string;
+  bannerPhotoMobile?: string;
 }
 
-const Banner = ({ imageClassName, bannerPhoto, bannerContent }: BannerProps) => {
+const Banner = ({ imageClassName, bannerPhoto, bannerPhotoMobile, bannerContent }: BannerProps) => {
   return (
     <BannerWrapper
       imageSrc={bannerPhoto}
+      imageSrcMobile={bannerPhotoMobile}
       imageClassName={imageClassName}
       animated
       wrapperMotionProps={{
