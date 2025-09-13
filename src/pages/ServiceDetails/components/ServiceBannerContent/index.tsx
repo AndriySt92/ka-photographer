@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 
-import { Button, Typography } from '../../../../components/ui';
-import { useWindowSize } from '../../../../hooks';
-import { fadeIn, fadeInBottom, fadeInLeft, staggerContainer } from '../../../../lib';
+import { Button, SessionOrderModal, Typography } from '@/components';
+import { useModal, useWindowSize } from '@/hooks';
+import { fadeIn, fadeInBottom, fadeInLeft, staggerContainer } from '@/lib';
+import type { SessionOption } from '@/types';
 
 interface ServiceBannerTextProps {
   name: string;
+  value: SessionOption['value'];
   details: {
     price: string;
     duration: string;
@@ -14,7 +16,8 @@ interface ServiceBannerTextProps {
   };
 }
 
-const ServiceBannerContent = ({ name, details }: ServiceBannerTextProps) => {
+const ServiceBannerContent = ({ name, details, value }: ServiceBannerTextProps) => {
+  const { isOpenModal, openModal, closeModal } = useModal();
   const { height } = useWindowSize();
 
   const getTextSize = () => {
@@ -74,7 +77,7 @@ const ServiceBannerContent = ({ name, details }: ServiceBannerTextProps) => {
               `— ${details.photosCount} в авторській обробці`,
               `— ${details.deliveryTime} Термін віддачі: до 10 днів`,
             ]}
-            size="3xl"
+            size="2xl"
             animated
             parentMotionProps={{ variants: staggerContainer(0, 0, 0.2) }}
             childrenVariants={fadeInLeft}
@@ -86,8 +89,13 @@ const ServiceBannerContent = ({ name, details }: ServiceBannerTextProps) => {
             variants={fadeInBottom}
             transition={{ delay: 1 }}
           >
-            <Button size="textLg">Замовити</Button>
+            <Button size="textLg" onClick={openModal}>
+              Замовити
+            </Button>
           </motion.div>
+
+          {/* Modal  */}
+          <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} sessionType={value} />
         </div>
       </div>
 

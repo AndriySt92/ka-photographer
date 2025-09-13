@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { BackgroundGradient, MButton, Typography } from '../../../../components/ui';
-import { reviews } from '../../../../config';
+import { BackgroundGradient, MButton, SessionOrderModal, Typography } from '@/components';
+import { reviews } from '@/config';
+import { useModal } from '@/hooks';
 import {
   cn,
   expandFadeIn,
@@ -11,11 +12,13 @@ import {
   fadeInRight,
   fadeInWithOpacity,
   staggerContainer,
-} from '../../../../lib';
+} from '@/lib';
 
 import ReviewsSlider from './ReviewsSlider';
 
 const Reviews = () => {
+  const { isOpenModal, openModal, closeModal } = useModal();
+
   return (
     <motion.div
       className="space-y-6 sm:space-y-8 xl:space-y-12"
@@ -112,10 +115,13 @@ const Reviews = () => {
           </div>
 
           <div className="mt-6 w-fit self-center sm:mt-8 lg:mt-0 lg:self-end">
-            <MButton size="textLg" variants={fadeInWithOpacity}>
+            <MButton size="textLg" variants={fadeInWithOpacity} onClick={openModal}>
               Замовити
             </MButton>
           </div>
+
+          {/* Modal */}
+          <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
         </motion.div>
       </div>
     </motion.div>

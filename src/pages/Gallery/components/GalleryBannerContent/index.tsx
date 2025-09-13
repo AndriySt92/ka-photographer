@@ -1,7 +1,10 @@
-import { MButton, Typography } from '../../../../components/ui';
-import { fadeIn, fadeInLeft, fadeInRight } from '../../../../lib';
+import { MButton, SessionOrderModal, Typography } from '@/components';
+import { useModal } from '@/hooks';
+import { fadeIn, fadeInLeft, fadeInRight } from '@/lib';
 
 const GalleryBannerContent = () => {
+  const { closeModal, openModal, isOpenModal } = useModal();
+
   return (
     <div className="flex h-full w-full flex-col pt-7 lg:h-[calc(100%-76px)] lg:pt-0">
       <div className="flex h-full w-full flex-col justify-between">
@@ -26,9 +29,17 @@ const GalleryBannerContent = () => {
           >
             Кожне фото — окрема історія.
           </Typography>
-          <MButton size="textLg" variants={fadeIn} className="self-center sm:self-start">
+          <MButton
+            onClick={openModal}
+            size="textLg"
+            variants={fadeIn}
+            className="self-center sm:self-start"
+          >
             Замовити
           </MButton>
+
+          {/* Modal */}
+          <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
         </div>
       </div>
     </div>

@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 
-import { MButton, Typography } from '../../components/ui';
-import { services } from '../../config';
-import { fadeInBottom, fadeInWithOpacity, staggerContainer } from '../../lib';
+import { MButton, SessionOrderModal, Typography } from '@/components/ui';
+import { services } from '@/config';
+import { useModal } from '@/hooks';
+import { fadeInBottom, fadeInWithOpacity, staggerContainer } from '@/lib';
 
 import ServiceCard from './ServiceCard';
 
 const Services = () => {
+  const { isOpenModal, openModal, closeModal } = useModal();
+
   return (
     <motion.section
       className="relative min-h-screen overflow-hidden bg-primary"
@@ -80,9 +83,12 @@ const Services = () => {
               Зв'яжіться з нами для обговорення деталей та бронювання дати зйомки
             </Typography>
           </div>
-          <MButton size="textLg" variants={fadeInWithOpacity}>
+          <MButton size="textLg" variants={fadeInWithOpacity} onClick={openModal}>
             Замовити зйомку
           </MButton>
+
+          {/* Modal */}
+          <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
         </motion.div>
       </motion.div>
     </motion.section>
