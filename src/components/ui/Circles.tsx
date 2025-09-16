@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { cn, smallCircleVariants } from '../../lib';
+import { cn, smallCircleVariants } from '@/lib';
 
 interface CirclesProps {
   className?: string;

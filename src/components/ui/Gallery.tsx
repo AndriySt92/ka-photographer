@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { cn, fadeInScale } from '../../lib';
+import { cn, fadeInScale } from '@/lib';
 
 import { FancyboxAnchor, FancyboxLayout } from './';
 
 interface GalleryProps {
-  photosUrl: string[];
+  photosUrls: string[];
+  className?: string;
 }
 
 const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
@@ -42,7 +43,7 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
           className={cn(
-            'w-full object-cover transition-opacity duration-500 hover:scale-[1.02]',
+            'w-full object-cover transition-opacity duration-500',
             status !== 'loaded' && 'opacity-0',
           )}
           variants={fadeInScale}
@@ -59,11 +60,16 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
   );
 };
 
-const Gallery = ({ photosUrl }: GalleryProps) => {
+const Gallery = ({ photosUrls, className }: GalleryProps) => {
   return (
     <FancyboxLayout>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 2xl:gap-8">
-        {photosUrl.map((photoUrl) => (
+      <div
+        className={cn(
+          'grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 2xl:gap-8',
+          className,
+        )}
+      >
+        {photosUrls.map((photoUrl) => (
           <GalleryItem photoUrl={photoUrl} key={photoUrl} />
         ))}
       </div>

@@ -1,4 +1,4 @@
-import { cn } from '../../lib';
+import { cn } from '@/lib';
 
 interface IconProps {
   name: string;
@@ -18,13 +18,13 @@ export const Icon = ({
   as = 'icon',
 }: IconProps) => {
   const commonClasses = cn(
-    'flex items-center justify-center overflow-hidden',
+    'flex flex-shrink-0 items-center justify-center overflow-hidden',
     as === 'link' && 'cursor-pointer duration-300 hover:scale-110',
     size,
     className,
   );
 
-  const iconContent = <img src={icon} alt={name} className="h-full w-full object-contain p-0.5" />;
+  const iconContent = <img src={icon} alt={name} className="h-full w-full object-contain" />;
 
   if (as === 'link' && link) {
     return (
@@ -40,7 +40,7 @@ export const Icon = ({
     );
   }
 
-  // Static icon
+  // Static icon (non-interactive)
   return <span className={commonClasses}>{iconContent}</span>;
 };
 

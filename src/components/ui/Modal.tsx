@@ -7,9 +7,7 @@ import { close } from '@/assets/icons';
 import { useEventListener } from '@/hooks';
 import { cn, modalVariants, overlayVariants } from '@/lib';
 
-import { Button } from './Button';
-import Icon from './Icon';
-import Typography from './Typography';
+import { Button, Icon, Typography } from '..';
 
 interface Props {
   children: ReactNode;

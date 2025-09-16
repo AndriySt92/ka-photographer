@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { useFancybox } from '../../hooks';
+import { useFancybox } from '@/hooks';
 
 const FancyboxLayout = ({ children }: { children: ReactNode }) => {
   useFancybox();

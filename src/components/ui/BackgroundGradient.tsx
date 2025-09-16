@@ -1,7 +1,7 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 
-import { cn } from '../../lib';
+import { cn } from '@/lib';
 
 interface BackgroundGradientProps {
   className?: string;

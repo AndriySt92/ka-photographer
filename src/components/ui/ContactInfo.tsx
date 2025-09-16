@@ -1,8 +1,8 @@
 import { motion, type Variants } from 'framer-motion';
 
-import { socialMediaPlatforms } from '../../config';
-import { cn } from '../../lib';
-import type { ContactInfoItem } from '../../types';
+import { socialMediaPlatforms } from '@/config';
+import { cn } from '@/lib';
+import type { ContactInfoItem } from '@/types';
 
 import { Icon, Typography } from './';
 

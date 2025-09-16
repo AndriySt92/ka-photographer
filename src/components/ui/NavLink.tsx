@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { cn } from '../../lib';
+import { cn } from '@/lib';
 
 import { Typography } from '.';
 
