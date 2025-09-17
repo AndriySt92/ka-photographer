@@ -1,5 +1,5 @@
-import type { HTMLAttributes, ImgHTMLAttributes } from 'react';
-import { motion, type MotionProps } from 'framer-motion';
+import { type HTMLAttributes, type ImgHTMLAttributes, useRef } from 'react';
+import { motion, type MotionProps, useScroll, useTransform } from 'framer-motion';
 
 import { cn } from '@/lib';
 
@@ -12,7 +12,6 @@ interface BannerWrapperProps {
   imageClassName?: string;
   overlayClassName?: string;
   contentClassName?: string;
-  animated?: boolean;
   wrapperMotionProps?: MotionProps & HTMLAttributes<HTMLDivElement>;
   imageMotionProps?: MotionProps & ImgHTMLAttributes<HTMLImageElement>;
 }
@@ -26,18 +25,25 @@ const BannerWrapper = ({
   imageClassName = '',
   overlayClassName = '',
   contentClassName = '',
-  animated = false,
   wrapperMotionProps = {},
   imageMotionProps = {},
 }: BannerWrapperProps) => {
-  // Choose element types
-  const WrapperComponent = animated ? motion.div : 'div';
-  const ImageComponent = animated ? motion.img : 'img';
+  // Ref for the banner wrapper to track scroll position
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+
+  // Parallax translation & scale effects for the background image.
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.9], [1, 1.1]);
 
   return (
-    <WrapperComponent
+    <motion.div
+      ref={ref}
       className={cn('relative h-screen w-full overflow-hidden', className)}
-      {...(animated ? wrapperMotionProps : {})}
+      {...wrapperMotionProps}
     >
       {/* Background image section */}
       <div className="absolute inset-0">
@@ -50,11 +56,15 @@ const BannerWrapper = ({
           <source media="(max-width: 639px)" srcSet={imageSrcMobile} />
 
           {/* fallback */}
-          <ImageComponent
+          <motion.img
             src={imageSrcMobile || imageSrc}
             alt={imageAlt}
-            {...(animated ? imageMotionProps : {})}
+            {...imageMotionProps}
             className={cn('absolute h-full w-full object-cover', imageClassName)}
+            style={{
+              y: backgroundY,
+              scale: backgroundScale,
+            }}
           />
         </picture>
       </div>
@@ -64,7 +74,7 @@ const BannerWrapper = ({
 
       {/* Content section */}
       <div className={cn('relative z-20 h-full w-full', contentClassName)}>{children}</div>
-    </WrapperComponent>
+    </motion.div>
   );
 };
 
