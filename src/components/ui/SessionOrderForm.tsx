@@ -1,12 +1,11 @@
 import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
-import { sessionOptions } from '../../config';
-import { fadeInWithOpacity } from '../../lib';
-import type { SessionOrderData } from '../../types';
-import { GroupButtons } from '../';
+import { sessionOptions } from '@/config';
+import { cn, fadeInWithOpacity } from '@/lib';
+import type { SessionOption, SessionOrderData } from '@/types';
 
-import { FormField, MButton } from './';
+import { FormField, GroupButtons, MButton } from './';
 
 // Constants for validation
 const NAME_MIN = 2;
@@ -16,7 +15,12 @@ const SOCIAL_MAX = 70;
 const DATE_MAX = 70;
 const COMMENT_MAX = 200;
 
-const SessionOrderForm = () => {
+interface SessionOrderFormProps {
+  sessionType?: SessionOption['value'];
+  className?: string;
+}
+
+const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => {
   const {
     register,
     formState: { errors },
@@ -27,7 +31,7 @@ const SessionOrderForm = () => {
     shouldFocusError: false,
     defaultValues: {
       name: '',
-      sessionType: '',
+      sessionType: sessionType || '',
       social: '',
       comment: '',
       sessionDate: '',
@@ -40,7 +44,10 @@ const SessionOrderForm = () => {
 
   return (
     <form
-      className="pointer-events-auto flex h-full max-h-[500px] flex-col gap-5 overflow-visible xl:gap-9"
+      className={cn(
+        'pointer-events-auto flex h-full max-h-[500px] flex-col gap-5 overflow-visible',
+        className,
+      )}
       onSubmit={onSubmit}
     >
       <FormField
@@ -72,7 +79,7 @@ const SessionOrderForm = () => {
           required: "Обов'язкове поле",
           minLength: {
             value: SOCIAL_MIN,
-            message: `Telegram / Instagram має містити щонайбільше ${SOCIAL_MIN} символів`,
+            message: `Telegram / Instagram має містити щонайменше ${SOCIAL_MIN} символів`,
           },
           maxLength: {
             value: SOCIAL_MAX,
@@ -128,8 +135,15 @@ const SessionOrderForm = () => {
         }}
       />
 
+      {/* Display the first error message at the bottom of the form */}
+      {Object.values(errors)[0]?.message && (
+        <p className="absolute bottom-[67px] text-sm text-red-500">
+          {Object.values(errors)[0]?.message as string}
+        </p>
+      )}
+
       {/* Button */}
-      <div className="w-fit self-center  sm:self-end">
+      <div className="w-fit self-center sm:self-end">
         <MButton type="submit" size="textSm" variants={fadeInWithOpacity}>
           Замовити
         </MButton>

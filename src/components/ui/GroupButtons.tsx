@@ -1,6 +1,7 @@
 import { LayoutGroup, motion } from 'framer-motion';
 
-import { cn } from '../../lib';
+import { cn } from '@/lib';
+
 import { Button, Typography } from '..';
 
 interface ButtonOption {
@@ -24,7 +25,7 @@ const ActiveLine = () => {
   );
 };
 
-const GroupButtons = ({ options, selectedOption, onChange, label, error }: GroupButtonsProps) => {
+const GroupButtons = ({ options, selectedOption, onChange, label }: GroupButtonsProps) => {
   return (
     <div className="pointer-events-auto relative ">
       {label && (
@@ -42,10 +43,10 @@ const GroupButtons = ({ options, selectedOption, onChange, label, error }: Group
                 type="button"
                 onClick={() => onChange(option.value)}
                 className={cn(
-                  'relative rounded-sm xl:px-4 xl:py-3',
+                  'relative rounded-sm xl:px-3 xl:py-3 ',
                   selectedOption === option.value
-                    ? 'text-secondary opacity-100'
-                    : ' text-white opacity-70 hover:bg-accent/40 hover:opacity-100',
+                    ? 'opacity-100'
+                    : 'opacity-80 hover:bg-accent/40 hover:opacity-100',
                 )}
               >
                 {option.label}
@@ -55,8 +56,6 @@ const GroupButtons = ({ options, selectedOption, onChange, label, error }: Group
           ))}
         </LayoutGroup>
       </div>
-
-      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   );
 };

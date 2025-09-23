@@ -3,7 +3,7 @@ import type { Control, FieldValues, Path, RegisterOptions, UseFormRegister } fro
 import { useWatch } from 'react-hook-form';
 import { motion, type Variants } from 'framer-motion';
 
-import { cn, fadeInWithOpacity } from '../../lib';
+import { cn, fadeInWithOpacity } from '@/lib';
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
@@ -79,7 +79,7 @@ const FormField = <T extends FieldValues>({
   };
 
   const baseFieldClasses =
-    'w-full border-b bg-transparent py-2 text-secondary !opacity-70 outline-none sm:py-3';
+    'w-full border-b bg-transparent py-2 text-secondary !opacity-60 outline-none sm:py-3';
 
   const hasFocusOrValue = isFocused || !!value;
   return (
@@ -87,12 +87,12 @@ const FormField = <T extends FieldValues>({
       <motion.label
         className={cn(
           'pointer-events-none absolute left-0 uppercase text-white opacity-70',
-          hasFocusOrValue ? 'text-base sm:text-lg' : 'text-sm sm:text-base',
+          hasFocusOrValue ? 'text-sm xl:text-base' : 'text-sm xl:text-base',
           labelClassName,
         )}
         initial={false}
         animate={{
-          y: hasFocusOrValue ? -23 : 10,
+          y: hasFocusOrValue ? -20 : 10,
           opacity: hasFocusOrValue ? 0.8 : 1,
         }}
         transition={{
@@ -146,7 +146,6 @@ const FormField = <T extends FieldValues>({
         {/* Animated underline */}
         <AnimatedUnderline isFocused={isFocused} isError={!!error} className={underlineClassName} />
       </div>
-      {error && <div className="relative text-red-500">adwawd</div>}
     </motion.div>
   );
 };
