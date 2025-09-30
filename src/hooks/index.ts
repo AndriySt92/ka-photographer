@@ -1,4 +1,5 @@
 export { default as useAspectRatio } from './useAspectRatio';
+export { default as useClickOutside } from './useClickOutside';
 export { default as useEventListener } from './useEventListener';
 export { default as useFancybox } from './useFancybox';
 export { default as useInViewport } from './useInViewport';
