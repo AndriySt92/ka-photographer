@@ -1,3 +1,4 @@
+export { default as AdminLogin } from './AdminLogin';
 export { default as Contacts } from './Contacts';
 export { default as Gallery } from './Gallery';
 export { default as Home } from './Home';

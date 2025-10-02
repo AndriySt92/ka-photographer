@@ -1,7 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from './components';
-import { Contacts, Gallery, Home, ServiceDetails, Services, Terms, UploadPhotos } from './pages';
+import {
+  AdminLogin,
+  Contacts,
+  Gallery,
+  Home,
+  ServiceDetails,
+  Services,
+  Terms,
+  UploadPhotos,
+} from './pages';
 
 const App = () => {
   return (
@@ -15,6 +24,7 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/upload-photos" element={<UploadPhotos />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
       </Route>
     </Routes>
   );
