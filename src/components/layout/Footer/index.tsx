@@ -1,6 +1,6 @@
-import { contactInfo, navigation, socialMediaPlatforms } from '../../../config';
-import { cn } from '../../../lib';
-import { ContactInfo, NavLink, Typography } from '../../ui';
+import { ContactInfo, NavLink, Typography } from '@/components';
+import { contactInfo, navigation, socialMediaPlatforms } from '@/config';
+import { cn } from '@/lib';
 
 import FooterSection from './FooterSection';
 
@@ -33,7 +33,10 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={socialMediaPlatforms[2].name}
-              className={cn('cursor-pointer', navLinkClasses)}
+              className={cn(
+                'cursor-pointer transition-all duration-300 hover:bg-accent/40',
+                navLinkClasses,
+              )}
             >
               <Typography parentAs="span" size="lg">
                 ФОТОГРАФ ІВАНО-ФРАНКІВСЬК, ЛЬВІВ

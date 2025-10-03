@@ -9,17 +9,16 @@ const Layout = () => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
     });
   }, [pathname]);
 
   return (
-    <div className="relative z-50 flex min-h-screen flex-col">
+    <div className="relative z-50 flex min-h-screen flex-col overflow-hidden ">
       <Header />
-      <main>
+      <main className="overflow-hidden bg-primary">
         <Outlet />
       </main>
-      <div className="fixed bottom-[2%] right-[2%] z-[100]">
+      <div className="fixed bottom-[2%] right-[2%] z-[60]">
         <ScrollToTopButton />
       </div>
       <Footer />

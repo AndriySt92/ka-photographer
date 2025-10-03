@@ -1,7 +1,7 @@
-import { dropdownArrow } from '../../../assets/icons';
-import { cn } from '../../../lib';
-import type { NavItem } from '../../../types';
-import { Button, Icon, NavLink } from '../../ui';
+import { dropdownArrow } from '@/assets';
+import { Button, Icon, NavLink } from '@/components';
+import { cn } from '@/lib';
+import type { NavItem } from '@/types';
 
 interface MobileNavItemProps {
   item: NavItem;

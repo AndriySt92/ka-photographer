@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { cn } from '../../../lib';
-import { Typography } from '../../ui';
+import { Typography } from '@/components';
+import { cn } from '@/lib';
 
 interface FooterSectionProps {
   title: string;

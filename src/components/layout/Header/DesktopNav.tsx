@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { arrowTopLeft } from '../../../assets/icons';
-import type { NavItem } from '../../../types';
-import { Typography } from '../../ui';
+import { arrowTopLeft } from '@/assets';
+import { Typography } from '@/components';
+import type { NavItem } from '@/types';
 
 import DesktopNavItem from './DesktopNavItem';
 
@@ -23,7 +23,7 @@ const DesktopNav = ({ navigation }: DesktopNavProps) => {
       {/* Gallery link */}
       <Link
         to={galleryLink.path}
-        className="group ml-[66px] flex items-center gap-3 px-3 py-4 transition-colors duration-300 hover:bg-accent/40"
+        className="group ml-[66px] flex items-center gap-3 px-3 py-3 transition-colors duration-300 hover:bg-accent/40"
       >
         <span className="relative">
           <Typography parentAs="span" size="lg" font="secondary">

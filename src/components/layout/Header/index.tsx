@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { navigation } from '../../../config';
+import { navigation } from '@/config';
 
 import DesktopNav from './DesktopNav';
 import Logo from './Logo';

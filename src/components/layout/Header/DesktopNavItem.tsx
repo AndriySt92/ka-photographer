@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import type { NavItem } from '../../../types';
-import { NavLink } from '../../ui';
+import { NavLink } from '@/components';
+import type { NavItem } from '@/types';
 
 interface DesktopNavProps {
   item: NavItem;
@@ -21,7 +21,7 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
         key={item.path}
         to={item.path}
         font="secondary"
-        className="flex h-full items-center px-3 py-4"
+        className="flex h-full items-center px-3 py-3"
       >
         {item.label}
       </NavLink>

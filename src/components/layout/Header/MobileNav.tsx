@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { burgerMenu, close } from '../../../assets/icons';
-import { contactInfo } from '../../../config';
-import { useMobileNav } from '../../../hooks';
-import { fadeIn } from '../../../lib';
-import type { NavItem } from '../../../types';
-import { Button, ContactInfo, Icon } from '../../ui';
+import { burgerMenu, close } from '@/assets';
+import { Button, ContactInfo, Icon } from '@/components';
+import { contactInfo } from '@/config';
+import { useMobileNav } from '@/hooks';
+import { fadeIn, overlayVariants } from '@/lib';
+import type { NavItem } from '@/types';
 
 import Logo from './Logo';
 import MobileNavItem from './MobileNavItem';
@@ -16,17 +16,12 @@ const panelVariants = {
   visible: { x: 0 },
 };
 
-const overlayVariants = {
-  hidden: { opacity: 0, pointerEvents: 'none' },
-  visible: { opacity: 0.5, pointerEvents: 'auto' },
-};
-
 interface MobileNavProps {
   navigation: NavItem[];
 }
 
 const MobileNav = ({ navigation }: MobileNavProps) => {
-  const { isOpen, activeSubmenu, toggleMenu, closeMenu, toggleSubmenu } = useMobileNav();
+  const { isOpen, activeSubmenu, openMenu, closeMenu, toggleSubmenu } = useMobileNav();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -38,11 +33,12 @@ const MobileNav = ({ navigation }: MobileNavProps) => {
   return (
     <>
       <Button
-        onClick={toggleMenu}
+        onClick={openMenu}
         intent="minimal"
         aria-label="Open menu"
         aria-expanded={isOpen}
-        className="px-0 py-3 lg:hidden"
+        className="px-0 py-2 lg:hidden"
+        disabled={isOpen}
       >
         <Icon icon={burgerMenu} size="h-8 w-8" name="burgerMenu" />
       </Button>
@@ -58,7 +54,7 @@ const MobileNav = ({ navigation }: MobileNavProps) => {
               exit="hidden"
               variants={overlayVariants}
               onClick={closeMenu}
-              className="fixed inset-0 z-40 h-screen bg-primary/80 lg:hidden"
+              className="fixed inset-0 z-[90] h-screen bg-primary/80 lg:hidden"
             />
 
             {/* Sliding panel */}
@@ -69,7 +65,7 @@ const MobileNav = ({ navigation }: MobileNavProps) => {
               exit="hidden"
               variants={panelVariants}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed left-0 top-0 z-50 h-screen bg-primary px-4 py-2 shadow-lg lg:hidden"
+              className="fixed left-0 top-0 z-[100] h-screen bg-primary px-4 py-2 shadow-lg lg:hidden"
               aria-hidden={!isOpen}
             >
               <motion.div variants={fadeIn} className="flex h-full flex-col">
