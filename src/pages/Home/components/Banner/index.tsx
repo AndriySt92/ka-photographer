@@ -1,5 +1,5 @@
-import { bannerImg } from '../../../../assets/images';
-import { BannerWrapper } from '../../../../components/ui';
+import { bannerImg } from '@/assets';
+import { BannerWrapper } from '@/components';
 
 import AnimatedGridOverlay from './AnimatedGridOverlay';
 import TextContent from './TextContent';

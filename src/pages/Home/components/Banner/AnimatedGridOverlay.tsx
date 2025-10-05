@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { useAspectRatio } from '../../../../hooks';
-import { fadeIn } from '../../../../lib';
+import { useAspectRatio } from '@/hooks';
+import { fadeIn } from '@/lib';
 
 const ROWS = 6;
 let COLUMNS = 12;
@@ -31,7 +31,7 @@ const AnimatedGridOverlay = () => {
       COLUMNS = 12;
       break;
     default:
-      COLUMNS = 8;
+      COLUMNS = 12;
   }
 
   const squares = Array.from({ length: COLUMNS * ROWS });
