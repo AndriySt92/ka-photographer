@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { Typography } from '../../../../components';
-import { fadeInBottom, fadeInRight, staggerContainer } from '../../../../lib';
+import { Typography } from '@/components';
+import { fadeInBottom, fadeInRight, staggerContainer } from '@/lib';
 
 import Avatar from './Avatar';
 import TextCircles from './TextCircles';
@@ -13,14 +13,14 @@ const About = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ amount: 0.2, once: true }}
-      variants={staggerContainer()}
+      variants={staggerContainer(0, 0.3, 0.2)}
     >
       {/* Title */}
       <Typography
         parentAs="h1"
         size="extraLarge"
         content={['Хто', 'я?']}
-        className="flex w-full max-w-full justify-between text-6xl min-[500px]:max-w-[70%] sm:max-w-[50%] sm:text-7xl lg:max-w-[50%] lg:text-8xl xl:text-9xl 2xl:text-[160px]"
+        className="flex w-full max-w-[50%] justify-between"
         animated
         parentMotionProps={{
           variants: staggerContainer(),
@@ -31,7 +31,7 @@ const About = () => {
       {/* Content */}
       <div className="flex w-full flex-col gap-8 sm:justify-center sm:gap-8 lg:flex-row lg:gap-4">
         {/* Left Block */}
-        <div className="flex-1">
+        <div className="w-full lg:w-1/2">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-3">
             <div className="flex flex-1 flex-col lg:w-[340px] lg:flex-none lg:gap-2 xl:w-[420px] xl:gap-10 2xl:w-[500px]">
               <Avatar />
@@ -39,7 +39,6 @@ const About = () => {
               {/* Name */}
               <Typography
                 parentAs="h3"
-                // size="6xl"
                 size="custom"
                 align="right"
                 font="secondary"
@@ -49,8 +48,8 @@ const About = () => {
                 parentMotionProps={{
                   initial: 'hidden',
                   whileInView: 'visible',
-                  variants: staggerContainer(0, 0.3),
-                  viewport: { once: true },
+                  variants: staggerContainer(),
+                  viewport: { once: true, amount: 0.2 },
                 }}
                 childrenVariants={fadeInBottom}
               />
@@ -66,7 +65,10 @@ const About = () => {
               className="block w-full flex-1 text-xl leading-tight sm:mb-20 lg:hidden"
               animated
               parentMotionProps={{
+                initial: 'hidden',
+                whileInView: 'visible',
                 variants: staggerContainer(),
+                viewport: { once: true, amount: 0.2 },
               }}
               childrenVariants={fadeInRight}
             />
@@ -74,8 +76,14 @@ const About = () => {
         </div>
 
         {/* Right Block - Text Content */}
-        <div className="relative flex flex-1 gap-5 xl:gap-10">
-          <div className="relative h-full w-full space-y-4 lg:-left-[56px] lg:-top-10 lg:w-[112%] lg:space-y-0 xl:-left-[76px] xl:-top-16">
+        <div className="relative flex w-full gap-5 lg:w-1/2 xl:gap-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ amount: 0.2, once: true }}
+            variants={staggerContainer(0, 0.3, 0.3)}
+            className="relative h-full w-full space-y-4 lg:-left-[56px] lg:-top-10 lg:w-[112%] lg:space-y-0 xl:-left-[76px] xl:-top-16"
+          >
             {/* First text circle */}
             <TextCircles
               text={[
@@ -89,8 +97,7 @@ const About = () => {
             <TextCircles
               className="lg:-top-8 xl:-top-14 2xl:-top-16"
               text={[
-                'Часто працюю з тінню, простором, кольором так, як працює режисер',
-                'або художник-постановник.',
+                'Часто працюю з тінню, простором, кольором так, як працює режисер, або художник-постановник.',
                 'Мої зйомки — це більше ніж просто “позувати”.',
                 'Це про атмосферу, настрій, рух, сенс.',
               ]}
@@ -115,7 +122,7 @@ const About = () => {
                 childrenVariants={fadeInRight}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

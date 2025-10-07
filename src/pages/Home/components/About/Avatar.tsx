@@ -1,8 +1,7 @@
-import type { Variants } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
-import { avatar } from '../../../../assets/images';
-import { cn } from '../../../../lib';
+import { avatar } from '@/assets';
+import { cn } from '@/lib';
 
 interface AvatarProps {
   className?: string;
@@ -38,7 +37,7 @@ const Avatar = ({ className = '' }: AvatarProps) => {
   return (
     <motion.div
       className={cn(
-        'aspect-square w-full rounded-full border border-secondary/40  lg:p-[33px] xl:p-[53px]',
+        'aspect-square w-full rounded-full border border-secondary/40 lg:p-[33px] xl:p-[53px]',
         className,
       )}
       variants={avatarContainerVariants}
