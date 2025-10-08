@@ -1,20 +1,29 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 
+import { FancyboxAnchor, FancyboxLayout } from '@/components';
 import { cn, fadeInScale } from '@/lib';
-
-import { FancyboxAnchor, FancyboxLayout } from './';
 
 interface GalleryProps {
   photosUrls: string[];
   className?: string;
+  motionKey?: string;
 }
 
 const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('error');
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(wrapperRef, { once: true, amount: 0.4 });
+
   return (
-    <div className="overflow-hidden">
+    <motion.div
+      className="overflow-hidden"
+      ref={wrapperRef}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={fadeInScale}
+    >
       <FancyboxAnchor
         href={photoUrl}
         gallery="gallery"
@@ -35,7 +44,7 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
         )}
 
         {/* Main img */}
-        <motion.img
+        <img
           src={photoUrl}
           alt="gallery-photo"
           loading="lazy"
@@ -43,20 +52,12 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
           className={cn(
-            'w-full object-cover transition-opacity duration-500',
+            'w-full object-cover transition-all duration-500 hover:scale-105',
             status !== 'loaded' && 'opacity-0',
           )}
-          variants={fadeInScale}
-          initial="hidden"
-          whileInView="visible"
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.3 },
-          }}
-          viewport={{ amount: 0.5, once: true }}
         />
       </FancyboxAnchor>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { BannerWrapper } from '@/components/ui';
-import GoBackButton from '@/components/ui/GoBackButton';
+import { BannerWrapper, GoBackButton } from '@/components';
 import { fadeIn, staggerContainer } from '@/lib';
 
 interface BannerProps {
@@ -17,7 +16,6 @@ const Banner = ({ imageClassName, bannerPhoto, bannerPhotoMobile, bannerContent 
       imageSrc={bannerPhoto}
       imageSrcMobile={bannerPhotoMobile}
       imageClassName={imageClassName}
-      animated
       wrapperMotionProps={{
         initial: 'hidden',
         animate: 'visible',

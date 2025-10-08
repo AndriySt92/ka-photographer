@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { BackgroundGradient, Circles, Typography } from '../../../../components/ui';
-import { cn, expandFadeIn, fadeInLeft, fadeInRight, staggerContainer } from '../../../../lib';
+import { BackgroundGradient, Circles, Typography } from '@/components';
+import { cn, expandFadeIn, fadeInLeft, fadeInRight, staggerContainer } from '@/lib';
 
 interface DescriptionProps {
   description: string;
@@ -9,12 +10,15 @@ interface DescriptionProps {
 }
 
 const DescriptionSection = ({ description, title }: DescriptionProps) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(wrapperRef, { once: true, amount: 0.2 });
+
   return (
     <motion.div
       className="container space-y-6 sm:space-y-8 xl:space-y-12"
+      ref={wrapperRef}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={staggerContainer()}
     >
       {/* Title */}
