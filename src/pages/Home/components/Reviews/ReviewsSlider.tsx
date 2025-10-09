@@ -3,9 +3,9 @@ import { EffectFade, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper/types';
 
-import { arrowLeft, arrowRight } from '../../../../assets/icons';
-import { Button, Icon } from '../../../../components/ui';
-import type { ReviewSlide } from '../../../../types';
+import { arrowLeft, arrowRight } from '@/assets';
+import { Button, Icon } from '@/components';
+import type { ReviewSlide } from '@/types';
 
 import ReviewCard from './ReviewCard';
 

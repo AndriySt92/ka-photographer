@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { close } from '@/assets/icons';
+import { close } from '@/assets';
 import { useEventListener } from '@/hooks';
 import { cn, modalVariants, overlayVariants } from '@/lib';
 

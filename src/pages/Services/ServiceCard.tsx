@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { detailsArrow } from '../../assets/icons';
-import { Icon, Typography } from '../../components/ui';
-import { cn } from '../../lib';
-import type { ServicesItem } from '../../types';
+import { detailsArrow } from '@/assets';
+import { Icon, Typography } from '@/components';
+import { cn } from '@/lib';
+import type { ServicesItem } from '@/types';
 
 interface ServiceCardProps {
   item: ServicesItem;
@@ -17,7 +17,7 @@ const ServiceCard = ({ item }: ServiceCardProps) => {
 
   return (
     <motion.div
-      className="relative h-[500px] w-full overflow-hidden rounded-lg xl:h-[600px]"
+      className="relative h-[600px] w-full overflow-hidden rounded-lg xl:h-[600px]"
       transition={{ duration: 0.8 }}
       whileHover={{ y: -10 }}
       onHoverStart={() => setIsHovered(true)}
@@ -36,7 +36,7 @@ const ServiceCard = ({ item }: ServiceCardProps) => {
         />
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-end p-6 text-white">

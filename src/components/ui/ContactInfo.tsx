@@ -58,7 +58,7 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
       {items.map(({ type, icon, value }, index) => (
         <motion.div
           key={type}
-          className={cn('flex items-center', roleStyles.containerClasses)}
+          className={cn('flex items-center text-nowrap', roleStyles.containerClasses)}
           variants={variants}
           custom={index}
         >

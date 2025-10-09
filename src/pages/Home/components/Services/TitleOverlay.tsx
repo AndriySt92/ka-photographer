@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { Typography } from '../../../../components';
-import { fadeInBottom } from '../../../../lib';
+import { Typography } from '@/components';
+import { fadeInBottom } from '@/lib';
 
 const TitleOverlay = () => {
   return (

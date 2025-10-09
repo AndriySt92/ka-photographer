@@ -1,8 +1,6 @@
-import React from 'react';
-
-import { Typography } from '../../../../components';
-import { useWindowSize } from '../../../../hooks';
-import { fadeInBottom, staggerContainer } from '../../../../lib';
+import { Typography } from '@/components';
+import { useWindowSize } from '@/hooks';
+import { fadeInBottom, staggerContainer } from '@/lib';
 
 const VerticalText = () => {
   const { height } = useWindowSize();

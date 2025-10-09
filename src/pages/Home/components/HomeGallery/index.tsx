@@ -8,9 +8,9 @@ import {
   galleryPhoto4,
   galleryPhoto5,
   galleryPhoto6,
-} from '../../../../assets/images';
-import { Gallery, MButton, Typography } from '../../../../components/ui';
-import { fadeInBottom, fadeInLeft } from '../../../../lib';
+} from '@/assets';
+import { Gallery, MButton, Typography } from '@/components';
+import { fadeInBottom, fadeInLeft } from '@/lib';
 
 const galleryPhotos = [
   galleryPhoto1,
@@ -40,7 +40,7 @@ const HomeGallery = () => {
       </Typography>
 
       {/* Photos */}
-      <Gallery photosUrl={galleryPhotos} className="grid-cols-2" />
+      <Gallery photosUrls={galleryPhotos} className="grid-cols-2" />
 
       {/* Button more */}
       <div className="text-center">

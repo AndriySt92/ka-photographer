@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { BackgroundGradient, Typography } from '../../../../components/ui';
-import { cn, fadeInLeft, fadeInRight } from '../../../../lib';
+import { BackgroundGradient, Typography } from '@/components';
+import { cn, fadeInLeft, fadeInRight } from '@/lib';
 
 interface TermsItemProps {
   item: { title: string; subtitle: string };

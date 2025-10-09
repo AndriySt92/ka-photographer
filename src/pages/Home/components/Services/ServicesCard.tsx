@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Typography } from '../../../../components';
-import { cn } from '../../../../lib';
-import type { ServicesItem } from '../../../../types';
+import { Typography } from '@/components';
+import { cn } from '@/lib';
+import type { ServicesItem } from '@/types';
 
 interface ServiceCardProps {
   item: ServicesItem;
@@ -20,6 +20,9 @@ const ServicesCard = ({ item }: ServiceCardProps) => {
           className="absolute inset-0 bg-cover bg-center duration-700 group-hover:scale-105"
           style={{ backgroundImage: `url(${item.img})` }}
         />
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
 
         {/* Title overlay */}
         <div className="absolute bottom-[3%] z-20 flex w-full justify-center duration-500 group-hover:-translate-y-3 lg:bottom-[5%]">

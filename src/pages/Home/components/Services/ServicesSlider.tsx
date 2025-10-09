@@ -3,9 +3,9 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper/types';
 
-import { arrowLeft, arrowRight } from '../../../../assets/icons';
-import { Button } from '../../../../components';
-import type { ServicesItem } from '../../../../types';
+import { arrowLeft, arrowRight } from '@/assets';
+import { Button } from '@/components';
+import type { ServicesItem } from '@/types';
 
 import ServicesCard from './ServicesCard';
 

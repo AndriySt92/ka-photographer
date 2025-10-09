@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { Typography } from '../../../../components/ui';
-import { terms } from '../../../../config';
-import { fadeInBottom, staggerContainer } from '../../../../lib';
+import { Typography } from '@/components';
+import { terms } from '@/config';
+import { fadeInBottom, staggerContainer } from '@/lib';
 
 import TermsItem from './TermsItem';
 
@@ -12,8 +12,7 @@ const Terms = () => {
       className="pointer-events-none relative"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
-      variants={staggerContainer()}
+      viewport={{ once: true, amount: 0.2 }}
     >
       <div className="relative z-10 space-y-12 2xl:space-y-16">
         {/* Title */}
@@ -32,11 +31,11 @@ const Terms = () => {
           />
         </div>
 
-        <motion.div className="space-y-12 xl:space-y-3 2xl:space-y-5" variants={staggerContainer()}>
+        <div className="space-y-12 xl:space-y-3 2xl:space-y-5">
           {terms.map((item, index) => (
             <TermsItem key={item.title} item={item} index={index} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

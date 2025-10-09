@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-import { useEventListener, useInViewport, useThrottle } from '../../hooks';
+import { useEventListener, useInViewport, useThrottle } from '@/hooks';
 
 const OFFSET = 24;
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { arrowLeft } from '@/assets/icons';
+import { arrowLeft } from '@/assets';
 
 import { Button, Icon } from '..';
 

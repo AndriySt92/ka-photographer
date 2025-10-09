@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { services } from '../../../../config';
-import { staggerContainer } from '../../../../lib';
+import { services } from '@/config';
+import { staggerContainer } from '@/lib';
 
 import ServicesSlider from './ServicesSlider';
 import TitleOverlay from './TitleOverlay';

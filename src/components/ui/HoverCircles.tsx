@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { logo } from '@/assets/icons';
+import { logo } from '@/assets';
 import { circleVariants, cn, staggerContainer } from '@/lib';
 
 interface HoverCirclesProps {
