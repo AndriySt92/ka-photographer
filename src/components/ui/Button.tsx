@@ -6,26 +6,25 @@ import { motion, type Variants } from 'framer-motion';
 import { cn } from '../../lib';
 
 const buttonVariants = cva(
-  'rounded-full text-secondary transition-all duration-300 font-title uppercase',
+  'inline-flex items-center justify-center rounded-full text-secondary transition-all duration-300 font-title uppercase',
   {
     variants: {
       intent: {
-        primary: 'border border-secondary hover:bg-accent/30',
-        secondary: 'bg-primary border border-secondary hover:bg-accent/30',
-        minimal: 'bg-transarent text-white border-none',
+        primary: 'border border-secondary',
+        secondary: 'bg-primary border border-secondary hover:bg-accent/30 ',
+        minimal: 'bg-transarent border-none',
       },
       size: {
-        textSm: 'px-5 py-2 lg:text-lg',
-        textLg: 'px-5 py-2 lg:px-7 lg:py-3 lg:text-lg',
+        textSm: 'px-5 py-2 text-sm lg:text-base',
+        textLg: 'px-5 py-2 lg:px-10 lg:py-3 text-base lg:text-lg xl:text-xl',
         iconSm: 'p-1 sm:p-2 h-10 w-10 lg:h-12 lg:w-12',
-        iconLg: 'p-2 sm:p-3 h-14 w-14 lg:h-16 lg:w-16',
+        iconLg: 'p-1 sm:p-3 h-14 w-14 lg:h-16 lg:w-16',
       },
     },
     compoundVariants: [
-      // Scale for icon buttons
       {
-        size: ['iconSm', 'iconLg'],
-        class: 'hover:scale-110',
+        intent: ['primary', 'secondary'],
+        class: 'hover:scale-105 active:scale-95',
       },
     ],
     defaultVariants: {
@@ -68,7 +67,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     },
     ref,
   ) => {
-    const baseClasses = cn(buttonVariants({ intent, size, className }));
+    const baseClasses = cn(buttonVariants({ intent, size }), className);
 
     // Handle link
     if (Component === Link) {
