@@ -6,9 +6,9 @@ import DesktopNav from './DesktopNav';
 import Logo from './Logo';
 import MobileNav from './MobileNav';
 
-export const Header = () => {
+const Header = () => {
   return (
-    <header className="fixed left-0 right-0 top-0 z-[100] flex items-center bg-primary/65 shadow-md backdrop-blur-3xl backdrop-filter">
+    <header className="dropdown-blur fixed left-0 right-0 top-0 z-[100] flex items-center shadow-md">
       <div className="container flex w-full items-center justify-between">
         {/* Logo */}
         <div className="text-xl font-bold text-gray-800">
