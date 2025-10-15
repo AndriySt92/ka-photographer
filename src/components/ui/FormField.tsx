@@ -5,6 +5,8 @@ import { motion, type Variants } from 'framer-motion';
 
 import { cn, fadeInWithOpacity } from '@/lib';
 
+import ErrorMessage from './ErrorMessage';
+
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
@@ -92,7 +94,7 @@ const FormField = <T extends FieldValues>({
         )}
         initial={false}
         animate={{
-          y: hasFocusOrValue ? -20 : 10,
+          y: hasFocusOrValue ? -16 : 10,
           opacity: hasFocusOrValue ? 0.8 : 1,
         }}
         transition={{
@@ -146,6 +148,9 @@ const FormField = <T extends FieldValues>({
         {/* Animated underline */}
         <AnimatedUnderline isFocused={isFocused} isError={!!error} className={underlineClassName} />
       </div>
+
+      {/* Form validation error */}
+      <ErrorMessage animationKey="form-validation-error" error={error} />
     </motion.div>
   );
 };

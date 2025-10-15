@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 
-import { Button, Typography } from '..';
+import { Button, ErrorMessage, Typography } from '..';
 
 interface ButtonOption {
   label: string;
@@ -25,7 +25,7 @@ const ActiveLine = () => {
   );
 };
 
-const GroupButtons = ({ options, selectedOption, onChange, label }: GroupButtonsProps) => {
+const GroupButtons = ({ options, selectedOption, onChange, label, error }: GroupButtonsProps) => {
   return (
     <div className="pointer-events-auto relative ">
       {label && (
@@ -33,7 +33,6 @@ const GroupButtons = ({ options, selectedOption, onChange, label }: GroupButtons
           {label}
         </Typography>
       )}
-
       <div className="scrollbar-hide relative flex justify-between overflow-x-auto overflow-y-hidden whitespace-nowrap border-b border-secondary/60">
         <LayoutGroup>
           {options.map((option) => (
@@ -56,6 +55,9 @@ const GroupButtons = ({ options, selectedOption, onChange, label }: GroupButtons
           ))}
         </LayoutGroup>
       </div>
+
+      {/* Form validation error */}
+      <ErrorMessage animationKey="form-validation-error" error={error} />
     </div>
   );
 };

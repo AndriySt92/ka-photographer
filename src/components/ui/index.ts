@@ -4,6 +4,7 @@ export { Button, MButton } from './Button';
 export { default as Circles } from './Circles';
 export { default as ContactInfo } from './ContactInfo';
 export { default as CursorFollower } from './CursorFollower';
+export { default as ErrorMessage } from './ErrorMessage';
 export { default as FancyboxAnchor } from './FancyboxAnchor';
 export { default as FancyboxLayout } from './FancyboxLayout';
 export { default as FormField } from './FormField';
