@@ -8,14 +8,13 @@ export const navigation: NavItem[] = [
     children: [
       { label: 'Індивідуальна зйомка', path: '/services/individual' },
       { label: 'Love Story', path: '/services/love-story' },
-      { label: 'Експрес-зйомка', path: '/services/express' },
+      { label: 'Експрес зйомка', path: '/services/express' },
       { label: 'Групова зйомка', path: '/services/group' },
     ],
   },
-  { label: 'Про мене', path: '/about' },
-  { label: 'Відгуки', path: '/reviews' },
   { label: 'Умови', path: '/terms' },
   { label: 'Контакти', path: '/contacts' },
+  { label: 'Галерея', path: '/gallery' },
 ];
 
 export default navigation;

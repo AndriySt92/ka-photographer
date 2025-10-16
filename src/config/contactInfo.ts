@@ -1,4 +1,4 @@
-import { email, location, phone } from '../assets/icons';
+import { email, location, phone } from '../assets';
 import type { ContactInfoItem } from '../types';
 
 const contactInfo: ContactInfoItem[] = [

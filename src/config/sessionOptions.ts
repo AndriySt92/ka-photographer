@@ -2,7 +2,7 @@ import type { SessionOption } from '../types';
 
 const sessionOptions: SessionOption[] = [
   { label: 'індивідуальна', value: 'individual' },
-  { label: 'lovestory', value: 'lovestory' },
+  { label: 'loveStory', value: 'love-story' },
   { label: 'експрес', value: 'express' },
   { label: 'групова', value: 'group' },
 ];

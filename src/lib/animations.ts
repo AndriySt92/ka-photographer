@@ -47,8 +47,9 @@ export const fadeInWithShadow: Variants = {
       '0 0 0px rgba(255,255,255,0)',
       '0 0 5px rgba(255,255,255,0.5)',
       '0 0 15px rgba(255,255,255,0.8)',
-      '0 0 30px rgba(255,255,255,0.6)',
+      '0 0 25px rgba(255,255,255,0.6)',
       '0 0 10px rgba(255,255,255,0.4)',
+      '0 0 0px rgba(255,255,255,0)',
     ],
     transition: {
       duration: 1,
@@ -62,6 +63,14 @@ export const fadeInWithShadow: Variants = {
   },
 };
 
+export const fadeInWithOpacity: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
+
 export const fadeInScale: Variants = {
   hidden: { opacity: 0, filter: 'blur(10px)', scale: 0.9 },
   visible: {
@@ -69,9 +78,6 @@ export const fadeInScale: Variants = {
     scale: 1,
     filter: 'blur(0px)',
     transition: {
-      type: 'spring',
-      stiffness: 60,
-      damping: 15,
       duration: 0.8,
     },
   },
@@ -147,4 +153,36 @@ export const smallCircleVariants: Variants = {
       type: 'tween',
     },
   }),
+};
+
+export const overlayVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+export const modalVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    filter: 'blur(10px)',
+    y: -50,
+    transition: { duration: 0.3 },
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      type: 'spring',
+      damping: 25,
+      stiffness: 300,
+      duration: 0.5,
+    },
+  },
+  exit: {
+    opacity: 0,
+    filter: 'blur(10px)',
+    y: 50,
+    transition: { duration: 0.3 },
+  },
 };

@@ -1,29 +1,29 @@
 import {
-  reviews_1_1,
-  reviews_1_2,
-  reviews_2,
-  reviews_3,
-  reviews_avatar_1,
-  reviews_avatar_2,
-  reviews_avatar_3,
+  client_1_review_1,
+  client_1_review_2,
+  client_2_review_1,
+  client_3_review_1,
+  client_avatar_1,
+  client_avatar_2,
+  client_avatar_3,
 } from '../assets/images';
 import type { ReviewSlide } from '../types';
 
 const reviews: ReviewSlide[] = [
   [
-    { avatar: reviews_avatar_1, items: [reviews_1_1, reviews_1_2] },
-    { avatar: reviews_avatar_2, items: [reviews_2] },
-    { avatar: reviews_avatar_3, items: [reviews_3] },
+    { avatar: client_avatar_1, items: [client_1_review_1, client_1_review_2] },
+    { avatar: client_avatar_2, items: [client_2_review_1] },
+    { avatar: client_avatar_3, items: [client_3_review_1] },
   ],
   [
-    { avatar: reviews_avatar_1, items: [reviews_1_1, reviews_1_2] },
-    { avatar: reviews_avatar_3, items: [reviews_3] },
-    { avatar: reviews_avatar_2, items: [reviews_2] },
+    { avatar: client_avatar_2, items: [client_2_review_1] },
+    { avatar: client_avatar_3, items: [client_3_review_1] },
+    { avatar: client_avatar_1, items: [client_1_review_1, client_1_review_2] },
   ],
   [
-    { avatar: reviews_avatar_2, items: [reviews_2] },
-    { avatar: reviews_avatar_3, items: [reviews_3] },
-    { avatar: reviews_avatar_1, items: [reviews_1_1, reviews_1_2] },
+    { avatar: client_avatar_1, items: [client_2_review_1] },
+    { avatar: client_avatar_3, items: [client_3_review_1] },
+    { avatar: client_avatar_2, items: [client_1_review_1, client_1_review_2] },
   ],
 ];
 

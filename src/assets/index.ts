@@ -1,2 +1,2 @@
-export * as Icons from './icons';
-export * as Images from './images';
+export * from './icons';
+export * from './images';
