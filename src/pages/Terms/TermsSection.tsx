@@ -40,7 +40,7 @@ const TermsItem = ({ icon, title, subtitle, index }: TermsItemProps) => {
 
         {/* Term content */}
         <motion.div
-          className="flex-1 rounded-3xl border border-white/40 bg-gradient-to-r from-accent/40 to-primary p-8 backdrop-blur-lg"
+          className="section-border flex-1 rounded-3xl bg-gradient-to-r from-accent/40 to-primary p-8 backdrop-blur-lg"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -73,7 +73,7 @@ const TermsItem = ({ icon, title, subtitle, index }: TermsItemProps) => {
 
 const TermsSection = () => {
   return (
-    <div className="relative space-y-5 sm:space-y-8 lg:space-y-12">
+    <div className="space-y-sm relative">
       {terms.map(({ icon, title, subtitle }, index) => (
         <TermsItem index={index} key={title} icon={icon} title={title} subtitle={subtitle} />
       ))}

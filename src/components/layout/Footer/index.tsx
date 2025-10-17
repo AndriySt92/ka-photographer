@@ -21,7 +21,7 @@ const Footer = () => {
     <footer className="bg-primary">
       <div className="container">
         {/* Top Navigation */}
-        <div className="hidden justify-center border-t border-secondary/60 sm:flex sm:p-3">
+        <div className="section-border-t hidden justify-center sm:flex sm:p-3">
           <nav className="flex sm:gap-8 2xl:text-lg">
             {navigation.slice(0, 2).map((item) => (
               <NavLink key={item.path} to={item.path} className={navLinkClasses}>
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Sections */}
-        <nav className="border-t border-secondary/60 py-3 sm:py-7 xl:py-10">
+        <nav className="section-border-t py-3 sm:py-7 xl:py-10">
           <div className="grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-3">
             {/* Services & Prices */}
             <FooterSection title="ПОСЛУГИ ТА ЦІНИ">

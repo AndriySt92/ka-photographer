@@ -9,12 +9,12 @@ import TermsSection from './TermsSection';
 const Terms = () => {
   return (
     <motion.section
-      className="relative h-full overflow-hidden bg-primary py-16 xl:py-24"
+      className="padding-y relative h-full overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="container space-y-12 xl:space-y-16">
+      <div className="space-y-lg container">
         {/* Title */}
         <Typography
           parentAs="h1"

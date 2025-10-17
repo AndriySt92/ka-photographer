@@ -15,7 +15,7 @@ const DescriptionSection = ({ description, title }: DescriptionProps) => {
 
   return (
     <motion.div
-      className="container space-y-6 sm:space-y-8 xl:space-y-12"
+      className="space-y-sm container"
       ref={wrapperRef}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}

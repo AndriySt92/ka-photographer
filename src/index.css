@@ -1,3 +1,110 @@
+@import './assets/fonts/fonts.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .space-y-lg {
+    @apply space-y-10 sm:space-y-14 xl:space-y-16;
+  }
+
+  .space-y-sm {
+    @apply space-y-6 sm:space-y-8 xl:space-y-12;
+  }
+
+  .padding-y {
+    @apply py-10 lg:py-16 2xl:py-20;
+  }
+
+  .padding-b {
+    @apply pb-10 lg:pb-16 2xl:pb-20;
+  }
+
+  .margin-t {
+    @apply mt-12 lg:mt-[52px];
+  }
+
+  .section-border {
+    @apply border border-secondary/40;
+  }
+
+  .section-border-y {
+    @apply border-y border-secondary/60;
+  }
+
+  .section-border-b {
+    @apply border-b border-secondary/60;
+  }
+
+  .section-border-t {
+    @apply border-t border-secondary/60;
+  }
+}
+
+/* Input styles */
+.input-container:has(input:-webkit-autofill) label,
+.input-container:has(input:autofill) label {
+  transform: translateY(-20px);
+  opacity: 0;
+  font-size: 0.75rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+/* Scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slider styles */
+.swiper-fade .swiper-slide {
+  opacity: 0;
+  backdrop-filter: blur(10px) brightness(0.5);
+  filter: blur(3px) contrast(0.8);
+  transform: scale(0.95);
+  transition: all 1000ms ease-in-out;
+}
+
+.swiper-fade .swiper-slide-active,
+.swiper-fade .swiper-slide-duplicate-active {
+  opacity: 1;
+  backdrop-filter: blur(0) brightness(1);
+  filter: blur(0px) contrast(1);
+  transform: scale(1);
+}
+
+/* Blur effects */
+.custom-blur::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: -1;
+}

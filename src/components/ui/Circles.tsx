@@ -13,11 +13,11 @@ const Circles = ({ className, custom }: CirclesProps) => {
       variants={smallCircleVariants}
       custom={custom}
       className={cn(
-        'absolute top-0 flex aspect-square h-full items-center justify-center rounded-full border border-secondary/40',
+        'section-border absolute top-0 flex aspect-square h-full items-center justify-center rounded-full',
         className,
       )}
     >
-      <div className="absolute aspect-square h-[50%] rounded-full border border-secondary/40" />
+      <div className="section-border absolute aspect-square h-[50%] rounded-full" />
     </motion.div>
   );
 };

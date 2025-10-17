@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 
 const Header = () => {
   return (
-    <header className="dropdown-blur fixed left-0 right-0 top-0 z-[100] flex items-center shadow-md">
+    <header className="custom-blur fixed left-0 right-0 top-0 z-[100] flex items-center shadow-md">
       <div className="container flex w-full items-center justify-between">
         {/* Logo */}
         <div className="text-xl font-bold text-gray-800">

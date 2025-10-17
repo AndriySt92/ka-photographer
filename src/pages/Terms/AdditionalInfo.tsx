@@ -10,7 +10,7 @@ const additionalInfoItems = [
 ];
 
 const AdditionalInfoItem = ({ text, icon }: { text: string; icon: string }) => (
-  <div className="flex flex-col items-center rounded-2xl border border-secondary/40 bg-black p-6 backdrop-blur-sm">
+  <div className="section-border flex flex-col items-center rounded-2xl bg-primary p-6 backdrop-blur-sm">
     <div className="mb-3 text-3xl">{icon}</div>
 
     <Typography parentAs="h3" size="base" align="center" className="normal-case opacity-80">
@@ -22,7 +22,7 @@ const AdditionalInfoItem = ({ text, icon }: { text: string; icon: string }) => (
 const AdditionalInfo = () => {
   return (
     <motion.div
-      className="rounded-3xl border border-secondary/40 bg-gradient-to-r from-primary to-accent/40 p-8 text-center md:p-12"
+      className="section-border rounded-3xl bg-gradient-to-r from-primary to-accent/40 p-8 text-center md:p-12"
       variants={fadeInLeft}
       initial="hidden"
       whileInView="visible"

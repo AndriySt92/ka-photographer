@@ -37,7 +37,7 @@ const Avatar = ({ className = '' }: AvatarProps) => {
   return (
     <motion.div
       className={cn(
-        'aspect-square w-full rounded-full border border-secondary/40 lg:p-[33px] xl:p-[53px]',
+        'section-border aspect-square w-full rounded-full lg:p-[33px] xl:p-[53px]',
         className,
       )}
       variants={avatarContainerVariants}

@@ -107,8 +107,8 @@ const UploadPhotos = () => {
   const hasFilesError = formState.errors.files?.message;
 
   return (
-    <div className="mt-[57px] flex min-h-screen flex-col items-center justify-center py-20">
-      <div className="container w-full max-w-5xl space-y-6 xl:space-y-8 2xl:space-y-10">
+    <div className="margin-t padding-y flex min-h-screen flex-col items-center justify-center">
+      <div className="space-y-sm container w-full max-w-5xl">
         <Typography parentAs="h1" size="3xl" align="center">
           Завантажити фото
         </Typography>

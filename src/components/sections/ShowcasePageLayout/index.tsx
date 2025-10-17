@@ -39,10 +39,7 @@ const ShowcasePageLayout = ({
 }: ShowcasePageLayoutProps) => {
   return (
     <motion.div
-      className={cn(
-        'relative min-h-screen w-full space-y-10 pb-10 sm:space-y-14 xl:space-y-16 xl:pb-14 2xl:pb-20',
-        className,
-      )}
+      className={cn('space-y-lg padding-b relative min-h-screen w-full', className)}
       key={motionKey}
     >
       <Banner {...bannerProps} bannerContent={children} />

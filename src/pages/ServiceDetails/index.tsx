@@ -1,14 +1,25 @@
 import { useParams } from 'react-router-dom';
 
-import { expressBanner, groupBanner, individualBanner, loveStoryBanner } from '../../assets/images';
-import { ShowcasePageLayout } from '../../components/sections';
+import {
+  expressBanner,
+  groupBanner,
+  individualBanner,
+  loveStoryBanner,
+  servicesExpress,
+  servicesGroup,
+  servicesIndividual,
+  servicesLoveStory,
+} from '@/assets/images';
+import { ShowcasePageLayout } from '@/components';
 
-import { ServiceBannerContent } from './components/';
+import { ServiceBannerContent } from './components';
 
 const servicesData = {
   individual: {
     name: 'Індивідуальна зйомка',
+    value: 'individual',
     bannerPhoto: individualBanner,
+    bannerPhotoMobile: servicesIndividual,
     details: {
       price: '1500 грн',
       duration: '1 год',
@@ -34,7 +45,9 @@ const servicesData = {
   },
   'love-story': {
     name: 'Love Story',
+    value: 'loveStory',
     bannerPhoto: loveStoryBanner,
+    bannerPhotoMobile: servicesLoveStory,
     details: {
       price: '2000 грн',
       duration: '1 год',
@@ -60,7 +73,9 @@ const servicesData = {
   },
   express: {
     name: 'Експрес зйомка',
+    value: 'express',
     bannerPhoto: expressBanner,
+    bannerPhotoMobile: servicesExpress,
     details: {
       price: '1000 грн',
       duration: '30 хв',
@@ -86,7 +101,9 @@ const servicesData = {
   },
   group: {
     name: 'Групова зйомка',
+    value: 'group',
     bannerPhoto: groupBanner,
+    bannerPhotoMobile: servicesGroup,
     details: {
       price: '3000 грн',
       duration: '1-2 год',
@@ -100,7 +117,7 @@ const servicesData = {
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776669/group/tfo4i6stvtrypcvqgmuw.webp',
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776668/group/bch5vto67jaw8fxrecba.jpg',
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776671/group/prut2yphhnjra1aokeff.webp',
-      'https://res.cloudinary.com/drcptrml4/image/upload/v1750776668/group/urdyxlwyfusins9vxwxy.webp',
+      // 'https://res.cloudinary.com/drcptrml4/image/upload/v1750776668/group/urdyxlwyfusins9vxwxy.webp',
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776669/group/mvajkqzvhetjcvijy2kx.webp',
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776685/group/ond8fgzydwyelo2sxjnm.webp',
       'https://res.cloudinary.com/drcptrml4/image/upload/v1750776686/group/sb0lysjhyute9wl1ozma.webp',
@@ -115,17 +132,18 @@ const servicesData = {
 const ServiceDetails = () => {
   const { type } = useParams();
   const service = servicesData[type as keyof typeof servicesData];
-  const { recentPhotos, description, name, bannerPhoto, details } = service;
+  const { recentPhotos, description, name, value, bannerPhoto, bannerPhotoMobile, details } =
+    service;
 
   return (
     <ShowcasePageLayout
       galleryProps={{ photosUrls: recentPhotos }}
       descriptionProps={{ description, title: `Що таке ${name}?` }}
-      bannerProps={{ bannerPhoto }}
+      bannerProps={{ bannerPhoto, bannerPhotoMobile }}
       motionKey={type}
     >
       {/* Banner text */}
-      <ServiceBannerContent name={name} details={details} />
+      <ServiceBannerContent name={name} details={details} value={value} />
     </ShowcasePageLayout>
   );
 };

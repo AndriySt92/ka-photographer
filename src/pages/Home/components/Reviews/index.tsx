@@ -21,7 +21,7 @@ const Reviews = () => {
 
   return (
     <motion.div
-      className="space-y-6 sm:space-y-8 xl:space-y-12"
+      className="space-y-sm"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -37,7 +37,7 @@ const Reviews = () => {
         Враження
       </Typography>
 
-      <div className="relative flex flex-col justify-between space-y-6 sm:space-y-8 lg:flex-row xl:space-y-12">
+      <div className="space-y-sm relative flex flex-col justify-between lg:flex-row ">
         {/* Text for mobile */}
         <div className="relative flex items-center justify-end py-2 sm:py-1 lg:hidden">
           <BackgroundGradient
@@ -64,7 +64,7 @@ const Reviews = () => {
 
         {/* Right side - Reviews slider */}
         <motion.div
-          className="relative border-y-[1px] border-secondary/40 py-8 sm:py-12 lg:w-[55%] lg:border-0 lg:py-0 xl:w-[40%]"
+          className="section-border-y relative py-8 sm:py-12 lg:w-[55%] lg:border-0 lg:py-0 xl:w-[40%]"
           variants={fadeIn}
         >
           <ReviewsSlider slides={reviews} />

@@ -18,7 +18,7 @@ const Services = () => {
       transition={{ duration: 0.8 }}
     >
       <motion.div
-        className="container relative z-10 space-y-12 py-16 2xl:space-y-16 2xl:py-24"
+        className="padding-y space-y-lg container relative z-10"
         initial="hidden"
         animate="visible"
       >
@@ -68,7 +68,7 @@ const Services = () => {
 
         {/* Order service section */}
         <motion.div
-          className="space-y-6 text-center lg:space-y-10"
+          className="space-y-sm text-center"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}

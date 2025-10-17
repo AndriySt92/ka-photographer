@@ -14,7 +14,7 @@ const Terms = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="relative z-10 space-y-12 2xl:space-y-16">
+      <div className="space-y-lg relative z-10">
         {/* Title */}
         <div className="flex justify-center sm:justify-start">
           <Typography

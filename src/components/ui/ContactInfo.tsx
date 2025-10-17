@@ -21,7 +21,7 @@ const ROLE_STYLES: Record<
   contacts: {
     iconSize: 'h-7 w-7 xl:h-10 xl:w-10',
     textSize: 'xl',
-    containerClasses: 'border-b border-b-secondary/60 py-3 sm:py-5 xl:py-7',
+    containerClasses: 'section-border-b py-3 sm:py-5 xl:py-7',
     textWrapperClasses: 'pointer-events-auto ml-3 xl:ml-7',
     socialWrapperClasses: 'mt-4 sm:mt-5 xl:mt-7',
   },
@@ -36,7 +36,7 @@ const ROLE_STYLES: Record<
   menu: {
     iconSize: 'h-6 w-6',
     textSize: 'lg',
-    containerClasses: 'border-b border-b-secondary/60 py-2',
+    containerClasses: 'section-border-b py-2',
     textWrapperClasses:
       'ml-2 w-fit px-1 py-1 transition-all duration-300 hover:bg-accent/40 hover:opacity-100',
     socialWrapperClasses: 'mt-2 xl:mt-3',

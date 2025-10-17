@@ -25,7 +25,7 @@ const Banner = ({ imageClassName, bannerPhoto, bannerPhotoMobile, bannerContent 
         variants: fadeIn,
       }}
     >
-      <div className="container relative h-full overflow-hidden py-14 lg:py-20">
+      <div className="padding-y container relative h-full overflow-hidden">
         {/* Go back button */}
         <motion.div className="mb-8 mt-4 hidden lg:block" variants={fadeIn}>
           <GoBackButton />

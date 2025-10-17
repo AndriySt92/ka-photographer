@@ -30,9 +30,9 @@ const SignIn = () => {
 
   return (
     <div className="h-screen">
-      <div className="container flex h-full items-center justify-center space-y-12 py-16 2xl:space-y-16 2xl:py-24">
+      <div className="space-y-lg padding-y container flex h-full items-center justify-center">
         <form
-          className="flex w-full max-w-xl flex-col space-y-6 rounded-3xl border border-secondary/40 bg-gradient-to-r from-accent/40 to-primary p-8 backdrop-blur-lg"
+          className="section-border flex w-full max-w-xl flex-col space-y-6 rounded-3xl bg-gradient-to-r from-accent/40 p-8 backdrop-blur-lg"
           onSubmit={onSubmit}
           autoComplete="off"
         >

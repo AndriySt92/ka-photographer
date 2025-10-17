@@ -143,11 +143,11 @@ const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => 
       )}
 
       {/* Button */}
-      <div className="w-fit self-center sm:self-end">
+      <motion.div layout className="w-fit self-center sm:self-end">
         <MButton type="submit" size="textSm" variants={fadeInWithOpacity}>
           Замовити
         </MButton>
-      </div>
+      </motion.div>
     </form>
   );
 };

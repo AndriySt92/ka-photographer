@@ -62,7 +62,7 @@ const Modal = ({ children, onClose, isOpen, title }: Props) => {
           >
             <div
               className={cn(
-                'relative w-fit max-w-[360px] rounded-md border border-secondary/40 bg-primary p-6 shadow-[0_10px_30px_rgba(0,0,0,0.25)] sm:mx-2 sm:max-w-xl sm:p-6',
+                'section-border relative w-fit max-w-[360px] rounded-md bg-primary p-6 shadow-[0_10px_30px_rgba(0,0,0,0.25)] sm:mx-2 sm:max-w-xl sm:p-6',
               )}
               onClick={(e) => e.stopPropagation()}
             >

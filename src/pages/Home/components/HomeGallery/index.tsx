@@ -24,7 +24,7 @@ const galleryPhotos = [
 const HomeGallery = () => {
   return (
     <motion.div
-      className="space-y-6 sm:space-y-8 xl:space-y-12"
+      className="space-y-sm"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

@@ -33,7 +33,7 @@ const GroupButtons = ({ options, selectedOption, onChange, label, error }: Group
           {label}
         </Typography>
       )}
-      <div className="scrollbar-hide relative flex justify-between overflow-x-auto overflow-y-hidden whitespace-nowrap border-b border-secondary/60">
+      <div className="scrollbar-hide section-border-b relative flex justify-between overflow-x-auto overflow-y-hidden whitespace-nowrap">
         <LayoutGroup>
           {options.map((option) => (
             <div className="relative flex-shrink-0" key={option.value}>

@@ -16,7 +16,7 @@ export const MobileNavItem = ({ item, isActive, toggleSubmenu, closeMenu }: Mobi
   };
 
   return (
-    <div className="border-b border-secondary/60 py-3">
+    <div className="section-border-b py-3">
       <div className="flex items-center">
         <NavLink to={item.path} onClick={handleClick}>
           {item.label}
