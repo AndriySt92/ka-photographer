@@ -9,7 +9,7 @@ import {
   galleryPhoto5,
   galleryPhoto6,
 } from '@/assets';
-import { Gallery, MButton, Typography } from '@/components';
+import { Button, Gallery, Typography } from '@/components';
 import { fadeInBottom, fadeInLeft } from '@/lib';
 
 const galleryPhotos = [
@@ -43,11 +43,17 @@ const HomeGallery = () => {
       <Gallery photosUrls={galleryPhotos} className="grid-cols-2" />
 
       {/* Button more */}
-      <div className="text-center">
-        <MButton as={Link} to="/gallery" size="textLg" variants={fadeInBottom}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInBottom}
+        viewport={{ once: true, amount: 0.2 }}
+        className="text-center"
+      >
+        <Button as={Link} to="/gallery" size="textLg">
           Більше
-        </MButton>
-      </div>
+        </Button>
+      </motion.div>
     </motion.div>
   );
 };

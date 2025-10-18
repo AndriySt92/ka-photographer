@@ -14,6 +14,9 @@ const TermsItem = ({ item, index }: TermsItemProps) => {
   return (
     <motion.div
       variants={isEven ? fadeInRight : fadeInLeft}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       className="space-y-0 lg:space-y-2 xl:space-y-3 2xl:space-y-5"
     >
       <div className="relative flex items-center py-2 sm:py-1">

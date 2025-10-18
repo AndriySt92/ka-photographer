@@ -33,9 +33,7 @@ const ReviewsSlider = ({ slides }: ReviewsSliderProps) => {
       </Button>
 
       <Swiper
-        modules={[Navigation, EffectFade]} // Added EffectFade and Autoplay modules
-        // effect="fade" // Enable fade effect
-        // fadeEffect={{ crossFade: true }} // Enable crossfade between slides
+        modules={[Navigation, EffectFade]}
         slidesPerView={1}
         loop={true}
         onSwiper={(swiper) => (swiperRef.current = swiper)}

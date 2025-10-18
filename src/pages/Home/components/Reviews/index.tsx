@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { BackgroundGradient, MButton, SessionOrderModal, Typography } from '@/components';
+import { BackgroundGradient, Button, SessionOrderModal, Typography } from '@/components';
 import { reviews } from '@/config';
 import { useModal } from '@/hooks';
 import {
@@ -10,7 +10,6 @@ import {
   fadeInBottom,
   fadeInLeft,
   fadeInRight,
-  fadeInWithOpacity,
   staggerContainer,
 } from '@/lib';
 
@@ -37,7 +36,7 @@ const Reviews = () => {
         Враження
       </Typography>
 
-      <div className="space-y-sm relative flex flex-col justify-between lg:flex-row ">
+      <div className="space-y-sm relative flex flex-col justify-between gap-2 lg:flex-row ">
         {/* Text for mobile */}
         <div className="relative flex items-center justify-end py-2 sm:py-1 lg:hidden">
           <BackgroundGradient
@@ -64,7 +63,7 @@ const Reviews = () => {
 
         {/* Right side - Reviews slider */}
         <motion.div
-          className="section-border-y relative py-8 sm:py-12 lg:w-[55%] lg:border-0 lg:py-0 xl:w-[40%]"
+          className="section-border-y relative py-8 sm:py-12 lg:w-[54%] lg:border-0 lg:py-0 xl:w-[40%]"
           variants={fadeIn}
         >
           <ReviewsSlider slides={reviews} />
@@ -72,7 +71,7 @@ const Reviews = () => {
 
         {/* Left side - Text block */}
         <motion.div
-          className="flex flex-col justify-between lg:w-[45%] xl:w-[55%]"
+          className="flex flex-col justify-between lg:w-[45%] xl:w-[57%]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -104,7 +103,7 @@ const Reviews = () => {
               parentAs="h3"
               size="custom"
               content={['Готові створити свою історію?', ' Пиши мені — і ми зробимо це разом.']}
-              className="text-base !leading-[0.95] xl:text-xl 2xl:text-2xl"
+              className="text-base !leading-[0.95] xl:text-lg 2xl:text-2xl"
               childrenClasses={{ 1: 'text-right mt-2 lg:mt-0' }}
               animated
               parentMotionProps={{
@@ -114,11 +113,17 @@ const Reviews = () => {
             />
           </div>
 
-          <div className="mt-6 w-fit self-center sm:mt-8 lg:mt-0 lg:self-end">
-            <MButton size="textLg" variants={fadeInWithOpacity} onClick={openModal}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInBottom}
+            viewport={{ once: true, amount: 0.2 }}
+            className="mt-6 w-fit self-center sm:mt-8 lg:mt-0 lg:self-end"
+          >
+            <Button size="textLg" onClick={openModal}>
               Замовити
-            </MButton>
-          </div>
+            </Button>
+          </motion.div>
 
           {/* Modal */}
           <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
