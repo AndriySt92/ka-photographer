@@ -9,12 +9,13 @@ export default {
         accent: '#1a00ff',
       },
       fontFamily: {
-        title: ['Montserrat', 'sans-serif'],
-        body: ['HelveticaNeueCyr', 'sans-serif'],
+        primary: ['Montserrat', 'sans-serif'],
+        secondary: ['HelveticaNeueCyr', 'sans-serif'],
       },
       container: {
         padding: {
-          DEFAULT: '1rem',
+          sm: '24px',
+          DEFAULT: '16px',
         },
         center: true,
         screens: {
@@ -22,9 +23,14 @@ export default {
           md: '768px',
           lg: '1024px',
           xl: '1280px',
-          '2xl': '1536px',
-          '3xl': '1720px',
+          '2xl': '1440px',
+          '3xl': '1620px',
         },
+      },
+      screens: {
+        '2xl': '1720px',
+        'pointer-fine': { raw: '(pointer: fine)' },
+        'pointer-coarse': { raw: '(pointer: coarse)' },
       },
     },
   },
