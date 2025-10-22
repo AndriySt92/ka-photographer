@@ -45,6 +45,7 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
           1024: { slidesPerView: 3 },
           1280: { slidesPerView: 4 },
         }}
+        loop={true}
         className="h-full"
       >
         {slides.map((item) => (

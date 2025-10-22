@@ -5,7 +5,7 @@ import { sessionOptions } from '@/config';
 import { cn, fadeInWithOpacity } from '@/lib';
 import type { SessionOption, SessionOrderData } from '@/types';
 
-import { FormField, GroupButtons, MButton } from './';
+import { Button, FormField, GroupButtons } from './';
 
 // Constants for validation
 const NAME_MIN = 2;
@@ -143,10 +143,10 @@ const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => 
       )}
 
       {/* Button */}
-      <motion.div layout className="w-fit self-center sm:self-end">
-        <MButton type="submit" size="textSm" variants={fadeInWithOpacity}>
+      <motion.div layout className="w-fit self-center sm:self-end" variants={fadeInWithOpacity}>
+        <Button type="submit" size="textSm">
           Замовити
-        </MButton>
+        </Button>
       </motion.div>
     </form>
   );

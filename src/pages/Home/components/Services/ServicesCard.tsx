@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { Typography } from '@/components';
-import { cn } from '@/lib';
+import { cn, fadeIn } from '@/lib';
 import type { ServicesItem } from '@/types';
 
 interface ServiceCardProps {
@@ -11,7 +12,13 @@ interface ServiceCardProps {
 const ServicesCard = ({ item }: ServiceCardProps) => {
   return (
     <Link to={item.path} className="block h-full">
-      <div className="group relative inset-0 flex h-full flex-col overflow-hidden border-l pointer-fine:border-primary pointer-coarse:border-none">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeIn}
+        viewport={{ once: true, amount: 0.2 }}
+        className="group relative inset-0 flex h-full flex-col overflow-hidden border-l pointer-fine:border-primary pointer-coarse:border-none"
+      >
         {/* White overlay - visible by default */}
         <div className="opacity-1 absolute inset-0 z-10 hidden bg-white duration-700 group-hover:opacity-0 pointer-fine:block" />
 
@@ -39,7 +46,7 @@ const ServicesCard = ({ item }: ServiceCardProps) => {
             {item.title}
           </Typography>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };

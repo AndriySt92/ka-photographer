@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { locationBanner } from '@/assets/icons';
 import { Icon, Typography } from '@/components';
 import { useWindowSize } from '@/hooks';
-import { fadeIn, fadeInBottom, fadeInLeft, fadeInWithShadow, staggerContainer } from '@/lib';
+import { fadeIn, fadeInBottom, fadeInLeft, staggerContainer } from '@/lib';
 
 const TextContent = () => {
   const { height, width } = useWindowSize();
@@ -44,7 +44,7 @@ const TextContent = () => {
             parentMotionProps={{
               variants: staggerContainer(),
             }}
-            childrenVariants={fadeInWithShadow}
+            childrenVariants={fadeIn}
           />
 
           {/* Location section */}
@@ -57,7 +57,7 @@ const TextContent = () => {
               childrenClasses={{ 1: 'text-right' }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0.2),
+                variants: staggerContainer(0.1),
               }}
               childrenVariants={fadeInBottom}
             />
@@ -80,7 +80,7 @@ const TextContent = () => {
             className="!leading-[0.9] sm:mb-0 2xl:text-2xl "
             animated
             parentMotionProps={{
-              variants: staggerContainer(0.1, 0.5),
+              variants: staggerContainer(0, 0.1),
             }}
             childrenVariants={fadeInLeft}
           />
@@ -97,7 +97,7 @@ const TextContent = () => {
               }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0.2, 0.5),
+                variants: staggerContainer(0, 0.1),
               }}
               childrenVariants={fadeInBottom}
             />

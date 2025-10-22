@@ -1,5 +1,5 @@
 import { BackgroundGradient, Circles, Typography } from '@/components';
-import { cn, expandFadeIn, fadeInRight, staggerContainer } from '@/lib';
+import { cn, expandFadeIn, fadeInLeft, staggerContainer } from '@/lib';
 
 interface TextCirclesProps {
   text?: string[];
@@ -31,7 +31,7 @@ const TextCircles = ({ text = [], className = '' }: TextCirclesProps) => {
             parentMotionProps={{
               variants: staggerContainer(),
             }}
-            childrenVariants={fadeInRight}
+            childrenVariants={fadeInLeft}
           />
         </div>
       </div>

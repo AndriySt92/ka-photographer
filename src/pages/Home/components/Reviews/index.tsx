@@ -96,7 +96,6 @@ const Reviews = () => {
                 'block h-full w-[90vw] sm:w-[60vw] lg:hidden lg:w-[38vw] [@media(min-width:1950px)]:w-[30vw]',
                 'left-[calc(50%-50vw)] bg-gradient-to-l from-[#1a00ff] to-transparent',
               )}
-              motionProps={{ variants: expandFadeIn }}
             />
 
             <Typography
@@ -104,12 +103,12 @@ const Reviews = () => {
               size="custom"
               content={['Готові створити свою історію?', ' Пиши мені — і ми зробимо це разом.']}
               className="text-base !leading-[0.95] xl:text-lg 2xl:text-2xl"
-              childrenClasses={{ 1: 'text-right mt-2 lg:mt-0' }}
+              childrenClasses={{ 1: 'text-left lg:text-right mt-2 lg:mt-0' }}
               animated
               parentMotionProps={{
                 variants: staggerContainer(0.2),
               }}
-              childrenVariants={fadeInBottom}
+              childrenVariants={fadeInLeft}
             />
           </div>
 

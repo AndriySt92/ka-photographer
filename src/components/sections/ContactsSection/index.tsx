@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 import { BackgroundGradient, ContactInfo, SessionOrderForm, Typography } from '@/components';
 import { contactInfo } from '@/config';
-import { expandFadeIn, fadeIn, fadeInLeft, fadeInWithOpacity, staggerContainer } from '@/lib';
+import { fadeInLeft, fadeInWithOpacity, staggerContainer } from '@/lib';
 
 interface ContactsSectionProps {
   isPage?: boolean;
@@ -49,28 +49,18 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
           </Typography>
         </div>
 
-        <div className="flex flex-col gap-10 sm:flex-row sm:justify-between sm:gap-0">
+        <div className="flex flex-col gap-14 sm:flex-row sm:justify-between sm:gap-0">
           {/* Contacts info section */}
-          <div className="order-2 mx-auto w-full max-w-[500px] sm:order-1 sm:mx-0 sm:w-[40%] sm:max-w-none lg:w-[37%] xl:w-[37%]">
+          <div className="mx-auto w-full max-w-[500px] sm:order-1 sm:mx-0 sm:w-[40%] sm:max-w-none lg:w-[37%] xl:w-[37%]">
             {/* Title */}
             <motion.div
-              variants={staggerContainer(0.8, 0, 1)}
-              className="pointer-events-none relative mb-2 flex items-center sm:mb-4 sm:py-1 xl:mb-7"
+              variants={fadeInLeft}
+              className="pointer-events-none relative mb-2 flex items-center py-2 sm:mb-4 sm:py-1 xl:mb-7"
             >
               {/* Gradient overlay */}
-              <BackgroundGradient
-                animated
-                motionProps={{ variants: expandFadeIn }}
-                className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]"
-              />
+              <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
 
-              <Typography
-                parentAs="h3"
-                size="2xl"
-                className="relative z-20 ml-2 2xl:text-3xl"
-                animated
-                parentMotionProps={{ variants: fadeIn }}
-              >
+              <Typography parentAs="h3" size="5xl" className="relative z-20 ml-2 2xl:text-3xl">
                 Як ми можемо зв’язатися
               </Typography>
             </motion.div>
@@ -80,26 +70,16 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
           </div>
 
           {/* Contacts form section */}
-          <div className="order-1 mx-auto w-full max-w-[500px] sm:order-2 sm:mx-0 sm:w-[45%] sm:max-w-none lg:w-[39%] xl:w-[37%]">
+          <div className="mx-auto w-full max-w-[500px] sm:order-2 sm:mx-0 sm:w-[45%] sm:max-w-none lg:w-[39%] xl:w-[37%]">
             {/* Title */}
             <motion.div
-              variants={staggerContainer(0, 0, 1)}
-              className="relative mb-6 flex items-center sm:mb-9 xl:mb-14"
+              variants={fadeInLeft}
+              className="relative mb-5 flex items-center py-2 sm:mb-9 sm:py-1 xl:mb-14"
             >
               {/* Gradient overlay */}
-              <BackgroundGradient
-                animated
-                motionProps={{ variants: expandFadeIn }}
-                className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]"
-              />
+              <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
 
-              <Typography
-                parentAs="h3"
-                size="2xl"
-                className="relative z-20 ml-2 2xl:text-3xl"
-                animated
-                parentMotionProps={{ variants: fadeIn }}
-              >
+              <Typography parentAs="h3" size="5xl" className="relative z-20 ml-2 2xl:text-3xl">
                 Залишай запит
               </Typography>
             </motion.div>
