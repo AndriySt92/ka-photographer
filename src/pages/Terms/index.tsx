@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { SessionOrderSection, Typography } from '@/components';
 import { fadeInBottom, staggerContainer } from '@/lib';
 
-import AdditionalInfo from './AdditionalInfo';
-import TermsSection from './TermsSection';
+import { AdditionalInfo, TermsSection } from './components';
 
 const Terms = () => {
   return (

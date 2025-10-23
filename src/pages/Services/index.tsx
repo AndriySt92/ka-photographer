@@ -5,7 +5,7 @@ import { services } from '@/config';
 import { useModal } from '@/hooks';
 import { fadeInBottom, fadeInWithOpacity, staggerContainer } from '@/lib';
 
-import ServiceCard from './ServiceCard';
+import { ServiceCard } from './components';
 
 const Services = () => {
   const { isOpenModal, openModal, closeModal } = useModal();
