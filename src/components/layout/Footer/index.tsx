@@ -15,7 +15,7 @@ const servicesItem = navigation.find((item) => item.label === 'Послуги');
 const servicesChildren = servicesItem?.children || [];
 
 const Footer = () => {
-  const navLinkClasses = 'w-fit p-1 opacity-80 hover:opacity-100';
+  const navLinkClasses = 'w-fit p-1 opacity-80 pointer-fine:hover:opacity-100 active:opacity-100';
 
   return (
     <footer className="bg-primary">
@@ -34,7 +34,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               aria-label={socialMediaPlatforms[2].name}
               className={cn(
-                'cursor-pointer transition-all duration-300 hover:bg-accent/40',
+                'cursor-pointer transition-all duration-300 pointer-fine:hover:bg-accent/40',
                 navLinkClasses,
               )}
             >
@@ -46,8 +46,8 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Sections */}
-        <nav className="section-border-t py-3 sm:py-7 xl:py-10">
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-3">
+        <nav className="section-border-t py-8 xl:py-10">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 md:gap-3">
             {/* Services & Prices */}
             <FooterSection title="ПОСЛУГИ ТА ЦІНИ">
               {servicesChildren.map((item) => (
@@ -73,7 +73,7 @@ const Footer = () => {
         </nav>
 
         {/* Copyright */}
-        <div className="p-2 sm:pb-4">
+        <div className="pb-6 pt-2">
           <Typography parentAs="p" size="lg" align="center" className="normal-case">
             Анастасія Кугіт - Фотограф в м. Івано-Франківськ, Львів. 2025 | Політика
             конфіденційності

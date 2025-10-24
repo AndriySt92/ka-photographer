@@ -51,7 +51,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
 
         <div className="flex flex-col gap-14 sm:flex-row sm:justify-between sm:gap-0">
           {/* Contacts info section */}
-          <div className="mx-auto w-full max-w-[500px] sm:order-1 sm:mx-0 sm:w-[40%] sm:max-w-none lg:w-[37%] xl:w-[37%]">
+          <div className="mx-auto w-full max-w-[500px] sm:order-1 sm:mx-0 sm:w-[40%] sm:max-w-none lg:w-[38%]">
             {/* Title */}
             <motion.div
               variants={fadeInLeft}
@@ -60,7 +60,11 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               {/* Gradient overlay */}
               <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
 
-              <Typography parentAs="h3" size="5xl" className="relative z-20 ml-2 2xl:text-3xl">
+              <Typography
+                parentAs="h3"
+                size="3xl"
+                className="relative z-20 ml-0 whitespace-nowrap text-xl leading-[1.1] sm:ml-2"
+              >
                 Як ми можемо зв’язатися
               </Typography>
             </motion.div>
@@ -79,7 +83,11 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               {/* Gradient overlay */}
               <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
 
-              <Typography parentAs="h3" size="5xl" className="relative z-20 ml-2 2xl:text-3xl">
+              <Typography
+                parentAs="h3"
+                size="3xl"
+                className="relative z-20 ml-0 text-xl leading-[1.1] sm:ml-2"
+              >
                 Залишай запит
               </Typography>
             </motion.div>

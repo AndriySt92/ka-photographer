@@ -24,7 +24,7 @@ const NavLink = ({
   <Link
     to={to}
     onClick={onClick}
-    className={cn('transition-all duration-300 hover:bg-accent/40', className)}
+    className={cn('transition-all duration-300 pointer-fine:hover:bg-accent/40', className)}
   >
     <Typography parentAs="span" size={textSize} font={font}>
       {children}

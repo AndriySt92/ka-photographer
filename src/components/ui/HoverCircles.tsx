@@ -39,7 +39,7 @@ const HoverCircles = ({ withLogo = false, className }: HoverCirclesProps) => {
           custom={1}
         >
           {withLogo && (
-            <div className="hidden h-[60%] w-[60%] items-center justify-center duration-300 hover:scale-105 hover:opacity-60 sm:flex">
+            <div className="hidden h-[55%] w-[55%] items-center justify-center duration-300 hover:scale-105 hover:opacity-60 sm:flex">
               <img src={logo} alt="logo" className="object-contain" />
             </div>
           )}

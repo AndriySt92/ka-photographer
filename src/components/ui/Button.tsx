@@ -3,15 +3,16 @@ import { Link, type LinkProps } from 'react-router-dom';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion, type Variants } from 'framer-motion';
 
-import { cn } from '../../lib';
+import { cn } from '@/lib';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-full text-secondary transition-all duration-300 font-title uppercase',
+  'inline-flex items-center justify-center rounded-full text-secondary transition-all duration-300 font-title uppercase disabled:opacity-50 disabled:scale-100',
   {
     variants: {
       intent: {
         primary: 'border border-secondary',
-        secondary: 'bg-primary border border-secondary hover:bg-accent/30 ',
+        secondary:
+          'bg-primary border border-secondary pointer-fine:hover:bg-accent/40 active:bg-accent/40',
         minimal: 'bg-transarent border-none',
       },
       size: {
@@ -45,6 +46,7 @@ interface ButtonBaseProps extends VariantProps<typeof buttonVariants> {
   loadingText?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   variants?: Variants;
+  disasbled?: boolean;
 }
 
 type ButtonProps<T extends ButtonAs> = (T extends 'button'
