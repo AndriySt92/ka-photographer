@@ -57,15 +57,16 @@ const Services = () => {
         {/* Services grid */}
         <motion.div
           className="grid grid-cols-1 gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, staggerChildren: 0.2 }}
+          variants={staggerContainer(0.9, 0.3, 0.1)}
+          initial="hidden"
+          animate="visible"
         >
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} item={service} index={index} />
+          {services.map((service) => (
+            <motion.div key={service.title} variants={fadeInBottom}>
+              <ServiceCard key={service.title} item={service} />
+            </motion.div>
           ))}
         </motion.div>
-
         {/* Order service section */}
         <motion.div
           className="space-y-sm text-center"

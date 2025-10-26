@@ -2,19 +2,17 @@ import { motion } from 'framer-motion';
 
 import { Typography } from '@/components';
 import { terms } from '@/config';
-import { fadeInLeft, fadeInRight } from '@/lib';
+import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib';
 
 interface TermsItemProps {
   icon: string;
   title: string;
   subtitle: string;
-  index: number;
+  isEvenItem: boolean;
+  isLastItem: boolean;
 }
 
-const TermsItem = ({ icon, title, subtitle, index }: TermsItemProps) => {
-  const isEvenItem = (index + 1) % 2 === 0;
-  const isLastItem = index === terms.length - 1;
-
+const TermsItem = ({ icon, title, subtitle, isEvenItem, isLastItem }: TermsItemProps) => {
   return (
     <motion.div
       variants={isEvenItem ? fadeInLeft : fadeInRight}
@@ -34,7 +32,7 @@ const TermsItem = ({ icon, title, subtitle, index }: TermsItemProps) => {
 
           {/* Vertical connector */}
           {!isLastItem && (
-            <div className="absolute left-1/2 top-16 z-10 h-[calc(100%+2rem)] w-1 -translate-x-1/2 transform bg-accent/40 lg:h-[calc(100%+3rem)]"></div>
+            <div className="absolute left-1/2 top-16 z-10 h-[calc(100%+2rem)] w-1 -translate-x-1/2 transform bg-accent/40 lg:h-[94%]"></div>
           )}
         </div>
 
@@ -73,11 +71,29 @@ const TermsItem = ({ icon, title, subtitle, index }: TermsItemProps) => {
 
 const TermsSection = () => {
   return (
-    <div className="space-y-sm relative">
-      {terms.map(({ icon, title, subtitle }, index) => (
-        <TermsItem index={index} key={title} icon={icon} title={title} subtitle={subtitle} />
-      ))}
-    </div>
+    <motion.div
+      className="space-y-sm relative"
+      variants={staggerContainer(0.9, 0.3, 0.1)}
+      initial="hidden"
+      animate="visible"
+    >
+      {terms.map(({ icon, title, subtitle }, index) => {
+        const isEvenItem = (index + 1) % 2 === 0;
+        const isLastItem = index === terms.length - 1;
+
+        return (
+          <motion.div key={title} variants={isEvenItem ? fadeInLeft : fadeInRight}>
+            <TermsItem
+              isEvenItem={isEvenItem}
+              isLastItem={isLastItem}
+              icon={icon}
+              title={title}
+              subtitle={subtitle}
+            />
+          </motion.div>
+        );
+      })}
+    </motion.div>
   );
 };
 

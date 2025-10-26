@@ -1,10 +1,12 @@
 import { useRef } from 'react';
-import { Navigation } from 'swiper/modules';
+import { motion } from 'framer-motion';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper/types';
 
 import { arrowLeft, arrowRight } from '@/assets';
 import { Button } from '@/components';
+import { fadeIn } from '@/lib';
 import type { ServicesItem } from '@/types';
 
 import ServicesCard from './ServicesCard';
@@ -20,7 +22,13 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
   const handleNext = () => swiperRef.current?.slideNext();
 
   return (
-    <div className="relative h-full">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      variants={fadeIn}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative h-full"
+    >
       {/* Custom Navigation Buttons */}
       <Button
         onClick={handlePrev}
@@ -34,7 +42,8 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
       </Button>
 
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Pagination]}
+        effect="fade"
         slidesPerView={1}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{
@@ -65,7 +74,7 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
       >
         <img src={arrowRight} alt="Previous" className="h-full w-full object-contain p-0.5" />
       </Button>
-    </div>
+    </motion.div>
   );
 };
 

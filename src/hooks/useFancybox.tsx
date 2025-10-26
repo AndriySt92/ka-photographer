@@ -7,6 +7,7 @@ const fancyboxOptions = {
   Thumbs: true,
   Toolbar: true,
   closeButton: false,
+  hideScrollbar: false,
   Images: {
     zoom: true,
   },

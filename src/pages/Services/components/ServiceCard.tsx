@@ -1,25 +1,31 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 import { detailsArrow } from '@/assets';
 import { Icon, Typography } from '@/components';
-import { cn } from '@/lib';
+import { cn, fadeInBottom } from '@/lib';
 import type { ServicesItem } from '@/types';
 
 interface ServiceCardProps {
   item: ServicesItem;
-  index: number;
 }
 
 const ServiceCard = ({ item }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(wrapperRef, { once: true, amount: 0.01 });
 
   return (
     <motion.div
       className="relative h-[600px] w-full overflow-hidden rounded-lg xl:h-[600px]"
       transition={{ duration: 0.8 }}
       whileHover={{ y: -10 }}
+      ref={wrapperRef}
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={fadeInBottom}
+      viewport={{ once: true, amount: 0.2 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
