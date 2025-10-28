@@ -1,4 +1,5 @@
 export type { default as AdminLoginFormData } from './AdminLoginFormData';
+export type { default as ApiResponse } from './ApiResponse';
 export type { default as ContactInfoItem } from './ContactInfoItem';
 export type { default as NavItem } from './NavItem';
 export type { default as ReviewSlide } from './ReviewSlide';
