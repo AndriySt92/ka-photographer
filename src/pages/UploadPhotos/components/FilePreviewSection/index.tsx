@@ -12,6 +12,7 @@ interface FilePreviewSectionProps {
   showUploadButton?: boolean;
   className?: string;
   hasError?: boolean;
+  isLoading?: boolean;
 }
 
 const FilePreviewSection = ({
@@ -21,6 +22,7 @@ const FilePreviewSection = ({
   onClearAll,
   showUploadButton = false,
   hasError,
+  isLoading,
   className,
 }: FilePreviewSectionProps) => {
   if (files.length === 0) return null;
@@ -87,7 +89,7 @@ const FilePreviewSection = ({
         <div className="mt-6 flex gap-4">
           {showUploadButton && (
             <Button type="submit" intent="secondary" disabled={hasError}>
-              Завантажити {files.length} фото
+              {!isLoading ? `Завантажити ${files.length} фото` : 'Завантаження...'}
             </Button>
           )}
           <Button type="button" intent="secondary" onClick={onClearAll}>

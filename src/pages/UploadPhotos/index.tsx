@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import type { FileRejection } from 'react-dropzone';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Typography } from '@/components';
+import { ErrorMessage, Typography } from '@/components';
 import { selectSessionOptions } from '@/config';
+import { useUploadPhotos } from '@/hooks';
 import type { UploadPhotosFormData } from '@/types';
 
 import { Checkbox, FileDropzone, FilePreviewSection, Select } from './components';
@@ -22,6 +23,8 @@ const UploadPhotos = () => {
     });
   const files = watch('files');
   const sessionType = watch('sessionType');
+
+  const { mutateAsync, isPending } = useUploadPhotos();
 
   // Cleanup object URLs
   useEffect(() => {
@@ -95,12 +98,25 @@ const UploadPhotos = () => {
     setRejected([]);
   }, [setRejected]);
 
-  const onSubmit = (data: UploadPhotosFormData) => {
-    console.log(data);
-    reset();
-    setRejected([]);
+  const onSubmit = async (data: UploadPhotosFormData) => {
+    const categories = [data.sessionType];
+    if (data.addToGallery && data.sessionType !== 'gallery') {
+      categories.push('gallery');
+    }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      await mutateAsync({
+        categories,
+        photoFiles: files,
+      });
+
+      reset();
+      setRejected([]);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const hasFiles = files.length > 0;
@@ -149,11 +165,17 @@ const UploadPhotos = () => {
             onClearAll={clearAllFiles}
             showUploadButton
             hasError={Boolean(hasFilesError)}
+            isLoading={isPending}
           />
 
           {/* Files error */}
           {hasFilesError && (
-            <p className="mt-2 text-sm text-red-500">{`${formState.errors.files?.message}. Видаліть ${files.length - MAX_FILES} файл(ів).`}</p>
+            <ErrorMessage
+              error={`${formState.errors.files?.message}. Видаліть ${files.length - MAX_FILES} файл(ів).`}
+              size="sm"
+              className="text-center"
+              animationKey="upload-error"
+            />
           )}
 
           {/* Rejected files preview section */}

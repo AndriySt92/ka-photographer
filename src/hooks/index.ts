@@ -7,4 +7,5 @@ export { default as useMobileNav } from './useMobileNav';
 export { default as useModal } from './useModal';
 export { default as useScrollToTopVisibility } from './useScrollToTopVisibility';
 export { default as useThrottle } from './useThrottle';
+export { default as useUploadPhotos } from './useUploadPhotos';
 export { default as useWindowSize } from './useWindowSize';
