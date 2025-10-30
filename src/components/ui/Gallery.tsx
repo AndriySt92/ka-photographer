@@ -3,31 +3,31 @@ import { motion, useInView } from 'framer-motion';
 
 import { FancyboxAnchor, FancyboxLayout } from '@/components';
 import { cn, fadeInScale } from '@/lib';
+import type { PhotoItem } from '@/types';
 
 interface GalleryProps {
-  photosUrls: string[];
+  photos: PhotoItem[];
   className?: string;
-  motionKey?: string;
 }
 
 const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
-  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('error');
+  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(wrapperRef, { once: true, amount: 0.4 });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <motion.div
+      ref={ref}
       className="overflow-hidden"
-      ref={wrapperRef}
+      variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
-      variants={fadeInScale}
     >
       <FancyboxAnchor
         href={photoUrl}
         gallery="gallery"
-        className="relative aspect-[3/4] w-full cursor-pointer overflow-hidden"
+        className="h-[70vh] cursor-pointer overflow-hidden sm:h-[80vh]"
       >
         {/* Loading placeholder */}
         {status === 'loading' && (
@@ -52,7 +52,7 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
           className={cn(
-            'w-full object-cover transition-all duration-500 hover:scale-105',
+            'h-full w-full object-cover transition-opacity duration-500',
             status !== 'loaded' && 'opacity-0',
           )}
         />
@@ -61,7 +61,7 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
   );
 };
 
-const Gallery = ({ photosUrls, className }: GalleryProps) => {
+const Gallery = ({ photos, className }: GalleryProps) => {
   return (
     <FancyboxLayout>
       <div
@@ -70,8 +70,8 @@ const Gallery = ({ photosUrls, className }: GalleryProps) => {
           className,
         )}
       >
-        {photosUrls.map((photoUrl) => (
-          <GalleryItem photoUrl={photoUrl} key={photoUrl} />
+        {photos.map((photo) => (
+          <GalleryItem photoUrl={photo.photoUrl} key={photo._id} />
         ))}
       </div>
     </FancyboxLayout>

@@ -6,8 +6,8 @@ interface PhotosByCategory {
 
 export const endpoints = {
   photos: {
-    photosByCategory: ({ category, page, limit }: PhotosByCategory) =>
-      `/photos/?category=${category}&page=${page}&limit=${limit}`,
+    photos: ({ category, page, limit }: PhotosByCategory) =>
+      `/photos/?${category ? `category=${category}&` : ''}page=${page}&limit=${limit}`,
     uploadPhotos: '/photos',
     remove: (photoId: string) => `/photos/${photoId}`,
   },
