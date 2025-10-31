@@ -2,6 +2,7 @@ export { default as useAspectRatio } from './useAspectRatio';
 export { default as useClickOutside } from './useClickOutside';
 export { default as useEventListener } from './useEventListener';
 export { default as useFancybox } from './useFancybox';
+export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useInViewport } from './useInViewport';
 export { default as useMobileNav } from './useMobileNav';
 export { default as useModal } from './useModal';

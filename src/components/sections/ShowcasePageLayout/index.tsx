@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 import { ErrorMessage, Loader, Typography } from '@/components/ui';
-import { useInViewport, usePhotos } from '@/hooks';
+import { useInfiniteScroll, usePhotos } from '@/hooks';
 import { cn } from '@/lib';
 
 import { Banner, DescriptionSection, GallerySection } from './components';
@@ -45,18 +45,11 @@ const ShowcasePageLayout = ({
     error,
   } = usePhotos({ category: category as string });
 
-  const ref = useRef(null);
-  const isInView = useInViewport(ref, {
-    root: null,
-    rootMargin: '100px',
-    threshold: 0.1,
+  const { triggerRef } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
   });
-
-  useEffect(() => {
-    if (isInView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <motion.div
@@ -77,7 +70,7 @@ const ShowcasePageLayout = ({
       )}
 
       {/* Infinite scroll trigger */}
-      {hasNextPage && <div ref={ref} className="h-2" />}
+      {hasNextPage && <div ref={triggerRef} className="h-2" />}
 
       {/* Loading state */}
       {isFetching && isFetchingNextPage && <Loader />}
