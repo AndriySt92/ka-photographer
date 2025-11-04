@@ -1,12 +1,11 @@
 import { AxiosError } from 'axios';
 
-import type { ApiErrorResponse } from '@/types';
+import type { ApiResponse } from '@/types';
 
 const getErrorMessage = (error: unknown): string => {
   if (error instanceof AxiosError) {
-    const axiosError = error as AxiosError<ApiErrorResponse>;
+    const axiosError = error as AxiosError<ApiResponse>;
 
-    console.log(axiosError.response?.data?.message || axiosError.message || 'Помилка сервера');
     return axiosError.response?.data?.message || axiosError.message || 'Помилка сервера';
   }
 

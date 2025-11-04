@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 
 import { get } from '@/api/clients';
 import { endpoints, queryKeys } from '@/api/endpoints';
@@ -22,10 +23,10 @@ interface UsePhotosParams {
 }
 
 const usePhotos = ({ category, limit = 6 }: UsePhotosParams) => {
-  return useInfiniteQuery({
-    queryKey: queryKeys.photos.photosByCategory(category),
+  return useInfiniteQuery<PhotosResponse, AxiosError, PhotoItem[]>({
+    queryKey: queryKeys.photos.photos(category),
     queryFn: ({ pageParam = 1 }) =>
-      get<PhotosResponse>(endpoints.photos.photos({ category, page: pageParam, limit })),
+      get<PhotosResponse>(endpoints.photos.photos({ category, page: pageParam as number, limit })),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       return lastPage.pagination.hasNextPage ? lastPage.pagination.currentPage + 1 : undefined;

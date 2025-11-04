@@ -4,19 +4,14 @@ import type { AxiosError } from 'axios';
 
 import { post } from '@/api/clients';
 import { endpoints, queryKeys } from '@/api/endpoints';
-import type { ApiResponse } from '@/types';
+import type { ApiResponse, UploadPhotosData } from '@/types';
 import { getErrorMessage } from '@/utils';
-
-interface UploadPhotosData {
-  categories: string[];
-  photoFiles: File[];
-}
 
 const useUploadPhotos = () => {
   const queryClient = useQueryClient();
 
   return useMutation<ApiResponse, AxiosError, UploadPhotosData>({
-    mutationFn: async ({ categories, photoFiles }: UploadPhotosData) => {
+    mutationFn: async ({ categories, photoFiles }) => {
       const formData = new FormData();
 
       formData.append('categories', JSON.stringify(categories));
@@ -37,7 +32,7 @@ const useUploadPhotos = () => {
 
       variables.categories.forEach((category) => {
         queryClient.invalidateQueries({
-          queryKey: queryKeys.photos.photosByCategory(category),
+          queryKey: queryKeys.photos.photos(category),
         });
       });
     },
