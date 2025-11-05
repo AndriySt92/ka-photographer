@@ -3,28 +3,34 @@ import type { FileRejection } from 'react-dropzone';
 import { Controller, useForm } from 'react-hook-form';
 
 import { ErrorMessage, Typography } from '@/components';
-import { selectSessionOptions } from '@/config';
+import { uploadCategories } from '@/config';
 import { useUploadPhotos } from '@/hooks';
-import type { UploadPhotosFormData } from '@/types';
+import type { CategoriesItem } from '@/types';
 
-import { Checkbox, FileDropzone, FilePreviewSection, Select } from './components';
+import { Checkbox, FileDropzone, FilePreviewSection, Select } from '../';
 
 const MAX_FILES = 10;
 
+interface UploadPhotosFormData {
+  addToGallery: boolean;
+  sessionType: CategoriesItem['value'];
+  files: File[];
+}
+
 const UploadPhotos = () => {
   const [rejected, setRejected] = useState<FileRejection[]>([]);
+  const { mutateAsync, isPending } = useUploadPhotos();
   const { control, reset, handleSubmit, setValue, watch, setError, clearErrors, formState } =
     useForm<UploadPhotosFormData>({
       defaultValues: {
-        sessionType: 'individual',
+        sessionType: uploadCategories[0].value,
         addToGallery: false,
         files: [],
       },
     });
+
   const files = watch('files');
   const sessionType = watch('sessionType');
-
-  const { mutateAsync, isPending } = useUploadPhotos();
 
   // Cleanup object URLs
   useEffect(() => {
@@ -87,6 +93,8 @@ const UploadPhotos = () => {
   const clearAllFiles = useCallback(() => {
     setValue('files', []);
     clearErrors('files');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [setValue, clearErrors]);
 
   const removeRejectedFile = (indexToRemove: number) => {
@@ -110,6 +118,7 @@ const UploadPhotos = () => {
         photoFiles: files,
       });
 
+      // Reset form on success
       reset();
       setRejected([]);
 
@@ -123,70 +132,71 @@ const UploadPhotos = () => {
   const hasFilesError = formState.errors.files?.message;
 
   return (
-    <div className="margin-t padding-y flex min-h-screen flex-col items-center justify-center">
-      <div className="space-y-sm container w-full max-w-5xl">
-        <Typography parentAs="h1" size="3xl" align="center">
-          Завантажити фото
-        </Typography>
+    <div className="space-y-sm mx-auto w-full max-w-5xl">
+      <Typography parentAs="h3" size="5xl" align="center">
+        Завантажити фото
+      </Typography>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+        {/* FileDropzone */}
+        <Controller
+          name="files"
+          control={control}
+          defaultValue={[]}
+          render={() => <FileDropzone onDrop={onDrop} disabled={files.length >= MAX_FILES} />}
+        />
+
+        {/* Select */}
+        {hasFiles && (
           <Controller
-            name="files"
+            name="sessionType"
             control={control}
-            defaultValue={[]}
-            render={() => <FileDropzone onDrop={onDrop} disabled={files.length >= MAX_FILES} />}
+            render={({ field }) => (
+              <Select {...field} options={uploadCategories} aria-label="Тип сесії" />
+            )}
           />
+        )}
 
-          {hasFiles && (
-            <Controller
-              name="sessionType"
-              control={control}
-              render={({ field }) => (
-                <Select {...field} options={selectSessionOptions} aria-label="Тип сесії" />
-              )}
-            />
-          )}
-
-          {hasFiles && sessionType !== 'gallery' && (
-            <Controller
-              name="addToGallery"
-              control={control}
-              render={({ field }) => (
-                <Checkbox {...field} label="Добавити до галереї" id="addToGallery" />
-              )}
-            />
-          )}
-
-          {/* Files preview section */}
-          <FilePreviewSection
-            title="Обрані фото:"
-            files={files}
-            onRemove={removeFile}
-            onClearAll={clearAllFiles}
-            showUploadButton
-            hasError={Boolean(hasFilesError)}
-            isLoading={isPending}
+        {/* Checkbox */}
+        {hasFiles && sessionType !== 'gallery' && (
+          <Controller
+            name="addToGallery"
+            control={control}
+            render={({ field }) => (
+              <Checkbox {...field} label="Добавити до галереї" id="addToGallery" />
+            )}
           />
+        )}
 
-          {/* Files error */}
-          {hasFilesError && (
-            <ErrorMessage
-              error={`${formState.errors.files?.message}. Видаліть ${files.length - MAX_FILES} файл(ів).`}
-              size="sm"
-              className="text-center"
-              animationKey="upload-error"
-            />
-          )}
+        {/* Files preview section */}
+        <FilePreviewSection
+          title="Обрані фото:"
+          files={files}
+          onRemove={removeFile}
+          onClearAll={clearAllFiles}
+          showUploadButton
+          hasError={Boolean(hasFilesError)}
+          isPending={isPending}
+        />
 
-          {/* Rejected files preview section */}
-          <FilePreviewSection
-            title="Некоректні фото:"
-            files={rejected}
-            onRemove={removeRejectedFile}
-            onClearAll={clearAllRejectedFiles}
+        {/* Files error */}
+        {hasFilesError && (
+          <ErrorMessage
+            error={`${formState.errors.files?.message}. Видаліть ${files.length - MAX_FILES} файл(ів).`}
+            size="sm"
+            className="text-center"
+            animationKey="upload-error"
           />
-        </form>
-      </div>
+        )}
+
+        {/* Rejected files preview section */}
+        <FilePreviewSection
+          title="Некоректні фото:"
+          files={rejected}
+          onRemove={removeRejectedFile}
+          onClearAll={clearAllRejectedFiles}
+        />
+      </form>
     </div>
   );
 };

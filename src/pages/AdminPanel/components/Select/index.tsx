@@ -48,7 +48,7 @@ const Select = ({ options, className, value, onChange, ...props }: StyledSelectP
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="section-border absolute z-50 mt-2 w-full max-w-52 origin-top space-y-1 rounded-xl bg-primary p-2"
+            className="absolute z-50 mt-2 w-full max-w-52 origin-top space-y-1 rounded-xl border border-secondary/40 bg-primary p-2"
           >
             {options.map((option) => (
               <button

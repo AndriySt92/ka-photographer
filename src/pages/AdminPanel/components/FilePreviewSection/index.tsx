@@ -12,7 +12,7 @@ interface FilePreviewSectionProps {
   showUploadButton?: boolean;
   className?: string;
   hasError?: boolean;
-  isLoading?: boolean;
+  isPending?: boolean;
 }
 
 const FilePreviewSection = ({
@@ -22,11 +22,11 @@ const FilePreviewSection = ({
   onClearAll,
   showUploadButton = false,
   hasError,
-  isLoading,
   className,
+  isPending,
 }: FilePreviewSectionProps) => {
   if (files.length === 0) return null;
-
+  console.log(isPending);
   return (
     <div className={cn('mt-6', className)}>
       {/* Title */}
@@ -56,7 +56,7 @@ const FilePreviewSection = ({
                 onClick={() => onRemove(index)}
                 className="absolute -right-4 -top-1 z-10"
               >
-                <Icon icon={close} name="close" size="w-6 h-6" />
+                <Icon name="remove" icon={close} size="h-4 aspect-auto" />
               </Button>
 
               {/* File Info Overlay */}
@@ -88,8 +88,14 @@ const FilePreviewSection = ({
       {files.length > 0 && (
         <div className="mt-6 flex gap-4">
           {showUploadButton && (
-            <Button type="submit" intent="secondary" disabled={hasError}>
-              {!isLoading ? `Завантажити ${files.length} фото` : 'Завантаження...'}
+            <Button
+              type="submit"
+              intent="secondary"
+              disabled={hasError || isPending}
+              isLoading={isPending}
+              loadingText="Завантаження..."
+            >
+              {`Завантажити ${files.length} фото`}
             </Button>
           )}
           <Button type="button" intent="secondary" onClick={onClearAll}>

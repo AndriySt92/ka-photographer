@@ -1,8 +1,10 @@
+export { default as allPhotoCategories } from './allPhotoCategories';
 export { default as contactInfo } from './contactInfo';
 export { default as navigation } from './navigation';
 export { default as reviews } from './reviews';
-export { default as selectSessionOptions } from './selectSessionOptions';
+export { default as serviceDetails } from './serviceDetails';
 export { default as services } from './services';
 export { default as sessionOptions } from './sessionOptions';
 export { default as socialMediaPlatforms } from './socialMediaPlatforms';
 export { default as terms } from './terms';
+export { default as uploadCategories } from './uploadCategories';

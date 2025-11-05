@@ -24,6 +24,7 @@ const useUploadPhotos = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        timeout: 300000, // 5 minutes
       });
     },
 
