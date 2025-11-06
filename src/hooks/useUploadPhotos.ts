@@ -36,6 +36,11 @@ const useUploadPhotos = () => {
           queryKey: queryKeys.photos.photos(category),
         });
       });
+
+      // Invalidate all photos after upload
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.photos.photos('all'),
+      });
     },
 
     onError: (error) => {

@@ -1,5 +1,7 @@
+import type { CategoriesItem } from '@/types';
+
 interface GetPhotos {
-  category: string;
+  category: CategoriesItem['value'];
   limit: number;
   page: number;
 }
@@ -7,7 +9,7 @@ interface GetPhotos {
 export const endpoints = {
   photos: {
     photos: ({ category, page, limit }: GetPhotos) =>
-      `/photos/?category=${category}&page=${page}&limit=${limit}`,
+      `/photos/?${category !== 'all' ? `category=${category}` : ''}&page=${page}&limit=${limit}`,
     uploadPhotos: '/photos',
     remove: (photoId: string) => `/photos/${photoId}`,
   },
@@ -20,7 +22,7 @@ export const endpoints = {
 
 export const queryKeys = {
   photos: {
-    photos: (category: string) => ['photos', category],
+    photos: (category?: string) => ['photos', category] as const,
   },
   admin: {
     current: ['admin', 'current'] as const,

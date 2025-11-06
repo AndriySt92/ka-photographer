@@ -3,9 +3,9 @@ import type { CategoriesItem } from '@/types';
 import basePhotoCategories from './basePhotoCategories';
 
 const allPhotoCategories: CategoriesItem[] = [
-  ...basePhotoCategories,
+  { label: 'всі фото', value: 'all' },
   { label: 'галерея', value: 'gallery' },
-  { label: 'всі', value: '' },
+  ...basePhotoCategories,
 ];
 
 export default allPhotoCategories;

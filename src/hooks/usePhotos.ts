@@ -3,7 +3,7 @@ import type { AxiosError } from 'axios';
 
 import { get } from '@/api/clients';
 import { endpoints, queryKeys } from '@/api/endpoints';
-import type { PhotoItem } from '@/types';
+import type { CategoriesItem, PhotoItem } from '@/types';
 
 interface PhotosResponse {
   data: PhotoItem[];
@@ -18,7 +18,7 @@ interface PhotosResponse {
 }
 
 interface UsePhotosParams {
-  category: string;
+  category: CategoriesItem['value'];
   limit?: number;
 }
 
