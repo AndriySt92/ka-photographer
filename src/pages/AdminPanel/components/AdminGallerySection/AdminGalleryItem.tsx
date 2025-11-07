@@ -21,16 +21,12 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
   return (
     <motion.div
       ref={ref}
-      className="group overflow-hidden"
+      className="group h-[70vh] cursor-pointer overflow-hidden sm:h-[80vh]"
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
     >
-      <FancyboxAnchor
-        href={photo.photoUrl}
-        gallery="gallery"
-        className="h-[70vh] cursor-pointer overflow-hidden sm:h-[80vh]"
-      >
+      <FancyboxAnchor href={photo.photoUrl} gallery="gallery">
         {/* Loading placeholder */}
         {status === 'loading' && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">

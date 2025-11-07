@@ -54,7 +54,7 @@ const FilePreviewSection = ({
                 type="button"
                 intent="minimal"
                 onClick={() => onRemove(index)}
-                className="absolute -right-4 -top-1 z-10"
+                className="absolute right-1 top-1 z-10 rounded-lg bg-secondary/10 p-2 backdrop-blur-sm hover:scale-105 hover:bg-secondary/15"
               >
                 <Icon name="remove" icon={close} size="h-4 aspect-auto" />
               </Button>

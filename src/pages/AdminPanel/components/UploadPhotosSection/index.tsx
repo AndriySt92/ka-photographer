@@ -17,7 +17,11 @@ interface UploadPhotosFormData {
   files: File[];
 }
 
-const UploadPhotos = () => {
+interface UploadPhotosProps {
+  onUpload: (selectedCategory: string) => void;
+}
+
+const UploadPhotos = ({ onUpload }: UploadPhotosProps) => {
   const [rejected, setRejected] = useState<FileRejection[]>([]);
   const { mutateAsync, isPending } = useUploadPhotos();
   const { control, reset, handleSubmit, setValue, watch, setError, clearErrors, formState } =
@@ -108,6 +112,7 @@ const UploadPhotos = () => {
 
   const onSubmit = async (data: UploadPhotosFormData) => {
     const categories = [data.sessionType];
+
     if (data.addToGallery && data.sessionType !== 'gallery') {
       categories.push('gallery');
     }
@@ -122,7 +127,7 @@ const UploadPhotos = () => {
       reset();
       setRejected([]);
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      onUpload(data.sessionType);
     } catch (error) {
       console.error(error);
     }
