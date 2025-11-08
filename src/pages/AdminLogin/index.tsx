@@ -1,11 +1,16 @@
 import { useForm } from 'react-hook-form';
 
-import { Button, FormField, Typography } from '@/components';
-import type { AdminLoginFormData } from '@/types';
+import { Button, ErrorMessage, FormField, Typography } from '@/components';
+import useLogin from '@/hooks/useLogin';
+import type { LoginCredentials } from '@/types';
+import { getErrorMessage } from '@/utils';
 
 const PASSWORD_MIN = 6;
-const NAME_MIN = 2;
-const NAME_MAX = 70;
+const EMAIL_PATTERN = {
+  value:
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+  message: 'Будь ласка, введіть коректну email адресу',
+};
 
 const SignIn = () => {
   const {
@@ -13,26 +18,27 @@ const SignIn = () => {
     formState: { errors, isDirty, isValid, isSubmitting },
     handleSubmit,
     control,
-  } = useForm<AdminLoginFormData>({
+  } = useForm<LoginCredentials>({
     mode: 'onChange',
     shouldFocusError: false,
     defaultValues: {
-      name: '',
+      email: '',
       password: '',
     },
   });
+  const { mutate, isPending, error } = useLogin();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutate(data);
   });
 
   const hasError = !isDirty || !isValid;
 
   return (
     <div className="h-screen">
-      <div className="space-y-lg padding-y container flex h-full items-center justify-center">
+      <div className="container flex h-full items-center justify-center space-y-12 py-16 2xl:space-y-16 2xl:py-24">
         <form
-          className="section-border flex w-full max-w-xl flex-col space-y-6 rounded-3xl bg-gradient-to-r from-accent/40 p-8 backdrop-blur-lg"
+          className="flex w-full max-w-xl flex-col space-y-6 rounded-3xl border border-secondary/40 bg-gradient-to-r from-accent/40 to-primary p-8 backdrop-blur-lg"
           onSubmit={onSubmit}
           autoComplete="off"
         >
@@ -42,20 +48,14 @@ const SignIn = () => {
 
           <FormField
             label="Ім'я"
-            name="name"
+            name="email"
+            type="email"
             register={register}
             control={control}
-            error={errors.name?.message}
+            error={errors.email?.message}
             validation={{
               required: "Обов'язкове поле",
-              minLength: {
-                value: NAME_MIN,
-                message: `Ім'я має містити щонайменше ${NAME_MIN} символів`,
-              },
-              maxLength: {
-                value: NAME_MAX,
-                message: `Ім'я має містити щонайбільше ${NAME_MAX} символів`,
-              },
+              pattern: EMAIL_PATTERN,
             }}
           />
 
@@ -75,17 +75,20 @@ const SignIn = () => {
             }}
           />
 
+          {error && <ErrorMessage error={getErrorMessage(error)} />}
+
           {/* Button */}
           <div className="self-end">
-            <Button type="submit" size="textSm" disabled={hasError || isSubmitting}>
-              {isSubmitting ? 'Вхід...' : 'Увійти'}
+            <Button
+              type="submit"
+              size="textSm"
+              disabled={hasError || isSubmitting}
+              loadingText="Вхід..."
+              isLoading={isPending}
+            >
+              Увійти
             </Button>
           </div>
-
-          {/* Display the first error message */}
-          {hasError && (
-            <p className="text-sm text-red-500">{Object.values(errors)[0]?.message as string}</p>
-          )}
         </form>
       </div>
     </div>
