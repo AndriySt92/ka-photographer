@@ -2,12 +2,20 @@ import { Route, Routes } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify';
 
 import { Layout, PrivateRoutes } from './components';
-import { Contacts, Gallery, Home, ServiceDetails, Services, Terms, UploadPhotos } from './pages';
+import {
+  AdminLogin,
+  AdminPanel,
+  Contacts,
+  Gallery,
+  Home,
+  ServiceDetails,
+  Services,
+  Terms,
+} from './pages';
 
 const App = () => {
   return (
-    // <Home />
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -16,8 +24,9 @@ const App = () => {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route element={<PrivateRoutes />}>
-            <Route path="/upload-photos" element={<UploadPhotos />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
           </Route>
         </Route>
       </Routes>
@@ -30,7 +39,7 @@ const App = () => {
         toastClassName="bg-gradient-to-r from-accent/40 py-5 to-primary backdrop-blur-lg"
         progressClassName="!bg-accent"
       />
-    </div>
+    </>
   );
 };
 

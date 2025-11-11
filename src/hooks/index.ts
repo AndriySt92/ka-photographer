@@ -1,12 +1,15 @@
 export { default as useAspectRatio } from './useAspectRatio';
 export { default as useClickOutside } from './useClickOutside';
+export { default as useCurrentUser } from './useCurrentUser';
 export { default as useEventListener } from './useEventListener';
 export { default as useFancybox } from './useFancybox';
 export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useInViewport } from './useInViewport';
+export { default as useLogout } from './useLogout';
 export { default as useMobileNav } from './useMobileNav';
 export { default as useModal } from './useModal';
 export { default as usePhotos } from './usePhotos';
+export { default as useRemovePhoto } from './useRemovePhoto';
 export { default as useScrollToTopVisibility } from './useScrollToTopVisibility';
 export { default as useThrottle } from './useThrottle';
 export { default as useUploadPhotos } from './useUploadPhotos';

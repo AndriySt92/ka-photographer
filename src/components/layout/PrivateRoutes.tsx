@@ -1,13 +1,25 @@
-import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const PrivateRoutes: React.FC = () => {
-  const user = true;
+import { useCurrentUser } from '@/hooks';
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
+import { Loader } from '../';
+
+const PrivateRoutes = () => {
+  const { data: user, isLoading } = useCurrentUser();
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
-  return <Outlet />;
+
+  if (user?.role === 'admin') {
+    return <Outlet />;
+  }
+
+  return <Navigate to="/admin-login" replace />;
 };
 
 export default PrivateRoutes;

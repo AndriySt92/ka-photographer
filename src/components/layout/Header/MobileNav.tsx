@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { burgerMenu, close } from '@/assets';
-import { Button, ContactInfo, Icon } from '@/components';
+import { burgerMenu, close, logout } from '@/assets';
+import { Button, ContactInfo, Icon, NavLink } from '@/components';
 import { contactInfo } from '@/config';
 import { useMobileNav } from '@/hooks';
 import { fadeIn, overlayVariants } from '@/lib';
@@ -18,9 +18,12 @@ const panelVariants = {
 
 interface MobileNavProps {
   navigation: NavItem[];
+  onLogout: () => void;
+  isLoggingOut: boolean;
+  isAdmin: boolean;
 }
 
-const MobileNav = ({ navigation }: MobileNavProps) => {
+const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavProps) => {
   const { isOpen, activeSubmenu, openMenu, closeMenu, toggleSubmenu } = useMobileNav();
 
   useEffect(() => {
@@ -88,6 +91,25 @@ const MobileNav = ({ navigation }: MobileNavProps) => {
                       closeMenu={closeMenu}
                     />
                   ))}
+
+                  {/* Admin panel link & button logout*/}
+                  {isAdmin && (
+                    <div>
+                      <div className="section-border-b py-3">
+                        <NavLink to="/admin-panel">Адмін</NavLink>
+                      </div>
+                      <div className="py-3">
+                        <Button
+                          onClick={() => onLogout()}
+                          intent="minimal"
+                          className="px-0 py-2 opacity-80 hover:opacity-100"
+                          disabled={isLoggingOut}
+                        >
+                          <Icon icon={logout} size="h-5 w-5" name="logout" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </nav>
 
                 {/* Footer */}

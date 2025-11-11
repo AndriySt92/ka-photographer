@@ -3,19 +3,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { post } from '@/api/clients';
 import { endpoints, queryKeys } from '@/api/endpoints';
-import type { ApiResponse, LoginCredentials } from '@/types';
+import type { Admin, ApiResponse, LoginCredentials } from '@/types';
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  return useMutation<ApiResponse, Error, LoginCredentials>({
+  return useMutation<ApiResponse<Admin>, Error, LoginCredentials>({
     mutationFn: async (payload) => {
-      return await post<ApiResponse, LoginCredentials>(endpoints.admin.login, payload);
+      return await post<ApiResponse<Admin>, LoginCredentials>(endpoints.admin.login, payload);
     },
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.admin.current });
+    onSuccess: (response) => {
+      queryClient.setQueryData<ApiResponse<Admin> | null>(queryKeys.admin.current, response);
       navigate('/admin-panel', { replace: true });
     },
   });

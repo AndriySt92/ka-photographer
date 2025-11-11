@@ -13,6 +13,7 @@ export { default as instagram } from './instagram.svg';
 export { default as location } from './location.svg';
 export { default as locationBanner } from './location_banner.svg';
 export { default as logo } from './logo.png';
+export { default as logout } from './logout.svg';
 export { default as phone } from './phone.svg';
 export { default as telegram } from './telegram.svg';
 export { default as tick } from './tick.svg';

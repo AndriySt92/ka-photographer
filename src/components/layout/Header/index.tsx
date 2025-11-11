@@ -1,12 +1,22 @@
 import { Link } from 'react-router-dom';
 
 import { navigation } from '@/config';
+import { useCurrentUser, useLogout } from '@/hooks';
 
 import DesktopNav from './DesktopNav';
 import Logo from './Logo';
 import MobileNav from './MobileNav';
 
 const Header = () => {
+  const { mutate: logout, isPending: isLoggingOut } = useLogout();
+  const { data: user } = useCurrentUser();
+
+  const isAdmin = user?.role === 'admin';
+
+  const onLogout = () => {
+    logout();
+  };
+
   return (
     <header className="custom-blur fixed left-0 right-0 top-0 z-[100] flex items-center shadow-md">
       <div className="container flex w-full items-center justify-between">
@@ -19,8 +29,18 @@ const Header = () => {
 
         {/* Navigation */}
         <div className="flex items-center">
-          <DesktopNav navigation={navigation} />
-          <MobileNav navigation={navigation} />
+          <DesktopNav
+            navigation={navigation}
+            isAdmin={isAdmin}
+            onLogout={onLogout}
+            isLoggingOut={isLoggingOut}
+          />
+          <MobileNav
+            navigation={navigation}
+            isAdmin={isAdmin}
+            onLogout={onLogout}
+            isLoggingOut={isLoggingOut}
+          />
         </div>
       </div>
     </header>

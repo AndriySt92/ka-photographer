@@ -11,14 +11,4 @@ const axiosClient = axios.create({
   withCredentials: true,
 });
 
-axiosClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  },
-);
-
 export default axiosClient;
