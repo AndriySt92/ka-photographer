@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 
-import { Button, ErrorMessage, Typography } from '..';
+import { Button, ErrorMessage, Typography } from '../';
 
 interface ButtonOption {
   label: string;
@@ -15,6 +15,7 @@ interface GroupButtonsProps {
   onChange: (value: string) => void;
   label?: string;
   error?: string;
+  className?: string;
 }
 const ActiveLine = () => {
   return (
@@ -25,9 +26,16 @@ const ActiveLine = () => {
   );
 };
 
-const GroupButtons = ({ options, selectedOption, onChange, label, error }: GroupButtonsProps) => {
+const GroupButtons = ({
+  options,
+  selectedOption,
+  onChange,
+  label,
+  error,
+  className,
+}: GroupButtonsProps) => {
   return (
-    <div className="pointer-events-auto relative ">
+    <div className={cn('pointer-events-auto relative', className)}>
       {label && (
         <Typography size="custom" className="pb-2 text-base sm:text-lg">
           {label}

@@ -2,44 +2,59 @@ import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
 import { sessionOptions } from '@/config';
+import { useCreateBooking } from '@/hooks';
 import { cn, fadeInWithOpacity } from '@/lib';
-import type { SessionOption, SessionOrderData } from '@/types';
+import type { BookingFormData, CategoriesItem } from '@/types';
 
 import { Button, FormField, GroupButtons } from './';
 
 // Constants for validation
 const NAME_MIN = 2;
 const NAME_MAX = 70;
-const SOCIAL_MIN = 10;
-const SOCIAL_MAX = 70;
+const CONTACT_MIN = 3;
+const CONTACT_MAX = 100;
 const DATE_MAX = 70;
 const COMMENT_MAX = 200;
 
+const UA_PHONE_REGEX = /^(?:\+?380|0)\d{9}$/;
+const INSTAGRAM_REGEX = /^@?[A-Za-z0-9_](?:[A-Za-z0-9_.]{0,28}[A-Za-z0-9_])?$/;
+const NAME_REGEX = /^[a-zA-Zа-яА-ЯІіЇїЄєҐґ\s'-]+$/;
+
 interface SessionOrderFormProps {
-  sessionType?: SessionOption['value'];
+  sessionType?: CategoriesItem['value'];
   className?: string;
+  onSubmitSuccess?: () => void;
 }
 
-const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => {
+const SessionOrderForm = ({ sessionType, className, onSubmitSuccess }: SessionOrderFormProps) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
-  } = useForm<SessionOrderData>({
+    reset,
+  } = useForm<BookingFormData>({
     mode: 'onChange',
     shouldFocusError: false,
     defaultValues: {
       name: '',
       sessionType: sessionType || '',
-      social: '',
+      contact: '',
       comment: '',
       sessionDate: '',
     },
   });
+  const { mutateAsync: createBooking, isPending } = useCreateBooking();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await createBooking(data);
+
+      if (onSubmitSuccess) onSubmitSuccess();
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   return (
@@ -66,24 +81,33 @@ const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => 
             value: NAME_MAX,
             message: `Ім'я має містити щонайбільше ${NAME_MAX} символів`,
           },
+          pattern: {
+            value: NAME_REGEX,
+            message: "Ім'я може містити лише літери, пробіли, апострофи та дефіси",
+          },
         }}
       />
 
       <FormField
-        label="Telegram / Instagram"
-        name="social"
+        label="Instagram / Телефон"
+        name="contact"
         register={register}
         control={control}
-        error={errors.social?.message}
+        error={errors.contact?.message}
         validation={{
           required: "Обов'язкове поле",
-          minLength: {
-            value: SOCIAL_MIN,
-            message: `Telegram / Instagram має містити щонайменше ${SOCIAL_MIN} символів`,
-          },
-          maxLength: {
-            value: SOCIAL_MAX,
-            message: `Telegram / Instagram має містити щонайбільше ${SOCIAL_MAX} символів`,
+          validate: (value) => {
+            const v = String(value ?? '').trim();
+            if (v.length < CONTACT_MIN) {
+              return `Контакт має містити щонайменше ${CONTACT_MIN} символів`;
+            }
+            if (v.length > CONTACT_MAX) {
+              return `Контакт не може перевищувати ${CONTACT_MAX} символів`;
+            }
+            if (!(UA_PHONE_REGEX.test(v) || INSTAGRAM_REGEX.test(v))) {
+              return 'Будь ласка, введіть коректний номер телефону (+380XXXXXXXXX) або Instagram (@username)';
+            }
+            return true;
           },
         }}
       />
@@ -135,16 +159,9 @@ const SessionOrderForm = ({ sessionType, className }: SessionOrderFormProps) => 
         }}
       />
 
-      {/* Display the first error message at the bottom of the form */}
-      {Object.values(errors)[0]?.message && (
-        <p className="absolute bottom-[67px] text-sm text-red-500">
-          {Object.values(errors)[0]?.message as string}
-        </p>
-      )}
-
       {/* Button */}
       <motion.div layout className="w-fit self-center sm:self-end" variants={fadeInWithOpacity}>
-        <Button type="submit" size="textSm">
+        <Button type="submit" size="textSm" isLoading={isPending} loadingText="Відправлення...">
           Замовити
         </Button>
       </motion.div>

@@ -1,6 +1,6 @@
 export type { default as Admin } from './Admin';
 export type { default as ApiResponse } from './ApiResponse';
-export type { default as Categories } from './Categories';
+export type { default as BookingFormData } from './BookingFormData';
 export type { default as CategoriesItem } from './CategoriesItem';
 export type { default as ContactInfoItem } from './ContactInfoItem';
 export type { default as LoginCredentials } from './LoginCredentials';
@@ -8,6 +8,5 @@ export type { default as NavItem } from './NavItem';
 export type { default as PhotoItem } from './PhotoItem';
 export type { default as ReviewSlide } from './ReviewSlide';
 export type { default as ServicesItem } from './ServicesItem';
-export type { default as SessionOrderData } from './SessionOrderData';
 export type { default as TermsItem } from './TermsItem';
 export type { default as UploadPhotosData } from './UploadPhotosData';

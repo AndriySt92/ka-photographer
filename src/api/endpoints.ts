@@ -18,6 +18,9 @@ export const endpoints = {
     logout: '/admin/logout',
     current: '/admin/current',
   },
+  booking: {
+    create: '/bookings',
+  },
 };
 
 export const queryKeys = {

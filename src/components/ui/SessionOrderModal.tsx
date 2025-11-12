@@ -13,9 +13,13 @@ const SessionOrderModal = ({
   sessionType,
   title = 'Замовити фотосесію',
 }: SessionOrderModalProps) => {
+  const onSubmitSuccess = () => {
+    onClose();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title}>
-      <SessionOrderForm sessionType={sessionType} />
+      <SessionOrderForm sessionType={sessionType} onSubmitSuccess={onSubmitSuccess} />
     </Modal>
   );
 };
