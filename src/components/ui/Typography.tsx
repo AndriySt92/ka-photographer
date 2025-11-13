@@ -29,11 +29,9 @@ const typographyVariants = cva('uppercase leading-[0.8]', {
       custom: '',
     },
     weight: {
-      light: 'font-light',
       normal: 'font-normal',
       medium: 'font-medium',
       semibold: 'font-semibold',
-      bold: 'font-bold',
     },
     align: {
       left: 'text-left',

@@ -42,6 +42,7 @@ const TermsItem = ({ item, index }: TermsItemProps) => {
       <Typography
         parentAs="div"
         size="lg"
+        weight="normal"
         content={item.subtitle.split('\n')}
         align={isEven ? 'right' : 'left'}
         className="relative z-40 normal-case text-secondary xl:uppercase"

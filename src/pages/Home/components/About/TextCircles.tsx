@@ -26,6 +26,7 @@ const TextCircles = ({ text = [], className = '' }: TextCirclesProps) => {
             size="custom"
             className="container relative z-10 py-3 text-base normal-case !leading-[1.2] sm:pl-8 lg:py-0 lg:text-sm lg:uppercase xl:pl-8 2xl:pl-8 2xl:text-base"
             font="secondary"
+            weight="normal"
             content={text}
             animated
             parentMotionProps={{

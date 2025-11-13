@@ -31,6 +31,7 @@ const ServicesCard = ({ item }: ServiceCardProps) => {
             font="secondary"
             size="custom"
             align="center"
+            weight="normal"
             className={cn(
               'whitespace-wrap w-min px-2 text-2xl duration-500 group-hover:text-secondary xl:text-3xl 2xl:text-4xl pointer-fine:text-primary pointer-coarse:text-secondary',
               item.title === 'Love Story' && 'w-auto whitespace-nowrap',

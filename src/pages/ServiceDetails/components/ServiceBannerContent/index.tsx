@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import { Button, SessionOrderModal, Typography } from '@/components';
 import { useModal, useWindowSize } from '@/hooks';
 import { fadeIn, fadeInBottom, fadeInLeft, staggerContainer } from '@/lib';
-import type { SessionOption } from '@/types';
+import type { CategoriesItem } from '@/types';
 
 interface ServiceBannerTextProps {
   name: string;
-  value: SessionOption['value'];
+  value: CategoriesItem['value'];
   details: {
     price: string;
     duration: string;
@@ -72,6 +72,7 @@ const ServiceBannerContent = ({ name, details, value }: ServiceBannerTextProps) 
           <Typography
             parentAs="ul"
             childAs="li"
+            weight="normal"
             content={[
               `— ${details.price} / ${details.duration}`,
               `— ${details.photosCount} в авторській обробці`,

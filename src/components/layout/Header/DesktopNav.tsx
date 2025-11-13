@@ -55,7 +55,7 @@ const DesktopNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: DesktopNavP
         className="group ml-[66px] flex items-center gap-3 px-3 py-3 transition-colors duration-300 hover:bg-accent/40"
       >
         <span className="relative">
-          <Typography parentAs="span" size="lg" font="secondary">
+          <Typography parentAs="span" size="lg" font="secondary" weight="normal">
             {galleryLink.label}
           </Typography>
           <span className="absolute bottom-0 left-0 h-px w-0 bg-secondary transition-all duration-300 group-hover:w-full"></span>
