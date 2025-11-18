@@ -25,13 +25,14 @@ const Banner = ({ imageClassName, bannerPhoto, bannerPhotoMobile, bannerContent 
         variants: fadeIn,
       }}
     >
-      <div className="padding-y container relative h-full overflow-hidden">
-        {/* Go back button */}
-        <motion.div className="mb-8 mt-4 hidden lg:block" variants={fadeIn}>
-          <GoBackButton />
-        </motion.div>
-
-        {bannerContent}
+      <div className="container relative h-full overflow-hidden py-12">
+        <div className="flex h-full flex-col gap-6">
+          {/* Go back button */}
+          <motion.div className="mt-10 hidden lg:block" variants={fadeIn}>
+            <GoBackButton />
+          </motion.div>
+          <div className="mt-10 flex flex-1 lg:mt-0">{bannerContent}</div>
+        </div>
       </div>
     </BannerWrapper>
   );

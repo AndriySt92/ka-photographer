@@ -41,7 +41,7 @@ const AnimatedGridOverlay = () => {
       variants={fadeIn}
       initial="hidden"
       animate="visible"
-      className="relative hidden h-full w-full overflow-hidden lg:block [@media(pointer:fine)]:lg:block"
+      className="absolute inset-0 z-10 hidden w-full overflow-hidden lg:block [@media(pointer:fine)]:lg:block"
     >
       <div
         className="absolute inset-0 z-20 grid h-full w-full"

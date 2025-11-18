@@ -17,15 +17,15 @@ const TextContent = () => {
 
   const titleFontSize = getTitleFontSize();
   return (
-    <div className="pointer-events-none absolute inset-0 z-20 h-full w-full pb-14 pt-20 sm:pt-14 2xl:pt-20">
+    <div className="padding-y container pointer-events-none absolute inset-0 z-20 mt-10 lg:mt-0">
       <motion.div
-        className="container flex h-full flex-col justify-between gap-4"
+        className="flex h-full flex-col justify-between gap-4"
         variants={staggerContainer()}
         initial="hidden"
         animate="visible"
         transition={{
           type: 'spring',
-          visualDuration: 0.5,
+          visualDuration: 0.6,
           bounce: 0.25,
         }}
       >
@@ -70,6 +70,7 @@ const TextContent = () => {
             </motion.div>
           </div>
         </div>
+
         {/* Description section */}
         <div className="flex h-[25%] flex-col justify-between sm:h-auto sm:gap-2">
           {/* Left description */}

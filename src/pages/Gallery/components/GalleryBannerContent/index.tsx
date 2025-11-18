@@ -6,41 +6,39 @@ const GalleryBannerContent = () => {
   const { closeModal, openModal, isOpenModal } = useModal();
 
   return (
-    <div className="flex h-full w-full flex-col pt-7 lg:h-[calc(100%-76px)] lg:pt-0">
-      <div className="flex h-full w-full flex-col justify-between">
-        {/* Title */}
+    <div className="flex flex-1 flex-col justify-between">
+      {/* Title */}
+      <Typography
+        parentAs="h1"
+        size="extraLarge"
+        animated
+        parentMotionProps={{ variants: fadeInLeft }}
+      >
+        Галерея
+      </Typography>
+
+      {/* Text & Button */}
+      <div className="flex flex-col gap-10">
         <Typography
-          parentAs="h1"
-          size="extraLarge"
+          parentAs="h3"
+          size="5xl"
           animated
-          parentMotionProps={{ variants: fadeInLeft }}
+          parentMotionProps={{ variants: fadeInRight }}
+          className="self-center sm:self-end"
         >
-          Галерея
+          Кожне фото — окрема історія.
         </Typography>
+        <MButton
+          onClick={openModal}
+          size="textLg"
+          variants={fadeIn}
+          className="self-center sm:self-start"
+        >
+          Замовити
+        </MButton>
 
-        {/* Bottom */}
-        <div className="mb-5 flex flex-col gap-10 sm:mb-0">
-          <Typography
-            parentAs="h3"
-            size="5xl"
-            animated
-            parentMotionProps={{ variants: fadeInRight }}
-            className="self-center sm:self-end"
-          >
-            Кожне фото — окрема історія.
-          </Typography>
-          <MButton
-            onClick={openModal}
-            size="textLg"
-            variants={fadeIn}
-            className="self-center sm:self-start"
-          >
-            Замовити
-          </MButton>
-
-          {/* Modal */}
-          <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
-        </div>
+        {/* Modal */}
+        <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />
       </div>
     </div>
   );
