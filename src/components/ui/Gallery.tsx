@@ -5,12 +5,37 @@ import { FancyboxAnchor, FancyboxLayout } from '@/components';
 import { cn, fadeInScale } from '@/lib';
 import type { PhotoItem } from '@/types';
 
-interface GalleryProps {
-  photos: PhotoItem[];
+interface GalleryItemProps {
+  photoUrl: string;
   className?: string;
 }
 
-const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
+interface GalleryProps {
+  photos: PhotoItem[];
+  className?: string;
+  itemClassName?: string;
+}
+
+const Gallery = ({ photos, className, itemClassName }: GalleryProps) => {
+  if (!photos || !photos.length) return;
+
+  return (
+    <FancyboxLayout>
+      <div
+        className={cn(
+          'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 2xl:gap-8',
+          className,
+        )}
+      >
+        {photos.map((photo) => (
+          <GalleryItem photoUrl={photo.photoUrl} key={photo._id} className={itemClassName} />
+        ))}
+      </div>
+    </FancyboxLayout>
+  );
+};
+
+const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
 
   const ref = useRef<HTMLDivElement>(null);
@@ -19,16 +44,16 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
   return (
     <motion.div
       ref={ref}
-      className="overflow-hidden"
+      className={cn(
+        'group h-[544px] cursor-pointer overflow-hidden lg:h-[620px] 2xl:h-[630px]',
+        className,
+      )}
+      // className={cn('group cursor-pointer overflow-hidden h-[544px] lg:h-[565px] 2xl:h-[630px]', className)}
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
     >
-      <FancyboxAnchor
-        href={photoUrl}
-        gallery="gallery"
-        className="h-[70vh] cursor-pointer overflow-hidden sm:h-[80vh]"
-      >
+      <FancyboxAnchor href={photoUrl} gallery="gallery">
         {/* Loading placeholder */}
         {status === 'loading' && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -58,23 +83,6 @@ const GalleryItem = ({ photoUrl }: { photoUrl: string }) => {
         />
       </FancyboxAnchor>
     </motion.div>
-  );
-};
-
-const Gallery = ({ photos, className }: GalleryProps) => {
-  return (
-    <FancyboxLayout>
-      <div
-        className={cn(
-          'grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 2xl:gap-8',
-          className,
-        )}
-      >
-        {photos.map((photo) => (
-          <GalleryItem photoUrl={photo.photoUrl} key={photo._id} />
-        ))}
-      </div>
-    </FancyboxLayout>
   );
 };
 

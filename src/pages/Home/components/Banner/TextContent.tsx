@@ -53,7 +53,7 @@ const TextContent = () => {
               parentAs="div"
               size="custom"
               content={['івано-франківськ', 'львів']}
-              className="text-2xl sm:mb-0 2xl:text-4xl"
+              className="text-2xl leading-[1] sm:mb-0 sm:leading-[1.1] 2xl:text-4xl"
               childrenClasses={{ 1: 'text-right' }}
               animated
               parentMotionProps={{

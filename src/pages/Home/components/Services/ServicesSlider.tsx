@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper/types';
 
 import { arrowLeft, arrowRight } from '@/assets';
-import { Button } from '@/components';
+import { Button, Icon } from '@/components';
 import { fadeIn } from '@/lib';
 import type { ServicesItem } from '@/types';
 
@@ -38,12 +38,11 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
         as="button"
         className="absolute left-2 top-1/2 z-10 flex -translate-y-1/2 xl:hidden"
       >
-        <img src={arrowLeft} alt="Previous" className="h-full w-full object-contain p-0.5" />
+        <Icon icon={arrowLeft} name="Previous" size="w-7 h-7" />
       </Button>
 
       <Swiper
         modules={[Navigation, Pagination]}
-        effect="fade"
         slidesPerView={1}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{
@@ -72,7 +71,7 @@ const ServicesSlider = ({ slides }: ServicesSliderProps) => {
         as="button"
         className="absolute right-2 top-1/2 z-10 flex -translate-y-1/2 xl:hidden "
       >
-        <img src={arrowRight} alt="Previous" className="h-full w-full object-contain p-0.5" />
+        <Icon icon={arrowRight} name="Previous" size="w-7 h-7" />
       </Button>
     </motion.div>
   );

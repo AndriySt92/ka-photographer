@@ -20,7 +20,7 @@ const About = () => {
         parentAs="h1"
         size="extraLarge"
         content={['Хто', 'я?']}
-        className="flex w-full max-w-[50%] justify-between"
+        className="flex w-full max-w-[50%] justify-between lg:max-w-[35%]"
         animated
         parentMotionProps={{
           variants: staggerContainer(),

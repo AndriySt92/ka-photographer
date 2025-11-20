@@ -22,7 +22,7 @@ const TitleOverlay = () => {
         <Typography
           size="custom"
           font="secondary"
-          className="w-full text-xl font-normal leading-6 sm:max-w-[70%] md:text-3xl lg:max-w-[40%] xl:leading-8 2xl:max-w-[43%] 2xl:text-5xl 2xl:!leading-[3rem] pointer-fine:text-primary pointer-coarse:text-secondary"
+          className="w-full text-center text-lg font-normal leading-6 sm:max-w-[70%] sm:text-left md:text-3xl lg:max-w-[40%] xl:leading-8 2xl:max-w-[43%] 2xl:text-5xl 2xl:!leading-[3rem] pointer-fine:text-primary pointer-coarse:text-secondary"
         >
           Кожна зйомка — це простір для відчуттів, обирай свій формат.
         </Typography>

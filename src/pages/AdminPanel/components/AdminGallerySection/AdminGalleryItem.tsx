@@ -21,7 +21,7 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
   return (
     <motion.div
       ref={ref}
-      className="group h-[70vh] cursor-pointer overflow-hidden sm:h-[80vh]"
+      className="group h-[544px] cursor-pointer overflow-hidden lg:h-[565px] 2xl:h-[630px]"
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}

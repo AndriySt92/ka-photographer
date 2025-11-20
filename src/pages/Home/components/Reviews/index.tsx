@@ -102,7 +102,7 @@ const Reviews = () => {
               parentAs="h3"
               size="custom"
               content={['Готові створити свою історію?', ' Пиши мені — і ми зробимо це разом.']}
-              className="text-base !leading-[0.95] xl:text-lg 2xl:text-2xl"
+              className="text-base !leading-[0.95] xl:text-xl 2xl:text-2xl"
               childrenClasses={{ 1: 'text-left lg:text-right mt-2 lg:mt-0' }}
               animated
               parentMotionProps={{

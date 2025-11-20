@@ -1,25 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import {
-  galleryPhoto1,
-  galleryPhoto2,
-  galleryPhoto3,
-  galleryPhoto4,
-  galleryPhoto5,
-  galleryPhoto6,
-} from '@/assets';
 import { Button, Gallery, Typography } from '@/components';
+import { homePhotos } from '@/config';
 import { fadeInBottom, fadeInLeft } from '@/lib';
-
-const galleryPhotos = [
-  galleryPhoto1,
-  galleryPhoto2,
-  galleryPhoto3,
-  galleryPhoto4,
-  galleryPhoto5,
-  galleryPhoto6,
-];
+import type { PhotoItem } from '@/types';
 
 const HomeGallery = () => {
   return (
@@ -40,7 +25,11 @@ const HomeGallery = () => {
       </Typography>
 
       {/* Photos */}
-      <Gallery photosUrls={galleryPhotos} className="grid-cols-2" />
+      <Gallery
+        photos={homePhotos as PhotoItem[]}
+        className="grid-cols-2"
+        itemClassName="h-[260px] sm:h-[470px] lg:h-[565px]"
+      />
 
       {/* Button more */}
       <motion.div
