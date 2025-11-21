@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Control, FieldValues, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { useWatch } from 'react-hook-form';
 import { motion, type Variants } from 'framer-motion';
@@ -25,29 +25,6 @@ interface FormFieldProps<T extends FieldValues> {
   rows?: number; //Textarea prop
 }
 
-const AnimatedUnderline = ({
-  isFocused,
-  isError,
-  className,
-}: {
-  isFocused: boolean;
-  isError?: boolean;
-  className?: string;
-}) => (
-  <motion.div
-    className={cn(
-      'absolute bottom-0 left-0 h-0.5 w-full origin-left',
-      isError ? 'bg-red-500' : 'bg-white',
-      className,
-    )}
-    initial={false}
-    animate={{
-      scaleX: isFocused ? 1 : 0,
-    }}
-    transition={{ duration: 0.3 }}
-  />
-);
-
 const FormField = <T extends FieldValues>({
   name,
   label,
@@ -57,7 +34,7 @@ const FormField = <T extends FieldValues>({
   register,
   control,
   validation,
-  maxLength = 200,
+  maxLength = 500,
   rows = 1,
   variants = fadeInWithOpacity,
   formFieldClassName,
@@ -68,6 +45,13 @@ const FormField = <T extends FieldValues>({
 }: FormFieldProps<T>) => {
   const value = useWatch({ name, control });
   const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  // Reset focus state when value becomes empty after form reset function
+  useEffect(() => {
+    if (!value) {
+      setIsFocused(false);
+    }
+  }, [value]);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -154,5 +138,28 @@ const FormField = <T extends FieldValues>({
     </motion.div>
   );
 };
+
+const AnimatedUnderline = ({
+  isFocused,
+  isError,
+  className,
+}: {
+  isFocused: boolean;
+  isError?: boolean;
+  className?: string;
+}) => (
+  <motion.div
+    className={cn(
+      'absolute bottom-0 left-0 h-0.5 w-full origin-left',
+      isError ? 'bg-red-500' : 'bg-white',
+      className,
+    )}
+    initial={false}
+    animate={{
+      scaleX: isFocused ? 1 : 0,
+    }}
+    transition={{ duration: 0.3 }}
+  />
+);
 
 export default FormField;
