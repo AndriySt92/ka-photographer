@@ -28,6 +28,10 @@ const useRemovePhoto = () => {
           queryKey: queryKeys.photos.photos(category),
         });
       });
+
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.photos.photos('all'),
+      });
     },
 
     onError: (error) => {
