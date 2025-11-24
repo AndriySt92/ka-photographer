@@ -41,7 +41,8 @@ const ShowcasePageLayout = ({
     hasNextPage,
     isFetchingNextPage,
     isFetching,
-    status,
+    isSuccess,
+    isError,
     error,
   } = usePhotos({ category: category as string });
 
@@ -53,17 +54,17 @@ const ShowcasePageLayout = ({
 
   return (
     <motion.div
-      className={cn(
-        'relative min-h-screen w-full space-y-10 pb-10 sm:space-y-14 xl:space-y-16 xl:pb-14 2xl:pb-20',
-        className,
-      )}
+      className={cn('padding-b space-y-lg relative min-h-screen w-full', className)}
       key={motionKey}
     >
       <Banner {...bannerProps} bannerContent={children} />
       <DescriptionSection {...descriptionProps} />
-      {status === 'success' && photos.length > 0 ? (
-        <GallerySection photos={photos} />
-      ) : (
+
+      {/* Gallery */}
+      {isSuccess && photos.length > 0 && <GallerySection photos={photos} />}
+
+      {/* Photos data is empty */}
+      {isSuccess && photos?.length === 0 && (
         <Typography size="2xl" align="center">
           Немає фотографій для відображення!
         </Typography>
@@ -76,11 +77,12 @@ const ShowcasePageLayout = ({
       {isFetching && isFetchingNextPage && <Loader />}
 
       {/* Error state */}
-      {status === 'error' && (
+      {isError && (
         <ErrorMessage
           error={String((error as Error).message)}
           size="lg"
           animationKey="server-error"
+          className="text-center"
         />
       )}
     </motion.div>
