@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { useInViewport } from './';
+import { useInViewport } from '.';
 
 interface UseInfiniteScrollProps {
   hasNextPage: boolean;

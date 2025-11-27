@@ -1,5 +1,6 @@
 export { default as useAspectRatio } from './useAspectRatio';
 export { default as useClickOutside } from './useClickOutside';
+export { default as useCloudinaryUpload } from './useCloudinaryUpload';
 export { default as useCreateBooking } from './useCreateBooking';
 export { default as useCurrentUser } from './useCurrentUser';
 export { default as useEventListener } from './useEventListener';
