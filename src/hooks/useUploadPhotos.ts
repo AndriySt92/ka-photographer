@@ -7,25 +7,23 @@ import { endpoints, queryKeys } from '@/api/endpoints';
 import type { ApiResponse, UploadPhotosData } from '@/types';
 import { getErrorMessage } from '@/utils';
 
+import useCloudinaryUpload from './useCloudinaryUpload';
+
 const useUploadPhotos = () => {
   const queryClient = useQueryClient();
+  const { uploadMultiple } = useCloudinaryUpload();
 
   return useMutation<ApiResponse, AxiosError, UploadPhotosData>({
     mutationFn: async ({ categories, photoFiles }) => {
-      const formData = new FormData();
+      const photoUrls = await uploadMultiple(photoFiles);
 
-      formData.append('categories', JSON.stringify(categories));
-
-      photoFiles.forEach((file) => {
-        formData.append('photoFiles', file);
-      });
-
-      return await post<ApiResponse, FormData>(endpoints.photos.uploadPhotos, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      return await post<ApiResponse, { categories: string[]; photoUrls: string[] }>(
+        endpoints.photos.uploadPhotos,
+        { categories, photoUrls },
+        {
+          timeout: 300000, // 5 minutes
         },
-        timeout: 300000, // 5 minutes
-      });
+      );
     },
 
     onSuccess: (response, variables) => {
