@@ -4,7 +4,7 @@ import type { AxiosError } from 'axios';
 
 import { post } from '@/api/clients';
 import { endpoints, queryKeys } from '@/api/endpoints';
-import type { ApiResponse, UploadPhotosData } from '@/types';
+import type { ApiResponse, UploadedPhoto, UploadPhotosData } from '@/types';
 import { getErrorMessage } from '@/utils';
 
 import useCloudinaryUpload from './useCloudinaryUpload';
@@ -15,13 +15,16 @@ const useUploadPhotos = () => {
 
   return useMutation<ApiResponse, AxiosError, UploadPhotosData>({
     mutationFn: async ({ categories, photoFiles }) => {
-      const photoUrls = await uploadMultiple(photoFiles);
+      const uploadedPhotos = await uploadMultiple(photoFiles);
 
-      return await post<ApiResponse, { categories: string[]; photoUrls: string[] }>(
+      return await post<ApiResponse, { categories: string[]; photos: UploadedPhoto[] }>(
         endpoints.photos.uploadPhotos,
-        { categories, photoUrls },
         {
-          timeout: 300000, // 5 minutes
+          categories,
+          photos: uploadedPhotos,
+        },
+        {
+          timeout: 300000,
         },
       );
     },
@@ -35,7 +38,6 @@ const useUploadPhotos = () => {
         });
       });
 
-      // Invalidate all photos after upload
       queryClient.invalidateQueries({
         queryKey: queryKeys.photos.photos('all'),
       });

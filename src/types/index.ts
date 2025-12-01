@@ -9,4 +9,5 @@ export type { default as PhotoItem } from './PhotoItem';
 export type { default as ReviewSlide } from './ReviewSlide';
 export type { default as ServicesItem } from './ServicesItem';
 export type { default as TermsItem } from './TermsItem';
+export type { default as UploadedPhoto } from './UploadedPhoto';
 export type { default as UploadPhotosData } from './UploadPhotosData';
