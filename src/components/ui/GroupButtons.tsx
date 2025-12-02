@@ -41,10 +41,10 @@ const GroupButtons = ({
           {label}
         </Typography>
       )}
-      <div className="scrollbar-hide section-border-b relative flex justify-between overflow-x-auto overflow-y-hidden whitespace-nowrap">
+      <div className="scrollbar-hide section-border-b relative flex w-full min-w-0 max-w-full justify-between overflow-x-auto overflow-y-hidden whitespace-nowrap">
         <LayoutGroup>
           {options.map((option) => (
-            <div className="relative flex-shrink-0" key={option.value}>
+            <div className="relative inline-flex flex-shrink-0" key={option.value}>
               <Button
                 intent="minimal"
                 type="button"

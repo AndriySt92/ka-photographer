@@ -63,7 +63,7 @@ const Reviews = () => {
 
         {/* Right side - Reviews slider */}
         <motion.div
-          className="section-border-y relative py-8 sm:py-12 lg:w-[54%] lg:border-0 lg:py-0 xl:w-[40%]"
+          className="section-border-y relative py-8 sm:py-12 lg:w-[54%] lg:border-0 lg:py-0 xl:w-[43%]"
           variants={fadeIn}
         >
           <ReviewsSlider slides={reviews} />
@@ -71,7 +71,7 @@ const Reviews = () => {
 
         {/* Left side - Text block */}
         <motion.div
-          className="flex flex-col justify-between lg:w-[45%] xl:w-[57%]"
+          className="flex flex-col justify-between lg:w-[45%] xl:w-[52%]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}

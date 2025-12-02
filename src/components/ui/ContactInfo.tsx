@@ -74,8 +74,9 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
               <Typography
                 parentAs="div"
                 size={roleStyles.textSize}
+                childrenClasses={{ 1: 'flex-shrink-0' }}
                 content={value.split('\n')}
-                className="!leading-none"
+                className="flex flex-col !leading-none"
               />
             ) : (
               // Render phone/email as links

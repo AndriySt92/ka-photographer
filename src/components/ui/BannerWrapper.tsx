@@ -49,7 +49,7 @@ const BannerWrapper = ({
       ref={ref}
       className={cn(
         'relative w-full overflow-hidden',
-        'h-[100dvh] min-h-[100dvh]',
+        'h-[100svh] min-h-[100svh]',
         'sm:h-screen sm:min-h-screen',
         className,
       )}

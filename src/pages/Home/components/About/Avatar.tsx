@@ -37,7 +37,7 @@ const Avatar = ({ className = '' }: AvatarProps) => {
   return (
     <motion.div
       className={cn(
-        'section-border aspect-square w-full rounded-full lg:p-[33px] xl:p-[53px]',
+        'section-border aspect-square w-full overflow-hidden rounded-full lg:p-[33px] xl:p-[53px]',
         className,
       )}
       variants={avatarContainerVariants}
@@ -46,7 +46,7 @@ const Avatar = ({ className = '' }: AvatarProps) => {
         <motion.img
           src={avatar}
           alt="avatar"
-          className="h-full w-full object-cover"
+          className="h-full w-full rounded-full object-cover"
           variants={avatarImageVariants}
         />
       </div>

@@ -21,7 +21,7 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
   return (
     <motion.div
       ref={ref}
-      className="group h-[544px] cursor-pointer overflow-hidden lg:h-[565px] 2xl:h-[630px]"
+      className="relative h-[544px] cursor-pointer overflow-hidden lg:h-[565px] 2xl:h-[630px]"
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -49,10 +49,7 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
           decoding="async"
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
-          className={cn(
-            'h-full w-full object-cover transition-all duration-500 hover:scale-105',
-            status !== 'loaded' && 'opacity-0',
-          )}
+          className={cn('h-full w-full object-cover', status !== 'loaded' && 'opacity-0')}
         />
       </FancyboxAnchor>
 
@@ -60,7 +57,12 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
         <Button
           intent="minimal"
           onClick={onDelete ? () => onDelete(photo) : undefined}
-          className="absolute right-2 top-2 z-10 rounded-lg bg-secondary/10 p-2 backdrop-blur-sm hover:scale-105 hover:bg-secondary/15"
+          style={{
+            willChange: 'transform',
+            WebkitTransform: 'translateZ(0)',
+            transform: 'translateZ(0)',
+          }}
+          className="absolute right-2 top-2 z-10 h-8 w-8 rounded-lg bg-secondary/10 p-2 backdrop-blur-sm hover:scale-105 hover:bg-secondary/15"
         >
           <Icon name="remove" icon={close} size=" h-4 aspect-auto" />
         </Button>
