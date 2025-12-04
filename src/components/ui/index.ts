@@ -16,6 +16,7 @@ export { default as Icon } from './Icon';
 export { default as Loader } from './Loader';
 export { default as Modal } from './Modal';
 export { default as NavLink } from './NavLink';
+export { default as ScrollToTopButton } from './ScrollToTopButton';
 export { default as SessionOrderForm } from './SessionOrderForm';
 export { default as SessionOrderModal } from './SessionOrderModal';
 export { default as SessionOrderSection } from './SessionOrderSection';

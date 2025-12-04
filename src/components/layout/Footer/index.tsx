@@ -2,7 +2,7 @@ import { ContactInfo, NavLink, Typography } from '@/components';
 import { contactInfo, navigation, socialMediaPlatforms } from '@/config';
 import { cn } from '@/lib';
 
-import FooterSection from './FooterSection';
+import FooterSection from './components/FooterSection';
 
 const PAGE_ITEMS = [
   { label: 'Головна', path: '/' },

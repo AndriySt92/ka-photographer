@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Footer, Header, ScrollToTopButton } from './';
+import { ScrollToTopButton } from '@/components/ui';
+
+import { Footer, Header } from '../';
 
 const Layout = () => {
   const { pathname } = useLocation();

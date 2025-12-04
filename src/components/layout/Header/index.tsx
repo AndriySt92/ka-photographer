@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { navigation } from '@/config';
 import { useCurrentUser, useLogout } from '@/hooks';
 
-import DesktopNav from './DesktopNav';
-import Logo from './Logo';
-import MobileNav from './MobileNav';
+import { DesktopNav, Logo, MobileNav } from './components';
 
 const Header = () => {
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
