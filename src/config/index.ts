@@ -1,7 +1,9 @@
 export { default as allPhotoCategories } from './allPhotoCategories';
 export { default as contactInfo } from './contactInfo';
+export { default as homePhotos } from './homePhotos';
 export { default as navigation } from './navigation';
 export { default as reviews } from './reviews';
+export { default as ROUTES } from './routes';
 export { default as serviceDetails } from './serviceDetails';
 export { default as services } from './services';
 export { default as sessionOptions } from './sessionOptions';

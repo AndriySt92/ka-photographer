@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 
+import { cn } from '@/lib';
+
 const DOT_COUNT = 3;
 
 const containerVariants = {
@@ -12,8 +14,19 @@ const dotVariants = {
   animate: { y: '100%' },
 };
 
-const Loader = () => (
-  <div className="flex items-center justify-center">
+interface LoaderProps {
+  fullScreen?: boolean;
+  className?: string;
+}
+
+const Loader = ({ fullScreen = false, className }: LoaderProps) => (
+  <div
+    className={cn(
+      'flex items-center justify-center',
+      fullScreen && 'min-h-screen items-center',
+      className,
+    )}
+  >
     <motion.div
       className="flex h-4 w-20 items-start justify-around"
       variants={containerVariants}

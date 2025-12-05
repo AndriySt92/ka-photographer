@@ -15,6 +15,7 @@ export { default as locationBanner } from './location_banner.svg';
 export { default as logo } from './logo.png';
 export { default as logout } from './logout.svg';
 export { default as phone } from './phone.svg';
+export { default as search } from './search.svg';
 export { default as telegram } from './telegram.svg';
 export { default as tick } from './tick.svg';
 export { default as upload } from './upload.svg';

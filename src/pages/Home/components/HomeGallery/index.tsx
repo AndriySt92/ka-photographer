@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { Button, Gallery, Typography } from '@/components';
-import { homePhotos } from '@/config';
+import { homePhotos, ROUTES } from '@/config';
 import { fadeInBottom, fadeInLeft } from '@/lib';
 import type { PhotoItem } from '@/types';
 
@@ -39,7 +39,7 @@ const HomeGallery = () => {
         viewport={{ once: true, amount: 0.2 }}
         className="text-center"
       >
-        <Button as={Link} to="/gallery" size="textLg">
+        <Button as={Link} to={ROUTES.GALLERY} size="textLg">
           Більше
         </Button>
       </motion.div>

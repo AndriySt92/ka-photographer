@@ -1,35 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify';
 
-import { Layout, PrivateRoutes } from './components';
-import {
-  AdminLogin,
-  AdminPanel,
-  Contacts,
-  Gallery,
-  Home,
-  ServiceDetails,
-  Services,
-  Terms,
-} from './pages';
+import AppRoutes from './router/AppRoutes';
 
 const App = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/services/:type" element={<ServiceDetails />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route element={<PrivateRoutes />}>
-            <Route path="/admin-panel" element={<AdminPanel />} />
-          </Route>
-        </Route>
-      </Routes>
+      <AppRoutes />
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

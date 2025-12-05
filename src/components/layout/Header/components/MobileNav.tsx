@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { burgerMenu, close, logout } from '@/assets';
-import { Button, ContactInfo, Icon, NavLink } from '@/components';
+import { Button, ContactInfo, Icon } from '@/components';
 import { contactInfo } from '@/config';
 import { useMobileNav } from '@/hooks';
 import { fadeIn, overlayVariants } from '@/lib';
@@ -92,22 +92,17 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
                     />
                   ))}
 
-                  {/* Admin panel link & button logout*/}
+                  {/* Button logout*/}
                   {isAdmin && (
-                    <div>
-                      <div className="section-border-b py-3">
-                        <NavLink to="/admin-panel">Адмін</NavLink>
-                      </div>
-                      <div className="py-3">
-                        <Button
-                          onClick={() => onLogout()}
-                          intent="minimal"
-                          className="px-0 py-2 opacity-80 hover:opacity-100"
-                          disabled={isLoggingOut}
-                        >
-                          <Icon icon={logout} size="h-5 w-5" name="logout" />
-                        </Button>
-                      </div>
+                    <div className="py-3">
+                      <Button
+                        onClick={() => onLogout()}
+                        intent="minimal"
+                        className="px-0 py-2 opacity-80 hover:opacity-100"
+                        disabled={isLoggingOut}
+                      >
+                        <Icon icon={logout} size="h-5 w-5" name="logout" />
+                      </Button>
                     </div>
                   )}
                 </nav>

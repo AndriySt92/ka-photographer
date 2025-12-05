@@ -10,6 +10,7 @@ const Header = () => {
   const { data: user } = useCurrentUser();
 
   const isAdmin = user?.role === 'admin';
+  const regularLinks = navigation.filter((item) => !item.adminOnly || isAdmin);
 
   const onLogout = () => {
     logout();
@@ -28,13 +29,13 @@ const Header = () => {
         {/* Navigation */}
         <div className="flex items-center">
           <DesktopNav
-            navigation={navigation}
+            navigation={regularLinks}
             isAdmin={isAdmin}
             onLogout={onLogout}
             isLoggingOut={isLoggingOut}
           />
           <MobileNav
-            navigation={navigation}
+            navigation={regularLinks}
             isAdmin={isAdmin}
             onLogout={onLogout}
             isLoggingOut={isLoggingOut}
