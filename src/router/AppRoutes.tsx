@@ -5,7 +5,7 @@ import { Layout, Loader } from '@/components';
 import { ROUTES } from '@/config';
 import { Gallery, Home, ServiceDetails, Services } from '@/pages';
 
-import { PrivateRoutes } from '.';
+import PrivateRoutes from './PrivateRoutes';
 
 const Contacts = lazy(() => import('@/pages/Contacts'));
 const Terms = lazy(() => import('@/pages/Terms'));
