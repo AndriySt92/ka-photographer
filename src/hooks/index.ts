@@ -14,5 +14,6 @@ export { default as usePhotos } from './usePhotos';
 export { default as useRemovePhoto } from './useRemovePhoto';
 export { default as useScrollToTopVisibility } from './useScrollToTopVisibility';
 export { default as useThrottle } from './useThrottle';
+export { default as useToast } from './useToast';
 export { default as useUploadPhotos } from './useUploadPhotos';
 export { default as useWindowSize } from './useWindowSize';

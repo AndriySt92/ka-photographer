@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
@@ -8,10 +7,12 @@ import type { ApiResponse, UploadedPhoto, UploadPhotosData } from '@/types';
 import { getErrorMessage } from '@/utils';
 
 import useCloudinaryUpload from './useCloudinaryUpload';
+import useToast from './useToast';
 
 const useUploadPhotos = () => {
   const queryClient = useQueryClient();
   const { uploadMultiple } = useCloudinaryUpload();
+  const { showSuccess, showError } = useToast();
 
   return useMutation<ApiResponse, AxiosError, UploadPhotosData>({
     mutationFn: async ({ categories, photoFiles }) => {
@@ -30,7 +31,7 @@ const useUploadPhotos = () => {
     },
 
     onSuccess: (response, variables) => {
-      toast.success(response.message || `Завантажено ${variables.photoFiles.length} фото!`);
+      showSuccess(response.message || `Завантажено ${variables.photoFiles.length} фото!`);
 
       variables.categories.forEach((category) => {
         queryClient.invalidateQueries({
@@ -45,7 +46,7 @@ const useUploadPhotos = () => {
 
     onError: (error) => {
       const errorMessage = getErrorMessage(error);
-      toast.error(errorMessage);
+      showError(errorMessage);
     },
   });
 };

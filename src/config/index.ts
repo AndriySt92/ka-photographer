@@ -9,4 +9,5 @@ export { default as services } from './services';
 export { default as sessionOptions } from './sessionOptions';
 export { default as socialMediaPlatforms } from './socialMediaPlatforms';
 export { default as terms } from './terms';
+export { default as toastConfig } from './toastConfigs';
 export { default as uploadCategories } from './uploadCategories';

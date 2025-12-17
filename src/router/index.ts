@@ -1,2 +1,2 @@
-export { default as AppRouter } from './AppRoutes';
+export { default as AppRoutes } from './AppRoutes';
 export { default as PrivateRoutes } from './PrivateRoutes';

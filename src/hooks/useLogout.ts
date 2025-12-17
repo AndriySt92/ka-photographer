@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { remove } from '@/api/clients';
@@ -7,9 +6,12 @@ import { endpoints, queryKeys } from '@/api/endpoints';
 import type { Admin, ApiResponse } from '@/types';
 import { getErrorMessage } from '@/utils';
 
+import useToast from './useToast';
+
 const useLogout = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { showError } = useToast();
 
   return useMutation<ApiResponse, Error>({
     mutationFn: async () => {
@@ -25,7 +27,7 @@ const useLogout = () => {
 
     onError: (error) => {
       const errorMessage = getErrorMessage(error);
-      toast.error(errorMessage);
+      showError(errorMessage);
     },
   });
 };

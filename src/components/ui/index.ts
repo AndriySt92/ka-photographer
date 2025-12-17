@@ -20,4 +20,5 @@ export { default as ScrollToTopButton } from './ScrollToTopButton';
 export { default as SessionOrderForm } from './SessionOrderForm';
 export { default as SessionOrderModal } from './SessionOrderModal';
 export { default as SessionOrderSection } from './SessionOrderSection';
+export { default as Toast } from './Toast';
 export { default as Typography } from './Typography';
