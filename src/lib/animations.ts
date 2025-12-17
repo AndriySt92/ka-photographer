@@ -155,3 +155,9 @@ export const modalVariants: Variants = {
     transition: { duration: 0.3 },
   },
 };
+
+export const buttonTextVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+};

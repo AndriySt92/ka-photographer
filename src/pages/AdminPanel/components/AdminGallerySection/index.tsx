@@ -123,9 +123,8 @@ const AdminGallerySection = forwardRef<HTMLDivElement, AdminGallerySectionProps>
             <Button
               size="textSm"
               onClick={handleDelete}
-              disabled={isPending}
               isLoading={isPending}
-              loadingText="Видалення..."
+              loadingText="Видалення"
             >
               Видалити
             </Button>

@@ -93,7 +93,7 @@ const FilePreviewSection = ({
               intent="secondary"
               disabled={hasError || isPending}
               isLoading={isPending}
-              loadingText="Завантаження..."
+              loadingText="Завантаження"
             >
               {`Завантажити ${files.length} фото`}
             </Button>

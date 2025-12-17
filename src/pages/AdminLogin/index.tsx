@@ -83,7 +83,7 @@ const SignIn = () => {
               type="submit"
               size="textSm"
               disabled={hasError || isSubmitting}
-              loadingText="Вхід..."
+              loadingText="Вхід"
               isLoading={isPending}
             >
               Увійти
