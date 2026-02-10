@@ -65,7 +65,7 @@ const FormField = <T extends FieldValues>({
   };
 
   const baseFieldClasses =
-    'w-full border-b bg-transparent py-2 text-secondary !opacity-60 outline-none sm:py-3';
+    'w-full border-b bg-transparent py-2 no-appearance-underline text-secondary !opacity-60 outline-none sm:py-3 appearance-none focus:outline-none focus:ring-0';
 
   const hasFocusOrValue = isFocused || !!value;
   return (
@@ -104,6 +104,13 @@ const FormField = <T extends FieldValues>({
               error ? 'border-red-500' : 'border-secondary',
               formFieldClassName,
             )}
+            // style={{
+            //   WebkitAppearance: 'none',
+            //   MozAppearance: 'textfield',
+            //   WebkitTapHighlightColor: 'transparent',
+            //   WebkitBoxShadow: 'none',
+            //   boxShadow: 'none',
+            // }}
           />
         ) : (
           <textarea

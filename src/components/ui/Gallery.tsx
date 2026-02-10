@@ -5,15 +5,15 @@ import { FancyboxAnchor, FancyboxLayout } from '@/components';
 import { cn, fadeInScale } from '@/lib';
 import type { PhotoItem } from '@/types';
 
-interface GalleryItemProps {
-  photoUrl: string;
-  className?: string;
-}
-
 interface GalleryProps {
   photos: PhotoItem[];
   className?: string;
   itemClassName?: string;
+}
+
+interface GalleryItemProps {
+  photoUrl: string;
+  className?: string;
 }
 
 const Gallery = ({ photos, className, itemClassName }: GalleryProps) => {
@@ -45,10 +45,9 @@ const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
     <motion.div
       ref={ref}
       className={cn(
-        'group h-[544px] cursor-pointer overflow-hidden lg:h-[620px] 2xl:h-[630px]',
+        'ios-overflow-fix group h-[544px] cursor-pointer overflow-hidden lg:h-[565px] 2xl:h-[630px]',
         className,
       )}
-      // className={cn('group cursor-pointer overflow-hidden h-[544px] lg:h-[565px] 2xl:h-[630px]', className)}
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -77,7 +76,7 @@ const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
           className={cn(
-            'h-full w-full object-cover transition-opacity duration-500',
+            'transition-scale h-full w-full object-cover duration-500 group-hover:scale-105',
             status !== 'loaded' && 'opacity-0',
           )}
         />
