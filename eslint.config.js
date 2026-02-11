@@ -9,6 +9,11 @@ import importPlugin from 'eslint-plugin-import';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tailwindPlugin from 'eslint-plugin-tailwindcss';
 
+// Testing plugins
+import jestPlugin from 'eslint-plugin-jest';
+import testingLibrary from 'eslint-plugin-testing-library';
+import jestDom from 'eslint-plugin-jest-dom';
+
 export default tseslint.config(
   {
     ignores: ['dist', '**/node_modules/**/*.d.ts', 'eslint.config.js'],
@@ -52,7 +57,7 @@ export default tseslint.config(
       // Prettier integration
       'prettier/prettier': 'warn',
 
-      // Tailwind CSS Class Ordering Rules 👇
+      // Tailwind CSS Class Ordering Rules
       'tailwindcss/classnames-order': 'error',
       'tailwindcss/no-custom-classname': 'off',
 
@@ -82,16 +87,38 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/ban-ts-comment': 'warn',
     },
-
     settings: {
       react: {
         version: 'detect',
       },
       tailwindcss: {
-        // 👇 Add your Tailwind config file path
         config: './tailwind.config.js',
-        callees: ['classnames', 'clsx', 'cn'], // If using class utilities
+        callees: ['classnames', 'clsx', 'cn'],
       },
+    },
+  },
+  // ========== TESTING CONFIGURATIONS ==========
+  {
+    files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+    extends: [
+      jestPlugin.configs['flat/recommended'],
+      testingLibrary.configs['flat/react'],
+      jestDom.configs['flat/recommended'],
+    ],
+    rules: {
+      // Turn off React Refresh rule for test files
+      'react-refresh/only-export-components': 'off',
+      // Allow any in tests for mocks
+      '@typescript-eslint/no-explicit-any': 'off',
+      // Allow non-arrow functions for Jest hooks
+      'react/function-component-definition': 'off',
+      // Allow console statements in tests
+      'no-console': 'off',
     },
   },
 );
