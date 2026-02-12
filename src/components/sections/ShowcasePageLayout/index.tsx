@@ -56,6 +56,7 @@ const ShowcasePageLayout = ({
     <motion.div
       className={cn('padding-b space-y-lg relative min-h-screen w-full', className)}
       key={motionKey}
+      data-testid="showcase-layout"
     >
       <Banner {...bannerProps} bannerContent={children} />
       <DescriptionSection {...descriptionProps} />
@@ -74,7 +75,7 @@ const ShowcasePageLayout = ({
       {hasNextPage && <div ref={triggerRef} className="h-2" />}
 
       {/* Loading state */}
-      {isFetching && isFetchingNextPage && <Loader />}
+      {isFetching && <Loader />}
 
       {/* Error state */}
       {isError && (
