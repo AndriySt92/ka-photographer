@@ -107,7 +107,9 @@ const AdminGallerySection = forwardRef<HTMLDivElement, AdminGallerySectionProps>
         </AnimatePresence>
 
         {/* Infinite scroll trigger */}
-        {hasNextPage && <div ref={triggerRef} className="h-2" />}
+        {hasNextPage && (
+          <div ref={triggerRef} className="h-2" data-testid="infinite-scroll-trigger" />
+        )}
 
         {/* Delete confirmation Modal */}
         <Modal
