@@ -142,7 +142,11 @@ const UploadPhotos = ({ onUpload }: UploadPhotosProps) => {
         Завантажити фото
       </Typography>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-6"
+        data-testid="upload-form"
+      >
         {/* FileDropzone */}
         <Controller
           name="files"
