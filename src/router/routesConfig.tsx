@@ -1,5 +1,4 @@
-import React, { lazy, Suspense } from 'react';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
 import { Layout, Loader } from '@/components';
 import { ROUTES } from '@/config';
@@ -13,7 +12,7 @@ const AdminLogin = lazy(() => import('@/pages/AdminLogin'));
 const AdminPanel = lazy(() => import('@/pages/AdminPanel'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
-const router = createHashRouter([
+const routesConfig = [
   {
     path: ROUTES.HOME,
     element: <Layout />,
@@ -64,7 +63,6 @@ const router = createHashRouter([
           },
         ],
       },
-      // Not found route
       {
         path: '*',
         element: (
@@ -75,8 +73,6 @@ const router = createHashRouter([
       },
     ],
   },
-]);
+];
 
-const AppRoutes: React.FC = () => <RouterProvider router={router} />;
-
-export default AppRoutes;
+export default routesConfig;

@@ -15,7 +15,7 @@ const PrivateRoutes = () => {
     return <Outlet />;
   }
 
-  return <Navigate to={ROUTES.ADMIN_PANEL} replace />;
+  return <Navigate to={ROUTES.ADMIN_LOGIN} replace />;
 };
 
 export default PrivateRoutes;
