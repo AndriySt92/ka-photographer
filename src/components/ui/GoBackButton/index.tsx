@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { arrowLeft } from '@/assets';
 
-import { Button, Icon } from '..';
+import { Button } from '../Button';
+import Icon from '../Icon';
 
 const GoBackButton = () => {
   const navigate = useNavigate();

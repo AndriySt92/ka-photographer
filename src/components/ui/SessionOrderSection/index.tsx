@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { MButton, SessionOrderModal, Typography } from '@/components';
 import { useModal } from '@/hooks';
 import { fadeInBottom, fadeInWithOpacity } from '@/lib';
+
+import { MButton } from '../Button';
+import SessionOrderModal from '../SessionOrderModal';
+import Typography from '../Typography';
 
 const SessionOrderSection = () => {
   const { isOpenModal, openModal, closeModal } = useModal();

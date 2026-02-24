@@ -1,7 +1,9 @@
 import { arrowTop } from '@/assets';
-import { Button, Icon } from '@/components';
 import { useScrollToTopVisibility } from '@/hooks';
 import { cn } from '@/lib';
+
+import { Button } from '../Button';
+import Icon from '../Icon';
 
 const ScrollToTopButton = () => {
   const showScrollTop = useScrollToTopVisibility();

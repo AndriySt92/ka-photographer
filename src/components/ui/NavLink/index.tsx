@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { cn } from '@/lib';
 
-import { Typography } from '.';
+import Typography from '../Typography';
 
 interface NavLinkProps {
   to: string;

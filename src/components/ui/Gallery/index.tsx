@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-import { FancyboxAnchor, FancyboxLayout } from '@/components';
 import { cn, fadeInScale } from '@/lib';
 import type { PhotoItem } from '@/types';
+
+import FancyboxAnchor from '../FancyboxAnchor';
+import FancyboxLayout from '../FancyboxLayout';
 
 interface GalleryProps {
   photos: PhotoItem[];

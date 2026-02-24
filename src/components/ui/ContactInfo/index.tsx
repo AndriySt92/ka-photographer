@@ -4,7 +4,7 @@ import { socialMediaPlatforms } from '@/config';
 import { cn } from '@/lib';
 import type { ContactInfoItem } from '@/types';
 
-import { Icon, Typography } from './';
+import { Icon, Typography } from '..';
 
 type Role = 'contacts' | 'footer' | 'menu';
 

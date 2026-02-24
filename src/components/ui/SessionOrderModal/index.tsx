@@ -1,4 +1,5 @@
-import { Modal, SessionOrderForm } from '@/components';
+import Modal from '../Modal';
+import SessionOrderForm from '../SessionOrderForm';
 
 interface SessionOrderModalProps {
   isOpen: boolean;

@@ -6,7 +6,9 @@ import { useCreateBooking } from '@/hooks';
 import { cn, fadeInWithOpacity } from '@/lib';
 import type { BookingFormData, CategoriesItem } from '@/types';
 
-import { Button, FormField, GroupButtons } from './';
+import { Button } from '../Button';
+import FormField from '../FormField';
+import GroupButtons from '../GroupButtons';
 
 // Constants for validation
 const NAME_MIN = 2;
@@ -93,7 +95,7 @@ const SessionOrderForm = ({ sessionType, className, onSubmitSuccess }: SessionOr
         error={errors.contact?.message}
         validation={{
           required: "Обов'язкове поле",
-          validate: (value) => {
+          validate: (value: string | null | undefined) => {
             const v = String(value ?? '').trim();
             if (v.length < CONTACT_MIN) {
               return `Контакт має містити щонайменше ${CONTACT_MIN} символів`;

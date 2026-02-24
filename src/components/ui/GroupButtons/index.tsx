@@ -2,7 +2,9 @@ import { LayoutGroup, motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 
-import { Button, ErrorMessage, Typography } from '../';
+import { Button } from '../Button';
+import ErrorMessage from '../ErrorMessage';
+import Typography from '../Typography';
 
 interface ButtonOption {
   label: string;

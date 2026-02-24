@@ -5,7 +5,7 @@ import { motion, type Variants } from 'framer-motion';
 
 import { cn, fadeInWithOpacity } from '@/lib';
 
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
