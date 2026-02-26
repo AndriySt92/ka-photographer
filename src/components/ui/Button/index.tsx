@@ -109,7 +109,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
       >
         <AnimatePresence mode="wait" initial={false}>
           {isLoading ? (
-            <motion.span {...motionSpanProps} key="loading">
+            <motion.span {...motionSpanProps} key="loading" data-testid="button-spinner">
               <span className="h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
               {loadingText && <span>{loadingText}</span>}
             </motion.span>

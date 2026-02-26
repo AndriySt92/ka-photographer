@@ -16,8 +16,12 @@ const Circles = ({ className, custom }: CirclesProps) => {
         'section-border absolute top-0 flex aspect-square h-full items-center justify-center rounded-full',
         className,
       )}
+      data-testid="circles"
     >
-      <div className="section-border absolute aspect-square h-[50%] rounded-full" />
+      <div
+        className="section-border absolute aspect-square h-[50%] rounded-full"
+        data-testid="circles-inner"
+      />
     </motion.div>
   );
 };
