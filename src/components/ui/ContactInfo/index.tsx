@@ -4,7 +4,8 @@ import { socialMediaPlatforms } from '@/config';
 import { cn } from '@/lib';
 import type { ContactInfoItem } from '@/types';
 
-import { Icon, Typography } from '..';
+import Icon from '../Icon';
+import Typography from '../Typography';
 
 type Role = 'contacts' | 'footer' | 'menu';
 
@@ -54,13 +55,14 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
   const roleStyles = ROLE_STYLES[role];
 
   return (
-    <div className={className}>
+    <div className={className} data-testid="contact-info-container">
       {items.map(({ type, icon, value }, index) => (
         <motion.div
           key={type}
           className={cn('flex items-center text-nowrap', roleStyles.containerClasses)}
           variants={variants}
           custom={index}
+          data-testid={`contact-item-${type}`}
         >
           <Icon name={type} icon={icon} size={roleStyles.iconSize} />
 
@@ -69,6 +71,7 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
               roleStyles.textWrapperClasses,
               type === 'location' && role === 'footer' && 'hover:bg-transparent hover:opacity-80',
             )}
+            data-testid={`contact-content-${type}`}
           >
             {type === 'location' ? (
               <Typography
@@ -77,11 +80,18 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
                 childrenClasses={{ 1: 'flex-shrink-0' }}
                 content={value.split('\n')}
                 className="flex flex-col !leading-none"
+                data-testid={`location-typography-${type}`}
               />
             ) : (
-              // Render phone/email as links
-              <a href={type === 'phone' ? `tel:${value}` : `mailto:${value}`}>
-                <Typography parentAs="div" size={roleStyles.textSize}>
+              <a
+                href={type === 'phone' ? `tel:${value}` : `mailto:${value}`}
+                data-testid={`contact-link-${type}`}
+              >
+                <Typography
+                  parentAs="div"
+                  size={roleStyles.textSize}
+                  data-testid={`contact-text-${type}`}
+                >
                   {value}
                 </Typography>
               </a>
@@ -89,7 +99,10 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
           </div>
         </motion.div>
       ))}
-      <div className={cn('flex items-center gap-6 xl:gap-10', roleStyles.socialWrapperClasses)}>
+      <div
+        className={cn('flex items-center gap-6 xl:gap-10', roleStyles.socialWrapperClasses)}
+        data-testid="social-media-container"
+      >
         {socialMediaPlatforms.map(({ name, link, icon }, index) => (
           <motion.div
             key={name}
@@ -103,6 +116,7 @@ const ContactInfo = ({ items, variants = {}, role, className }: ContactInfoProps
               damping: 15,
             }}
             viewport={{ once: true }}
+            data-testid={`social-item-${name}`}
           >
             <Icon as="link" name={name} link={link} icon={icon} size={roleStyles.iconSize} />
           </motion.div>

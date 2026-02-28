@@ -30,6 +30,7 @@ const ErrorMessage = ({
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
           className={cn('text-red-500', sizeClasses[size], className)}
+          data-testid="error-message"
         >
           {error}
         </motion.div>
