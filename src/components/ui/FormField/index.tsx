@@ -86,6 +86,7 @@ const FormField = <T extends FieldValues>({
           ease: 'easeOut',
           type: 'spring',
         }}
+        data-testid={`label-${name}`}
       >
         {label}
       </motion.label>
@@ -104,13 +105,7 @@ const FormField = <T extends FieldValues>({
               error ? 'border-red-500' : 'border-secondary',
               formFieldClassName,
             )}
-            // style={{
-            //   WebkitAppearance: 'none',
-            //   MozAppearance: 'textfield',
-            //   WebkitTapHighlightColor: 'transparent',
-            //   WebkitBoxShadow: 'none',
-            //   boxShadow: 'none',
-            // }}
+            data-testid={`field-${name}`}
           />
         ) : (
           <textarea
@@ -133,6 +128,7 @@ const FormField = <T extends FieldValues>({
               error ? 'border-red-500' : 'border-secondary',
               formFieldClassName,
             )}
+            data-testid={`field-${name}`}
           />
         )}
 
@@ -166,6 +162,7 @@ const AnimatedUnderline = ({
       scaleX: isFocused ? 1 : 0,
     }}
     transition={{ duration: 0.3 }}
+    data-testid="field-underline"
   />
 );
 
