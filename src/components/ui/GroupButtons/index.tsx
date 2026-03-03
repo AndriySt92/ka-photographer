@@ -37,7 +37,7 @@ const GroupButtons = ({
   className,
 }: GroupButtonsProps) => {
   return (
-    <div className={cn('pointer-events-auto relative', className)}>
+    <div className={cn('pointer-events-auto relative', className)} data-testid="group-buttons">
       {label && (
         <Typography size="custom" className="pb-2 text-base sm:text-lg">
           {label}

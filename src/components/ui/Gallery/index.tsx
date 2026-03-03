@@ -19,7 +19,7 @@ interface GalleryItemProps {
 }
 
 const Gallery = ({ photos, className, itemClassName }: GalleryProps) => {
-  if (!photos || !photos.length) return;
+  if (!photos || !photos.length) return null;
 
   return (
     <FancyboxLayout>
@@ -28,6 +28,7 @@ const Gallery = ({ photos, className, itemClassName }: GalleryProps) => {
           'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5 2xl:gap-8',
           className,
         )}
+        data-testid="gallery-grid"
       >
         {photos.map((photo) => (
           <GalleryItem photoUrl={photo.photoUrl} key={photo._id} className={itemClassName} />
@@ -53,18 +54,25 @@ const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
       variants={fadeInScale}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
+      data-testid="gallery-item"
     >
       <FancyboxAnchor href={photoUrl} gallery="gallery">
         {/* Loading placeholder */}
         {status === 'loading' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-gray-100"
+            data-testid="loading-spinner"
+          >
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-primary" />
           </div>
         )}
 
         {/* Error state */}
         {status === 'error' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-500">
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-gray-500"
+            data-testid="error-state"
+          >
             <span className="text-white">Failed to load</span>
           </div>
         )}
@@ -81,6 +89,7 @@ const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
             'transition-scale h-full w-full object-cover duration-500 group-hover:scale-105',
             status !== 'loaded' && 'opacity-0',
           )}
+          data-testid="gallery-image"
         />
       </FancyboxAnchor>
     </motion.div>
