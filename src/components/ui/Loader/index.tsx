@@ -26,6 +26,7 @@ const Loader = ({ fullScreen = false, className }: LoaderProps) => (
       fullScreen && 'min-h-screen items-center',
       className,
     )}
+    data-testid="loader"
   >
     <motion.div
       className="flex h-4 w-20 items-start justify-around"
@@ -47,6 +48,7 @@ const Loader = ({ fullScreen = false, className }: LoaderProps) => (
             repeatType: 'reverse',
             ease: 'easeInOut',
           }}
+          data-testid="loader-dot"
         />
       ))}
     </motion.div>

@@ -34,6 +34,7 @@ export const Icon = ({
         rel="noopener noreferrer"
         aria-label={name}
         className={commonClasses}
+        data-testid="icon"
       >
         {iconContent}
       </a>
@@ -41,7 +42,11 @@ export const Icon = ({
   }
 
   // Static icon (non-interactive)
-  return <span className={commonClasses}>{iconContent}</span>;
+  return (
+    <span className={commonClasses} data-testid="icon">
+      {iconContent}
+    </span>
+  );
 };
 
 export default Icon;
