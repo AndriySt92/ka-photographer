@@ -63,6 +63,7 @@ const SessionOrderForm = ({ sessionType, className, onSubmitSuccess }: SessionOr
     <form
       className={cn('pointer-events-auto flex h-full max-h-[500px] flex-col gap-5', className)}
       onSubmit={onSubmit}
+      data-testid="session-order-form"
     >
       <FormField
         label="Ім'я"
