@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 
-import { BackgroundGradient, ContactInfo, SessionOrderForm, Typography } from '@/components';
 import { contactInfo } from '@/config';
 import { fadeInLeft, fadeInWithOpacity, staggerContainer } from '@/lib';
+
+import BackgroundGradient from '../../ui/BackgroundGradient';
+import ContactInfo from '../../ui/ContactInfo';
+import SessionOrderForm from '../../ui/SessionOrderForm';
+import Typography from '../../ui/Typography';
 
 interface ContactsSectionProps {
   isPage?: boolean;
@@ -25,6 +29,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
       className="pointer-events-none relative"
       variants={staggerContainer(0, 0.3, 0.2)}
       {...animationProps}
+      data-testid="contacts-section-root"
     >
       <div className="space-y-12 sm:pb-10 xl:space-y-10 xl:pb-24">
         {/* Title */}
@@ -35,6 +40,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
             animated
             className="text-center !leading-[0.8] sm:text-left"
             parentMotionProps={{ variants: fadeInLeft }}
+            data-testid="contacts-title-main"
           >
             Контакти
           </Typography>
@@ -44,6 +50,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
             className="hidden text-right !leading-[0.8] tracking-wider sm:block md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
             animated
             parentMotionProps={{ variants: fadeInLeft }}
+            data-testid="contacts-title-sub"
           >
             Фотографа кугіт анастасії
           </Typography>
@@ -57,9 +64,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               variants={fadeInLeft}
               className="pointer-events-none relative mb-2 flex items-center py-2 sm:mb-4 sm:py-1 xl:mb-7"
             >
-              {/* Gradient overlay */}
               <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
-
               <Typography
                 parentAs="h3"
                 size="3xl"
@@ -69,7 +74,6 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               </Typography>
             </motion.div>
 
-            {/* Contacts info */}
             <ContactInfo role="contacts" items={contactInfo} variants={fadeInWithOpacity} />
           </div>
 
@@ -80,9 +84,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               variants={fadeInLeft}
               className="relative mb-5 flex items-center py-2 sm:mb-9 sm:py-1 xl:mb-14"
             >
-              {/* Gradient overlay */}
               <BackgroundGradient className="right-0 w-full [@media(max-width:550px)]:right-[5%] [@media(max-width:550px)]:w-[100vw]" />
-
               <Typography
                 parentAs="h3"
                 size="3xl"
@@ -92,7 +94,6 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
               </Typography>
             </motion.div>
 
-            {/* Contacts form */}
             <SessionOrderForm className="gap-5 sm:gap-9" />
           </div>
         </div>

@@ -52,6 +52,7 @@ const Modal = ({ children, onClose, isOpen, title, withCloseButton = true }: Pro
             initial="hidden"
             animate="visible"
             exit="exit"
+            data-testid="modal-backdrop"
           />
 
           {/* Modal content */}
@@ -62,10 +63,12 @@ const Modal = ({ children, onClose, isOpen, title, withCloseButton = true }: Pro
             animate="visible"
             exit="exit"
             onClick={onClose}
+            data-testid="modal-overlay"
           >
             <div
               className="relative max-h-[95vh] w-full min-w-0 max-w-[360px] overflow-y-auto overflow-x-hidden rounded-2xl border border-secondary/90 bg-primary p-6 sm:mx-2 sm:max-w-xl"
               onClick={(e) => e.stopPropagation()}
+              data-testid="modal-content"
             >
               {withCloseButton && (
                 <Button
