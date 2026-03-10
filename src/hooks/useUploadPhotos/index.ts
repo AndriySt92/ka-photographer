@@ -6,8 +6,8 @@ import { endpoints, queryKeys } from '@/api/endpoints';
 import type { ApiResponse, UploadedPhoto, UploadPhotosData } from '@/types';
 import { getErrorMessage } from '@/utils';
 
-import useCloudinaryUpload from './useCloudinaryUpload';
-import useToast from './useToast';
+import useCloudinaryUpload from '../useCloudinaryUpload';
+import useToast from '../useToast';
 
 const useUploadPhotos = () => {
   const queryClient = useQueryClient();

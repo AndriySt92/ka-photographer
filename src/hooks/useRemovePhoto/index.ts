@@ -6,7 +6,7 @@ import { endpoints, queryKeys } from '@/api/endpoints';
 import type { ApiResponse } from '@/types';
 import { getErrorMessage } from '@/utils';
 
-import useToast from './useToast';
+import useToast from '../useToast';
 
 interface RemovePhotoData {
   categories: string[];
