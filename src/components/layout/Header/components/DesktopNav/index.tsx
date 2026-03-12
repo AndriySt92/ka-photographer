@@ -5,7 +5,7 @@ import { Button, Icon, Typography } from '@/components';
 import { ROUTES } from '@/config';
 import type { NavItem } from '@/types';
 
-import DesktopNavItem from './DesktopNavItem';
+import DesktopNavItem from '../DesktopNavItem';
 
 interface DesktopNavProps {
   navigation: NavItem[];

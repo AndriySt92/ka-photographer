@@ -8,8 +8,8 @@ import { useMobileNav } from '@/hooks';
 import { fadeIn, overlayVariants } from '@/lib';
 import type { NavItem } from '@/types';
 
-import Logo from './Logo';
-import MobileNavItem from './MobileNavItem';
+import Logo from '../Logo';
+import MobileNavItem from '../MobileNavItem';
 
 const panelVariants = {
   hidden: { x: '-100%' },
