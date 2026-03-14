@@ -16,9 +16,8 @@ const servicesChildren = servicesItem?.children || [];
 
 const Footer = () => {
   const navLinkClasses = 'w-fit p-1 opacity-80 pointer-fine:hover:opacity-100 active:opacity-100';
-
   return (
-    <footer className="bg-primary">
+    <footer className="bg-primary" data-testid="footer">
       <div className="container">
         {/* Top Navigation */}
         <div className="section-border-t hidden justify-center sm:flex sm:p-3">

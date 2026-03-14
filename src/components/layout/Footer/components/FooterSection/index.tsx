@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Typography } from '@/components';
+import Typography from '@/components/ui/Typography';
 import { cn } from '@/lib';
 
 interface FooterSectionProps {
