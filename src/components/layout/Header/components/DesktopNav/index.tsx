@@ -23,7 +23,7 @@ const DesktopNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: DesktopNavP
   };
 
   return (
-    <nav className="hidden h-full justify-between lg:flex">
+    <nav className="hidden h-full justify-between lg:flex" data-testid="desktop-nav">
       {mainLinks.map((item) => (
         <DesktopNavItem item={item} key={item.label} />
       ))}
@@ -54,6 +54,7 @@ const DesktopNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: DesktopNavP
         <img
           src={arrowTopLeft}
           className="h-[15px] w-[15px] text-secondary transition-all duration-300 group-hover:rotate-45"
+          data-testid="gallery-arrow"
         />
       </Link>
     </nav>

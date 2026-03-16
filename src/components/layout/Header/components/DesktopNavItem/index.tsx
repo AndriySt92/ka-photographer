@@ -38,12 +38,14 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
       className="relative h-full"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
+      data-testid="desktop-nav-item"
     >
       <NavLink
         key={item.path}
         to={item.path}
         font="secondary"
         className="flex h-full items-center px-3 py-3"
+        data-testid="nav-link-main"
       >
         {item.label}
       </NavLink>
@@ -59,6 +61,7 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
               variants={dropdownVariants}
               transition={{ duration: reduced ? 0 : 0.28, ease: 'easeInOut' }}
               className="absolute left-0 top-full z-[100] min-w-[200px] bg-black/65 shadow-md backdrop-blur-lg"
+              data-testid="dropdown"
             >
               {item.children.map((child, i) => (
                 <motion.div
@@ -67,12 +70,14 @@ const DesktopNavItem = ({ item }: DesktopNavProps) => {
                   animate="visible"
                   variants={listItemVariants}
                   custom={i}
+                  data-testid={`dropdown-item-${i}`}
                 >
                   <NavLink
                     to={child.path}
                     font="secondary"
                     className="block p-3 "
                     onClick={() => setIsOpen(false)}
+                    data-testid={`dropdown-link-${i}`}
                   >
                     {child.label}
                   </NavLink>
