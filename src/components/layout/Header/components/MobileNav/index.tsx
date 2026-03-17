@@ -42,6 +42,7 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
         aria-expanded={isOpen}
         className="px-0 py-2 lg:hidden"
         disabled={isOpen}
+        data-testid="open-menu-button"
       >
         <Icon icon={burgerMenu} size="h-8 w-8" name="burgerMenu" />
       </Button>
@@ -58,6 +59,7 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
               variants={overlayVariants}
               onClick={closeMenu}
               className="fixed inset-0 z-[90] h-screen bg-primary/80 lg:hidden"
+              data-testid="menu-overlay"
             />
 
             {/* Sliding panel */}
@@ -70,12 +72,22 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed left-0 top-0 z-[100] h-screen bg-primary px-4 py-2 shadow-lg lg:hidden"
               aria-hidden={!isOpen}
+              data-testid="menu-panel"
             >
-              <motion.div variants={fadeIn} className="flex h-full flex-col">
+              <motion.div
+                variants={fadeIn}
+                className="flex h-full flex-col"
+                data-testid="menu-panel-content"
+              >
                 {/* Header */}
                 <div className="flex justify-between">
                   <Logo />
-                  <Button intent="minimal" onClick={closeMenu} className="px-0 opacity-80">
+                  <Button
+                    intent="minimal"
+                    onClick={closeMenu}
+                    className="px-0 opacity-80"
+                    data-testid="close-menu-button"
+                  >
                     <Icon icon={close} name="close" size="w-6 h-6" />
                   </Button>
                 </div>
@@ -100,6 +112,7 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
                         intent="minimal"
                         className="px-0 py-2 opacity-80 hover:opacity-100"
                         disabled={isLoggingOut}
+                        data-testid="logout-button"
                       >
                         <Icon icon={logout} size="h-5 w-5" name="logout" />
                       </Button>
@@ -109,7 +122,7 @@ const MobileNav = ({ navigation, isAdmin, onLogout, isLoggingOut }: MobileNavPro
 
                 {/* Footer */}
                 <div className="flex w-full flex-1 items-center">
-                  <ContactInfo role="menu" items={contactInfo} />
+                  <ContactInfo role="menu" items={contactInfo} data-testid="contact-info-menu" />
                 </div>
               </motion.div>
             </motion.aside>

@@ -48,6 +48,7 @@ export const MobileNavItem = ({ item, isActive, toggleSubmenu, closeMenu }: Mobi
               'max-h-[300px] opacity-100': isActive,
               'max-h-0 opacity-0': !isActive,
             })}
+            data-testid="submenu"
           >
             {item.children.map((subItem) => (
               <NavLink
@@ -55,6 +56,7 @@ export const MobileNavItem = ({ item, isActive, toggleSubmenu, closeMenu }: Mobi
                 to={subItem.path}
                 className="block py-1 pl-4 tracking-wide"
                 onClick={handleClick}
+                data-testid="submenu-link"
               >
                 {subItem.label}
               </NavLink>
