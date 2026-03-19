@@ -89,6 +89,7 @@ const Typography = memo(
         className={cn(typographyVariants({ size, color, weight, font, align }), className)}
         style={style}
         {...(animated ? parentMotionProps : {})}
+        data-testid="typography"
       >
         {content
           ? content.map((child, index) => (

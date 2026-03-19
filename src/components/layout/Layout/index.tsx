@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { ScrollToTopButton } from '@/components/ui';
+import { ScrollToTopButton } from '@/components';
 
 import { Footer, Header } from '../';
 
