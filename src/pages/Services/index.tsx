@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { MButton, SessionOrderModal, Typography } from '@/components/ui';
+import { MButton, SessionOrderModal, Typography } from '@/components';
 import { services } from '@/config';
 import { useModal } from '@/hooks';
 import { fadeInBottom, fadeInWithOpacity, staggerContainer } from '@/lib';
