@@ -5,31 +5,25 @@ import { getCloudinaryErrorMessage } from '@/utils';
 
 import useCloudinaryUpload from './';
 
+jest.mock('@/config', () => ({
+  cloudinaryConfig: {
+    cloudName: 'test-cloud',
+    uploadPreset: 'test-preset',
+  },
+  contactInfo: [],
+}));
+
 jest.mock('axios');
 jest.mock('@/utils', () => ({
   getCloudinaryErrorMessage: jest.fn(),
 }));
 
-jest.mock('./', () => {
-  const { useCloudinaryUpload } = jest.requireActual('tests/mocks');
-  return { __esModule: true, default: useCloudinaryUpload };
-});
-
 describe('useCloudinaryUpload', () => {
   const mockedAxios = axios as jest.Mocked<typeof axios>;
   const mockedGetCloudinaryErrorMessage = getCloudinaryErrorMessage as jest.Mock;
 
-  const originalEnv = process.env;
-
   beforeEach(() => {
     jest.clearAllMocks();
-    process.env = { ...originalEnv };
-    process.env.VITE_CLOUDINARY_CLOUD_NAME = 'test-cloud';
-    process.env.VITE_CLOUDINARY_UPLOAD_PRESET = 'test-preset';
-  });
-
-  afterEach(() => {
-    process.env = originalEnv;
   });
 
   it('should upload a single file successfully', async () => {
@@ -50,10 +44,7 @@ describe('useCloudinaryUpload', () => {
     });
 
     expect(uploaded).toEqual([
-      {
-        url: mockResponse.data.secure_url,
-        publicId: mockResponse.data.public_id,
-      },
+      { url: mockResponse.data.secure_url, publicId: mockResponse.data.public_id },
     ]);
     expect(mockedAxios.post).toHaveBeenCalledTimes(1);
     expect(mockedAxios.post).toHaveBeenCalledWith(

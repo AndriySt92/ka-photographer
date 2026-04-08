@@ -1,4 +1,5 @@
 export { default as allPhotoCategories } from './allPhotoCategories';
+export { default as cloudinaryConfig } from './cloudinary';
 export { default as contactInfo } from './contactInfo';
 export { default as homePhotos } from './homePhotos';
 export { default as navigation } from './navigation';
