@@ -61,6 +61,7 @@ const CursorFollower = () => {
     <div
       ref={containerRef}
       className="pointer-events-none absolute inset-0 z-20 hidden overflow-hidden pointer-fine:block"
+      data-testid="cursor-follower-container"
     >
       <motion.div
         className="pointer-events-none absolute inset-0 h-12 w-12 rounded-full opacity-40"
@@ -70,6 +71,7 @@ const CursorFollower = () => {
           backgroundColor: '#1a00ff',
           boxShadow: '0 0 20px 25px #1a00ff',
         }}
+        data-testid="cursor-follower"
       />
     </div>
   );
