@@ -9,25 +9,25 @@ jest.mock('react-hook-form', () => ({
   useWatch: jest.fn(),
 }));
 
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: jest.fn().mockImplementation(({ children, ...props }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { initial, animate, exit, transition, variants, ...domProps } = props;
-      return <div {...domProps}>{children}</div>;
-    }),
-    label: jest.fn().mockImplementation(({ children, ...props }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { initial, animate, exit, transition, variants, ...domProps } = props;
-      return <label {...domProps}>{children}</label>;
-    }),
-  },
-}));
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
 
-jest.mock('../ErrorMessage', () => ({
-  __esModule: true,
-  default: jest.fn(({ error }) => (error ? <div data-testid="error-message">{error}</div> : null)),
-}));
+  return {
+    motion: {
+      div: createMotionComponent('div'),
+      label: createMotionComponent('label'),
+    },
+  };
+});
+
+jest.mock('../ErrorMessage', () => {
+  const { MockErrorMessage } = jest.requireActual('tests');
+
+  return {
+    __esModule: true,
+    default: MockErrorMessage,
+  };
+});
 
 const mockUseWatch = useWatch as jest.Mock;
 

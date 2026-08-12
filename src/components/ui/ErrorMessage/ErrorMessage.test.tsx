@@ -2,12 +2,16 @@ import { render, screen } from '@testing-library/react';
 
 import ErrorMessage from './';
 
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: jest.fn().mockImplementation(({ children, ...props }) => <div {...props}>{children}</div>),
-  },
-  AnimatePresence: jest.fn().mockImplementation(({ children }) => <>{children}</>),
-}));
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
+
+  return {
+    motion: {
+      div: createMotionComponent('div'),
+    },
+    AnimatePresence: jest.fn().mockImplementation(({ children }) => <>{children}</>),
+  };
+});
 
 describe('ErrorMessage', () => {
   it('renders nothing when error is not provided', () => {

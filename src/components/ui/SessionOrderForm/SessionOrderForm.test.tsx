@@ -17,13 +17,17 @@ jest.mock('@/config', () => ({
   ],
 }));
 
-jest.mock('@/lib', () => ({
-  cn: (...args: any[]) => args.join(' '),
-  fadeInWithOpacity: { initial: {}, animate: {} },
-}));
+jest.mock('@/lib', () => {
+  const { mockCn, createMockVariants } = jest.requireActual('tests');
+
+  return {
+    cn: mockCn,
+    fadeInWithOpacity: createMockVariants(),
+  };
+});
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/test-utils');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   const motionFn = jest
     .fn()

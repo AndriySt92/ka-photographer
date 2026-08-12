@@ -2,17 +2,16 @@ import { render, screen } from '@testing-library/react';
 
 import FooterSection from './';
 
-jest.mock('@/components/ui/Typography', () => {
-  const { MockTypography } = jest.requireActual('tests/mocks');
+jest.mock('@/components', () => {
+  const { MockTypography } = jest.requireActual('tests');
 
   return {
-    __esModule: true,
-    default: MockTypography,
+    Typography: MockTypography,
   };
 });
 
 jest.mock('@/lib', () => {
-  const { mockCn } = jest.requireActual('tests/mocks');
+  const { mockCn } = jest.requireActual('tests');
 
   return {
     cn: mockCn,
@@ -24,8 +23,7 @@ jest.mock('@/hooks', () => ({
 }));
 
 jest.mock('@/config', () => {
-  const { mockContactInfo, mockNavigation, mockSocialMediaPlatforms } =
-    jest.requireActual('tests/mocks');
+  const { mockContactInfo, mockNavigation, mockSocialMediaPlatforms } = jest.requireActual('tests');
 
   return {
     contactInfo: mockContactInfo,

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import DesktopNav from './';
 
 jest.mock('../DesktopNavItem', () => {
-  const { MockDesktopNavItem } = jest.requireActual('tests/mocks');
+  const { MockDesktopNavItem } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -13,7 +13,7 @@ jest.mock('../DesktopNavItem', () => {
 });
 
 jest.mock('@/components', () => {
-  const { MockButton, MockIcon, MockTypography } = jest.requireActual('tests/mocks');
+  const { MockButton, MockIcon, MockTypography } = jest.requireActual('tests');
 
   return {
     Button: MockButton,
@@ -23,7 +23,7 @@ jest.mock('@/components', () => {
 });
 
 jest.mock('react-router-dom', () => {
-  const { mockLink } = jest.requireActual('tests/mocks');
+  const { mockLink } = jest.requireActual('tests');
   const actual = jest.requireActual('react-router-dom');
 
   return {
@@ -42,7 +42,7 @@ jest.mock('@/assets', () => ({
 }));
 
 describe('DesktopNav', () => {
-  const { mockNavigation } = jest.requireActual('tests/mocks');
+  const { mockNavigation } = jest.requireActual('tests');
   const mockOnLogout = jest.fn();
   const defaultProps = {
     navigation: mockNavigation,
@@ -52,7 +52,7 @@ describe('DesktopNav', () => {
   };
 
   const renderComponent = (props = {}) => {
-    const { renderWithRouter } = jest.requireActual('tests/test-utils');
+    const { renderWithRouter } = jest.requireActual('tests');
 
     const mergedProps = { ...defaultProps, ...props };
     return renderWithRouter(<DesktopNav {...mergedProps} />);

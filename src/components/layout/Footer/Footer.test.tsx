@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import Footer from './';
 
 jest.mock('@/components', () => {
-  const { MockTypography, MockContactInfo, MockNavLink } = jest.requireActual('tests/mocks');
+  const { MockTypography, MockContactInfo, MockNavLink } = jest.requireActual('tests');
 
   return {
     Typography: MockTypography,
@@ -22,8 +22,7 @@ jest.mock('./components/FooterSection', () => ({
 }));
 
 jest.mock('@/config', () => {
-  const { mockContactInfo, mockNavigation, mockSocialMediaPlatforms } =
-    jest.requireActual('tests/mocks');
+  const { mockContactInfo, mockNavigation, mockSocialMediaPlatforms } = jest.requireActual('tests');
 
   return {
     contactInfo: mockContactInfo,
@@ -33,7 +32,7 @@ jest.mock('@/config', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { mockCn } = jest.requireActual('tests/mocks');
+  const { mockCn } = jest.requireActual('tests');
 
   return {
     cn: mockCn,
@@ -41,7 +40,7 @@ jest.mock('@/lib', () => {
 });
 
 describe('Footer', () => {
-  const { renderWithRouter } = jest.requireActual('tests/test-utils');
+  const { renderWithRouter } = jest.requireActual('tests');
 
   beforeEach(() => {
     jest.clearAllMocks();

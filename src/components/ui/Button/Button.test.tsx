@@ -6,12 +6,12 @@ import userEvent from '@testing-library/user-event';
 import { Button } from './';
 
 jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
+
   const motionMock = jest.fn().mockImplementation((Component: any) => {
     return React.forwardRef((props: any, ref: any) => <Component ref={ref} {...props} />);
   });
-  (motionMock as any).span = jest
-    .fn()
-    .mockImplementation(({ children, ...props }) => <span {...props}>{children}</span>);
+  (motionMock as any).span = createMotionComponent('span');
   const AnimatePresenceMock = ({ children }: any) => <>{children}</>;
   return {
     motion: motionMock,
@@ -20,21 +20,23 @@ jest.mock('framer-motion', () => {
 });
 
 jest.mock('react-router-dom', () => {
+  const { mockLink } = jest.requireActual('tests');
   const actual = jest.requireActual('react-router-dom');
+
   return {
     ...actual,
-    Link: jest.fn().mockImplementation(({ children, to, className, ...props }) => (
-      <a href={to} className={className} {...props}>
-        {children}
-      </a>
-    )),
+    Link: mockLink,
   };
 });
 
-jest.mock('@/lib', () => ({
-  buttonTextVariants: { initial: {}, animate: {}, exit: {} },
-  cn: (...args: any[]) => args.join(' '),
-}));
+jest.mock('@/lib', () => {
+  const { mockCn, createMockVariants } = jest.requireActual('tests');
+
+  return {
+    buttonTextVariants: createMockVariants({ includeExit: true }),
+    cn: mockCn,
+  };
+});
 
 describe('Button', () => {
   const renderButton = (props: any, options = { withRouter: false }) => {

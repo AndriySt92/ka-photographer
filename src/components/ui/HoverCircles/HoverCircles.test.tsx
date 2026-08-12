@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import HoverCircles from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/test-utils');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -17,11 +17,16 @@ jest.mock('@/assets', () => ({
   logo: 'logo-mock.png',
 }));
 
-jest.mock('@/lib', () => ({
-  cn: (...args: any[]) => args.join(' '),
-  circleVariants: { initial: { scale: 0 }, animate: { scale: 1 } },
-  staggerContainer: jest.fn().mockReturnValue({ initial: {}, animate: {} }),
-}));
+jest.mock('@/lib', () => {
+  const { mockCn, createMockVariants } = jest.requireActual('tests');
+  const mockVariant = createMockVariants();
+
+  return {
+    cn: mockCn,
+    circleVariants: mockVariant,
+    staggerContainer: jest.fn().mockReturnValue(mockVariant),
+  };
+});
 
 describe('HoverCircles', () => {
   beforeEach(() => {

@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import Layout from './';
 
 jest.mock('@/components', () => {
-  const { MockScrollToTop } = jest.requireActual('tests/mocks');
+  const { MockScrollToTop } = jest.requireActual('tests');
 
   return {
     ScrollToTopButton: MockScrollToTop,
@@ -36,7 +36,7 @@ describe('Layout', () => {
   });
 
   const renderComponent = (initialPath = '/') => {
-    const { renderWithRouter } = jest.requireActual('tests/test-utils');
+    const { renderWithRouter } = jest.requireActual('tests');
     return renderWithRouter(<Layout />, { initialEntries: [initialPath] });
   };
 

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Loader from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/test-utils');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -14,9 +14,10 @@ jest.mock('framer-motion', () => {
   };
 });
 
-jest.mock('@/lib', () => ({
-  cn: (...args: any[]) => args.join(' '),
-}));
+jest.mock('@/lib', () => {
+  const { mockCn } = jest.requireActual('tests');
+  return { cn: mockCn };
+});
 
 describe('Loader', () => {
   beforeEach(() => {

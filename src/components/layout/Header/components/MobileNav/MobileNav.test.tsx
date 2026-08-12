@@ -10,7 +10,7 @@ jest.mock('@/hooks', () => ({
 }));
 
 jest.mock('@/components', () => {
-  const { MockButton, MockIcon, MockContactInfo } = jest.requireActual('tests/mocks');
+  const { MockButton, MockIcon, MockContactInfo } = jest.requireActual('tests');
 
   return {
     Button: MockButton,
@@ -20,7 +20,7 @@ jest.mock('@/components', () => {
 });
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent, MockAnimatePresence } = jest.requireActual('tests/mocks');
+  const { createMotionComponent, MockAnimatePresence } = jest.requireActual('tests');
   const actual = jest.requireActual('framer-motion');
 
   return {
@@ -44,7 +44,7 @@ jest.mock('../MobileNavItem', () => ({
 }));
 
 jest.mock('../Logo', () => {
-  const { MockLogo } = jest.requireActual('tests/mocks');
+  const { MockLogo } = jest.requireActual('tests');
   return {
     __esModule: true,
     default: MockLogo,
@@ -52,7 +52,7 @@ jest.mock('../Logo', () => {
 });
 
 jest.mock('@/config', () => {
-  const { mockContactInfo } = jest.requireActual('tests/mocks');
+  const { mockContactInfo } = jest.requireActual('tests');
 
   return {
     contactInfo: mockContactInfo,
@@ -66,7 +66,7 @@ jest.mock('@/assets', () => ({
 }));
 
 jest.mock('@/lib', () => {
-  const { createMockVariants } = jest.requireActual('tests/mocks');
+  const { createMockVariants } = jest.requireActual('tests');
 
   return {
     fadeIn: createMockVariants(),
@@ -75,7 +75,7 @@ jest.mock('@/lib', () => {
 });
 
 jest.mock('react-router-dom', () => {
-  const { mockLink } = jest.requireActual('tests/mocks');
+  const { mockLink } = jest.requireActual('tests');
   const actual = jest.requireActual('react-router-dom');
 
   return {
@@ -85,7 +85,7 @@ jest.mock('react-router-dom', () => {
 });
 
 describe('MobileNav', () => {
-  const { mockNavigation } = jest.requireActual('tests/mocks');
+  const { mockNavigation } = jest.requireActual('tests');
   const mockOnLogout = jest.fn();
   const defaultProps = {
     navigation: mockNavigation,
@@ -115,7 +115,7 @@ describe('MobileNav', () => {
 
   const renderComponent = (props = {}) => {
     const mergedProps = { ...defaultProps, ...props };
-    const { renderWithRouter } = jest.requireActual('tests/test-utils');
+    const { renderWithRouter } = jest.requireActual('tests');
     return renderWithRouter(<MobileNav {...mergedProps} />);
   };
 

@@ -4,7 +4,7 @@ import { useInView } from 'framer-motion';
 import DescriptionSection from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -15,7 +15,7 @@ jest.mock('framer-motion', () => {
 });
 
 jest.mock('@/components/ui/BackgroundGradient', () => {
-  const { MockBackgroundGradient } = jest.requireActual('tests/mocks');
+  const { MockBackgroundGradient } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -24,7 +24,7 @@ jest.mock('@/components/ui/BackgroundGradient', () => {
 });
 
 jest.mock('@/components/ui/Circles', () => {
-  const { MockCircles } = jest.requireActual('tests/mocks');
+  const { MockCircles } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -33,7 +33,7 @@ jest.mock('@/components/ui/Circles', () => {
 });
 
 jest.mock('@/components/ui/Typography', () => {
-  const { MockTypography } = jest.requireActual('tests/mocks');
+  const { MockTypography } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -42,7 +42,7 @@ jest.mock('@/components/ui/Typography', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { createMockVariants, mockStaggerContainer, mockCn } = jest.requireActual('tests/mocks');
+  const { createMockVariants, mockStaggerContainer, mockCn } = jest.requireActual('tests');
   const mockVariants = createMockVariants();
 
   return {

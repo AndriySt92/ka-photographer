@@ -5,39 +5,43 @@ import type { PhotoItem } from '@/types';
 
 import Gallery from './';
 
-jest.mock('framer-motion', () => {
-  const actual = jest.requireActual('framer-motion');
+jest.mock('../FancyboxAnchor', () => {
+  const { MockFancyboxAnchor } = jest.requireActual('tests');
+
   return {
-    ...actual,
-    useInView: jest.fn(),
-    motion: {
-      div: jest.fn().mockImplementation(({ children, ...props }) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { initial, animate, exit, transition, variants, ...domProps } = props;
-        return <div {...domProps}>{children}</div>;
-      }),
-    },
+    __esModule: true,
+    default: MockFancyboxAnchor,
   };
 });
 
-jest.mock('../FancyboxAnchor', () => ({
-  __esModule: true,
-  default: jest.fn(({ children, href, gallery }) => (
-    <a href={href} data-gallery={gallery} data-testid="fancybox-anchor">
-      {children}
-    </a>
-  )),
-}));
+jest.mock('../FancyboxLayout', () => {
+  const { MockFancyboxLayout } = jest.requireActual('tests');
 
-jest.mock('../FancyboxLayout', () => ({
-  __esModule: true,
-  default: jest.fn(({ children }) => <div data-testid="fancybox-layout">{children}</div>),
-}));
+  return {
+    __esModule: true,
+    default: MockFancyboxLayout,
+  };
+});
 
-jest.mock('@/lib', () => ({
-  cn: (...args: any[]) => args.join(' '),
-  fadeInScale: { initial: { scale: 0 }, animate: { scale: 1 } },
-}));
+jest.mock('@/lib', () => {
+  const { mockCn, createMockVariants } = jest.requireActual('tests');
+
+  return {
+    cn: mockCn,
+    fadeInScale: createMockVariants(),
+  };
+});
+
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
+
+  return {
+    useInView: jest.fn(),
+    motion: {
+      div: createMotionComponent('div'),
+    },
+  };
+});
 
 describe('Gallery', () => {
   const mockPhotos: PhotoItem[] = [

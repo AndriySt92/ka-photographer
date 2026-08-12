@@ -9,95 +9,57 @@ import Typography from '../Typography';
 
 import ContactInfo from './';
 
-const mockContactItems: ContactInfoItem[] = [
-  { type: 'phone', icon: 'phone-icon', value: '+123456789' },
-  { type: 'email', icon: 'email-icon', value: 'test@example.com' },
-  { type: 'location', icon: 'location-icon', value: '123 Main St\nCity, Country' },
-];
+jest.mock('../Typography', () => {
+  const { MockTypography } = jest.requireActual('tests');
 
-jest.mock('../Icon', () => ({
-  __esModule: true,
-  default: jest.fn().mockImplementation(({ name, size, link, as }) => (
-    <div data-testid={`icon-${name}`} data-size={size} data-link={link} data-as={as}>
-      {name}
-    </div>
-  )),
-}));
+  return {
+    __esModule: true,
+    default: MockTypography,
+  };
+});
 
-jest.mock('../Typography', () => ({
-  __esModule: true,
-  default: jest
-    .fn()
-    .mockImplementation(({ children, content, size, parentAs, childrenClasses, className }) => (
-      <div
-        data-testid="typography"
-        data-size={size}
-        data-parent={parentAs}
-        data-children-classes={JSON.stringify(childrenClasses)}
-        className={className}
-      >
-        {content ? content.join(' ') : children}
-      </div>
-    )),
-}));
+jest.mock('../Icon', () => {
+  const { MockIcon } = jest.requireActual('tests');
 
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: jest.fn().mockImplementation(({ children, ...props }) => <div {...props}>{children}</div>),
-  },
-}));
+  return {
+    __esModule: true,
+    default: MockIcon,
+  };
+});
 
-jest.mock('@/config', () => ({
-  socialMediaPlatforms: [
-    { name: 'facebook', link: 'https://fb.com', icon: 'fb-icon' },
-    { name: 'instagram', link: 'https://ig.com', icon: 'ig-icon' },
-  ],
-}));
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
 
-jest.mock('@/lib', () => ({
-  cn: (...args: any[]) => args.filter(Boolean).join(' '),
-}));
+  return {
+    motion: {
+      div: createMotionComponent('div'),
+    },
+  };
+});
 
-const MockIcon = Icon as unknown as jest.Mock;
-const MockTypography = Typography as unknown as jest.Mock;
+jest.mock('@/config', () => {
+  const { mockSocialMediaPlatforms } = jest.requireActual('tests');
 
-type Role = 'contacts' | 'footer' | 'menu';
-const ROLE_STYLES: Record<
-  Role,
-  {
-    iconSize: string;
-    textSize: 'sm' | 'lg' | 'xl';
-    containerClasses: string;
-    textWrapperClasses: string;
-    socialWrapperClasses: string;
-  }
-> = {
-  contacts: {
-    iconSize: 'h-7 w-7 xl:h-10 xl:w-10',
-    textSize: 'xl',
-    containerClasses: 'section-border-b py-3 sm:py-5 xl:py-7',
-    textWrapperClasses: 'pointer-events-auto ml-3 xl:ml-7',
-    socialWrapperClasses: 'mt-4 sm:mt-5 xl:mt-7',
-  },
-  footer: {
-    iconSize: 'h-5 w-5 xl:h-8 xl:w-8',
-    textSize: 'lg',
-    containerClasses: 'sm:py-1',
-    textWrapperClasses:
-      'ml-2 xl:ml-3 w-fit rounded-sm opacity-80 px-1 py-1 transition-all duration-300 hover:bg-accent/40 hover:opacity-100',
-    socialWrapperClasses: 'mt-2 xl:mt-3',
-  },
-  menu: {
-    iconSize: 'h-6 w-6',
-    textSize: 'lg',
-    containerClasses: 'section-border-b py-2',
-    textWrapperClasses:
-      'ml-2 w-fit px-1 py-1 transition-all duration-300 hover:bg-accent/40 hover:opacity-100',
-    socialWrapperClasses: 'mt-2 xl:mt-3',
-  },
-};
+  return {
+    socialMediaPlatforms: mockSocialMediaPlatforms,
+  };
+});
+
+jest.mock('@/lib', () => {
+  const { mockCn, createMockVariants } = jest.requireActual('tests');
+
+  return {
+    buttonTextVariants: createMockVariants(),
+    cn: mockCn,
+  };
+});
+
+const { mockContactItems, mockContactInfoRoleStyles } = jest.requireActual('tests');
 
 describe('ContactInfo', () => {
+  const MockIcon = Icon as unknown as jest.Mock;
+  const MockTypography = Typography as unknown as jest.Mock;
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -120,7 +82,7 @@ describe('ContactInfo', () => {
     const expectedContactProps = (type: string, icon: string) => ({
       name: type,
       icon: icon,
-      size: ROLE_STYLES.footer.iconSize,
+      size: mockContactInfoRoleStyles.footer.iconSize,
     });
 
     expect(contactIconCalls[0][0]).toMatchObject(expectedContactProps('phone', 'phone-icon'));
@@ -131,14 +93,14 @@ describe('ContactInfo', () => {
     expect(socialIconCalls[0][0]).toMatchObject({
       name: 'facebook',
       icon: 'fb-icon',
-      size: ROLE_STYLES.footer.iconSize,
+      size: mockContactInfoRoleStyles.footer.iconSize,
       as: 'link',
       link: 'https://fb.com',
     });
     expect(socialIconCalls[1][0]).toMatchObject({
       name: 'instagram',
       icon: 'ig-icon',
-      size: ROLE_STYLES.footer.iconSize,
+      size: mockContactInfoRoleStyles.footer.iconSize,
       as: 'link',
       link: 'https://ig.com',
     });
@@ -163,18 +125,22 @@ describe('ContactInfo', () => {
     };
 
     const phonePropsContacts = getLastCallForTestId('contact-item-phone');
-    expect(phonePropsContacts.className).toContain(ROLE_STYLES.contacts.containerClasses);
+    expect(phonePropsContacts.className).toContain(
+      mockContactInfoRoleStyles.contacts.containerClasses,
+    );
 
     const socialContainer = screen.getByTestId('social-media-container');
-    expect(socialContainer).toHaveClass(ROLE_STYLES.contacts.socialWrapperClasses);
+    expect(socialContainer).toHaveClass(mockContactInfoRoleStyles.contacts.socialWrapperClasses);
 
     rerender(<ContactInfo items={mockContactItems} role="footer" />);
 
     const phonePropsFooter = getLastCallForTestId('contact-item-phone');
-    expect(phonePropsFooter.className).toContain(ROLE_STYLES.footer.containerClasses);
+    expect(phonePropsFooter.className).toContain(mockContactInfoRoleStyles.footer.containerClasses);
 
     const footerSocialContainer = screen.getByTestId('social-media-container');
-    expect(footerSocialContainer).toHaveClass(ROLE_STYLES.footer.socialWrapperClasses);
+    expect(footerSocialContainer).toHaveClass(
+      mockContactInfoRoleStyles.footer.socialWrapperClasses,
+    );
   });
 
   it('handles location type correctly (splits by newline)', () => {
@@ -185,7 +151,7 @@ describe('ContactInfo', () => {
     const props = typographyCalls[0][0];
     expect(props).toMatchObject({
       content: ['123 Main St', 'City, Country'],
-      size: ROLE_STYLES.footer.textSize,
+      size: mockContactInfoRoleStyles.footer.textSize,
     });
     expect(props['data-testid']).toBe('location-typography-location');
   });
@@ -212,7 +178,7 @@ describe('ContactInfo', () => {
       return motionDivMock.mock.calls.find((call) => call[0]?.['data-testid'] === testId)?.[0];
     };
 
-    mockContactItems.forEach((item, index) => {
+    (mockContactItems as ContactInfoItem[]).forEach((item, index) => {
       const props = findCallByTestId(`contact-item-${item.type}`);
       expect(props).toBeDefined();
       expect(props.variants).toBe(variants);

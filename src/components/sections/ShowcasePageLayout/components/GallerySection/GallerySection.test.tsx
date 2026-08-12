@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import GallerySection from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -27,7 +27,7 @@ jest.mock('@/config', () => ({
 }));
 
 jest.mock('@/components/ui', () => {
-  const { MockGallery, MockTypography } = jest.requireActual('tests/mocks');
+  const { MockGallery, MockTypography } = jest.requireActual('tests');
 
   return {
     Gallery: MockGallery,
@@ -36,7 +36,7 @@ jest.mock('@/components/ui', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { createMockVariants, MockCn } = jest.requireActual('tests/mocks');
+  const { createMockVariants, MockCn } = jest.requireActual('tests');
   const mockVariants = createMockVariants();
 
   return {

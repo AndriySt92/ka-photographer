@@ -4,27 +4,32 @@ import { AxiosError } from 'axios';
 import { useInfiniteScroll, usePhotos } from '@/hooks';
 import type { PhotoItem } from '@/types';
 
-import ShowcasePageLayout, { type ShowcasePageLayoutProps } from './index';
+import ShowcasePageLayout, { type ShowcasePageLayoutProps } from './';
 
-// Mock all external hooks and components
 jest.mock('@/hooks', () => ({
   usePhotos: jest.fn(),
   useInfiniteScroll: jest.fn(),
 }));
 
-jest.mock('@/components/ui', () => ({
-  ErrorMessage: jest.fn(({ error, className }) => (
-    <div data-testid="error-message" className={className}>
-      Error: {error}
-    </div>
-  )),
-  Loader: jest.fn(() => <div data-testid="loader">Loading...</div>),
-  Typography: jest.fn(({ children, size, align }) => (
-    <div data-testid="typography" data-size={size} data-align={align}>
-      {children}
-    </div>
-  )),
-}));
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
+
+  return {
+    motion: {
+      div: createMotionComponent('div'),
+    },
+  };
+});
+
+jest.mock('@/components/ui', () => {
+  const { MockErrorMessage, MockLoader, MockTypography } = jest.requireActual('tests');
+
+  return {
+    ErrorMessage: MockErrorMessage,
+    Loader: MockLoader,
+    Typography: MockTypography,
+  };
+});
 
 jest.mock('./components', () => ({
   Banner: jest.fn(({ bannerPhoto, bannerPhotoMobile, imageClassName, bannerContent }) => (
@@ -92,18 +97,15 @@ describe('ShowcasePageLayout', () => {
   it('renders the component with all props correctly', () => {
     render(<ShowcasePageLayout {...defaultProps} />);
 
-    // Motion div should have the key and className
     const rootDiv = screen.getByTestId('showcase-layout');
     expect(rootDiv).toHaveClass('custom-class');
 
-    // Check Banner props
     expect(screen.getByTestId('banner')).toBeInTheDocument();
     expect(screen.getByText(/Banner Photo: photo.jpg/)).toBeInTheDocument();
     expect(screen.getByText(/Mobile: mobile.jpg/)).toBeInTheDocument();
     expect(screen.getByText(/Class: banner-img/)).toBeInTheDocument();
     expect(screen.getByTestId('child-content')).toBeInTheDocument();
 
-    // Check DescriptionSection
     expect(screen.getByTestId('description-section')).toBeInTheDocument();
     expect(screen.getByText('Test Title')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
@@ -113,11 +115,11 @@ describe('ShowcasePageLayout', () => {
     mockUsePhotos.mockReturnValue(createMockPhotosReturn({ isFetching: true }));
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
   it('does not show loader when only fetching next page (isFetchingNextPage) because loader is shown only if both isFetching and isFetchingNextPage are true', () => {
-    // The component shows Loader when isFetching && isFetchingNextPage.
     mockUsePhotos.mockReturnValue(
       createMockPhotosReturn({
         hasNextPage: true,
@@ -126,6 +128,7 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
   });
 
@@ -141,6 +144,7 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
@@ -156,8 +160,9 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.getByTestId('error-message')).toBeInTheDocument();
-    expect(screen.getByText(`Error: ${errorMessage}`)).toBeInTheDocument();
+    expect(screen.getByText(`Network error`)).toBeInTheDocument();
   });
 
   it('renders GallerySection when isSuccess and photos.length > 0', () => {
@@ -165,7 +170,6 @@ describe('ShowcasePageLayout', () => {
       { _id: '1', photoUrl: 'photo1.jpg' },
       { _id: '2', photoUrl: 'photo2.jpg' },
     ];
-
     mockUsePhotos.mockReturnValue(
       createMockPhotosReturn({
         data: photos as PhotoItem[],
@@ -174,6 +178,7 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.getByTestId('gallery-section')).toBeInTheDocument();
     expect(screen.getByText('Photos: 2')).toBeInTheDocument();
   });
@@ -186,6 +191,7 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     expect(screen.getByTestId('typography')).toHaveTextContent(
       'Немає фотографій для відображення!',
     );
@@ -199,12 +205,11 @@ describe('ShowcasePageLayout', () => {
         isSuccess: true,
       }),
     );
-
-    // Mock useInfiniteScroll to provide a ref
     const triggerRef = { current: document.createElement('div') };
     mockUseInfiniteScroll.mockReturnValue({ triggerRef } as any);
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     const triggerDiv = screen.getByText(
       (_, element) => element?.tagName === 'DIV' && element.className === 'h-2',
     );
@@ -220,6 +225,7 @@ describe('ShowcasePageLayout', () => {
     );
 
     render(<ShowcasePageLayout {...defaultProps} />);
+
     const triggerDiv = screen.queryByText(
       (_, element) => element?.tagName === 'DIV' && element.className === 'h-2',
     );

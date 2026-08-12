@@ -9,7 +9,7 @@ jest.mock('@/hooks', () => ({
 }));
 
 jest.mock('../Icon', () => {
-  const { MockIcon } = jest.requireActual('tests/mocks');
+  const { MockIcon } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -18,12 +18,12 @@ jest.mock('../Icon', () => {
 });
 
 jest.mock('../Button', () => {
-  const { MockButton } = jest.requireActual('tests/mocks');
+  const { MockButton } = jest.requireActual('tests');
   return { MButton: MockButton };
 });
 
 jest.mock('../Typography', () => {
-  const { MockTypography } = jest.requireActual('tests/mocks');
+  const { MockTypography } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -32,7 +32,7 @@ jest.mock('../Typography', () => {
 });
 
 jest.mock('../SessionOrderModal', () => {
-  const { MockSessionOrderModal } = jest.requireActual('tests/mocks');
+  const { MockSessionOrderModal } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -41,7 +41,7 @@ jest.mock('../SessionOrderModal', () => {
 });
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -51,7 +51,7 @@ jest.mock('framer-motion', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { createMockVariants } = jest.requireActual('tests/mocks');
+  const { createMockVariants } = jest.requireActual('tests');
   const mockVariants = createMockVariants();
 
   return {

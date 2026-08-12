@@ -5,44 +5,24 @@ import { contactInfo } from '@/config';
 
 import ContactsSection from './';
 
-jest.mock('../../ui/SessionOrderForm', () => {
-  const { MockSessionOrderForm } = jest.requireActual('tests/mocks');
+jest.mock('@/components/ui', () => {
+  const { MockSessionOrderForm, MockBackgroundGradient, MockTypography, MockContactInfo } =
+    jest.requireActual('tests');
 
   return {
-    __esModule: true,
-    default: MockSessionOrderForm,
+    SessionOrderForm: MockSessionOrderForm,
+    BackgroundGradient: MockBackgroundGradient,
+    Typography: MockTypography,
+    ContactInfo: MockContactInfo,
   };
 });
 
-jest.mock('../../ui/BackgroundGradient', () => {
-  const { MockBackgroundGradient } = jest.requireActual('tests/mocks');
-
-  return {
-    __esModule: true,
-    default: MockBackgroundGradient,
-  };
-});
-
-jest.mock('../../ui/Typography', () => {
-  const { MockTypography } = jest.requireActual('tests/mocks');
-
-  return {
-    __esModule: true,
-    default: MockTypography,
-  };
-});
-
-jest.mock('../../ui/ContactInfo', () => {
-  const { MockContactInfo } = jest.requireActual('tests/mocks');
-
-  return {
-    __esModule: true,
-    default: MockContactInfo,
-  };
-});
+jest.mock('@/hooks', () => ({
+  useCloudinaryUpload: jest.fn(),
+}));
 
 jest.mock('@/config', () => {
-  const { mockContactItems } = jest.requireActual('tests/mocks');
+  const { mockContactItems } = jest.requireActual('tests');
 
   return {
     contactInfo: mockContactItems[0],
@@ -50,7 +30,7 @@ jest.mock('@/config', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { createMockVariants } = jest.requireActual('tests/mocks');
+  const { createMockVariants } = jest.requireActual('tests');
   const mockVariant = createMockVariants();
 
   return {
@@ -61,13 +41,18 @@ jest.mock('@/lib', () => {
 });
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
+  const actual = jest.requireActual('framer-motion');
+
+  const motionFn = jest
+    .fn()
+    .mockImplementation((Component) => (props: any) => <Component {...props} />);
+  (motionFn as any).div = createMotionComponent('div');
+  (motionFn as any).img = createMotionComponent('img');
 
   return {
-    motion: {
-      div: createMotionComponent('div'),
-      img: createMotionComponent('img'),
-    },
+    ...actual,
+    motion: motionFn,
     useScroll: jest.fn(),
     useTransform: jest.fn(),
   };
@@ -114,10 +99,10 @@ describe('ContactsSection', () => {
   it('renders ContactInfo with correct props', () => {
     renderComponent();
 
-    const contactInfoMock = jest.requireMock('../../ui/ContactInfo').default;
-    expect(contactInfoMock).toHaveBeenCalledTimes(1);
+    const { ContactInfo } = jest.requireMock('@/components/ui');
+    expect(ContactInfo).toHaveBeenCalledTimes(1);
 
-    const [props] = contactInfoMock.mock.calls[0];
+    const [props] = ContactInfo.mock.calls[0];
     expect(props.role).toBe('contacts');
     expect(props.items).toEqual(contactInfo);
     expect(props.variants).toBeDefined();
@@ -126,10 +111,10 @@ describe('ContactsSection', () => {
   it('renders SessionOrderForm with correct className', () => {
     renderComponent();
 
-    const sessionOrderFormMock = jest.requireMock('../../ui/SessionOrderForm').default;
-    expect(sessionOrderFormMock).toHaveBeenCalledTimes(1);
+    const { SessionOrderForm } = jest.requireMock('@/components/ui');
+    expect(SessionOrderForm).toHaveBeenCalledTimes(1);
 
-    const [props] = sessionOrderFormMock.mock.calls[0];
+    const [props] = SessionOrderForm.mock.calls[0];
     expect(props.className).toBe('gap-5 sm:gap-9');
   });
 

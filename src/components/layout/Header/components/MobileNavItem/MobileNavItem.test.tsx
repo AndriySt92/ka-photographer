@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import MobileNavItem from './';
 
 jest.mock('@/components', () => {
-  const { MockButton, MockIcon, MockNavLink } = jest.requireActual('tests/mocks');
+  const { MockButton, MockIcon, MockNavLink } = jest.requireActual('tests');
 
   return {
     Button: MockButton,
@@ -13,7 +13,7 @@ jest.mock('@/components', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { mockCn } = jest.requireActual('tests/mocks');
+  const { mockCn } = jest.requireActual('tests');
 
   return {
     cn: mockCn,
@@ -27,7 +27,7 @@ jest.mock('@/assets', () => ({
 describe('MobileNavItem', () => {
   const mockToggleSubmenu = jest.fn();
   const mockCloseMenu = jest.fn();
-  const { mockNavigation } = jest.requireActual('tests/mocks');
+  const { mockNavigation } = jest.requireActual('tests');
 
   const baseItem = mockNavigation[0]; // { label: 'Головна', path: '/' }
   const itemWithChildren = mockNavigation[1]; // { label: 'Послуги', path: '/services', children: [...] }

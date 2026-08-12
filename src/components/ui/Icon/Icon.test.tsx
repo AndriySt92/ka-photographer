@@ -4,9 +4,13 @@ import { cn } from '@/lib';
 
 import Icon from './';
 
-jest.mock('@/lib', () => ({
-  cn: jest.fn((...args) => args.join(' ')),
-}));
+jest.mock('@/lib', () => {
+  const { mockCn } = jest.requireActual('tests');
+
+  return {
+    cn: mockCn,
+  };
+});
 
 describe('Icon', () => {
   const defaultProps = {

@@ -5,7 +5,7 @@ import { fadeIn } from '@/lib';
 import Banner from './';
 
 jest.mock('@/components/ui/BannerWrapper', () => {
-  const { MockBannerWrapper } = jest.requireActual('tests/mocks');
+  const { MockBannerWrapper } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -14,7 +14,7 @@ jest.mock('@/components/ui/BannerWrapper', () => {
 });
 
 jest.mock('@/components/ui/GoBackButton', () => {
-  const { MockGoBackButton } = jest.requireActual('tests/mocks');
+  const { MockGoBackButton } = jest.requireActual('tests');
 
   return {
     __esModule: true,
@@ -27,7 +27,7 @@ jest.mock('@/hooks', () => ({
 }));
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
 
   return {
     motion: {
@@ -37,7 +37,7 @@ jest.mock('framer-motion', () => {
 });
 
 jest.mock('@/lib', () => {
-  const { createMockVariants } = jest.requireActual('tests/mocks');
+  const { createMockVariants } = jest.requireActual('tests');
   const mockVariants = createMockVariants();
 
   return {

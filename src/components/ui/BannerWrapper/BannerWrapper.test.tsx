@@ -10,14 +10,12 @@ jest.mock('@/hooks', () => ({
 }));
 
 jest.mock('framer-motion', () => {
-  const actual = jest.requireActual('framer-motion');
+  const { createMotionComponent } = jest.requireActual('tests');
+
   return {
-    ...actual,
     motion: {
-      div: jest
-        .fn()
-        .mockImplementation(({ children, ...props }) => <div {...props}>{children}</div>),
-      img: jest.fn().mockImplementation((props) => <img {...props} />),
+      div: createMotionComponent('div'),
+      img: createMotionComponent('img'),
     },
     useScroll: jest.fn(),
     useTransform: jest.fn(),

@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Typography from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent } = jest.requireActual('tests/mocks');
+  const { createMotionComponent } = jest.requireActual('tests');
   const motionDiv = createMotionComponent('div');
   const motionSpan = createMotionComponent('span');
   const motionP = createMotionComponent('p');

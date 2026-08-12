@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import DesktopNavItem from './';
 
 jest.mock('framer-motion', () => {
-  const { createMotionComponent, MockAnimatePresence } = jest.requireActual('tests/mocks');
+  const { MockAnimatePresence, createMotionComponent } = jest.requireActual('tests');
   const actual = jest.requireActual('framer-motion');
 
   return {
@@ -18,7 +18,7 @@ jest.mock('framer-motion', () => {
 });
 
 jest.mock('@/components', () => {
-  const { MockNavLink } = jest.requireActual('tests/mocks');
+  const { MockNavLink } = jest.requireActual('tests');
 
   return {
     NavLink: MockNavLink,
@@ -27,8 +27,7 @@ jest.mock('@/components', () => {
 
 describe('DesktopNavItem', () => {
   const mockUseReducedMotion = useReducedMotion as jest.Mock;
-  const { renderWithRouter } = jest.requireActual('tests/test-utils');
-  const { mockNavigation } = jest.requireActual('tests/mocks');
+  const { renderWithRouter, mockNavigation } = jest.requireActual('tests');
 
   const itemWithoutChildren = mockNavigation[0]; // { label: 'Головна', path: '/' }
   const itemWithChildren = mockNavigation[1]; // { label: 'Послуги', path: '/services', children: [...] }

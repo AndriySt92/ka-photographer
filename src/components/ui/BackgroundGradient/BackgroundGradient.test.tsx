@@ -3,13 +3,12 @@ import { motion } from 'framer-motion';
 
 import BackgroundGradient from './';
 
-// Mock framer-motion so that motion.div becomes a regular div
 jest.mock('framer-motion', () => {
-  const actual = jest.requireActual('framer-motion');
+  const { createMotionComponent } = jest.requireActual('tests');
+
   return {
-    ...actual,
     motion: {
-      div: jest.fn().mockImplementation((props) => <div data-testid="motion-div" {...props} />),
+      div: createMotionComponent('div'),
     },
   };
 });

@@ -4,59 +4,38 @@ import userEvent from '@testing-library/user-event';
 import GroupButtons from './';
 
 jest.mock('framer-motion', () => {
-  const actual = jest.requireActual('framer-motion');
+  const { createMotionComponent, MockLayoutGroup } = jest.requireActual('tests');
+
   return {
-    ...actual,
-    LayoutGroup: jest
-      .fn()
-      .mockImplementation(({ children }) => <div data-testid="layout-group">{children}</div>),
+    LayoutGroup: MockLayoutGroup,
     motion: {
-      div: jest.fn().mockImplementation(({ children, ...props }) => {
-        // Filter out animation props to avoid React DOM warnings
-        const { layoutId, ...domProps } = props;
-        return (
-          <div data-layout-id={layoutId} {...domProps}>
-            {children}
-          </div>
-        );
-      }),
+      div: createMotionComponent('div'),
     },
   };
 });
 
-jest.mock('../Button', () => ({
-  Button: jest.fn().mockImplementation(({ children, onClick, intent, type, className }) => (
-    <button
-      data-testid="button"
-      data-intent={intent}
-      data-type={type}
-      className={className}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  )),
-}));
+jest.mock('../Button', () => {
+  const { MockButton } = jest.requireActual('tests');
+  return { Button: MockButton };
+});
 
-jest.mock('../Typography', () => ({
-  __esModule: true,
-  default: jest.fn().mockImplementation(({ children, size, className }) => (
-    <div data-testid="typography" data-size={size} className={className}>
-      {children}
-    </div>
-  )),
-}));
+jest.mock('../Typography', () => {
+  const { MockTypography } = jest.requireActual('tests');
 
-jest.mock('../ErrorMessage', () => ({
-  __esModule: true,
-  default: jest.fn().mockImplementation(({ error, animationKey }) =>
-    error ? (
-      <div data-testid="error-message" data-animation-key={animationKey}>
-        {error}
-      </div>
-    ) : null,
-  ),
-}));
+  return {
+    __esModule: true,
+    default: MockTypography,
+  };
+});
+
+jest.mock('../ErrorMessage', () => {
+  const { MockErrorMessage } = jest.requireActual('tests');
+
+  return {
+    __esModule: true,
+    default: MockErrorMessage,
+  };
+});
 
 const mockOptions = [
   { label: 'Option 1', value: 'opt1' },
