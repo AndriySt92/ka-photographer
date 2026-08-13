@@ -1,5 +1,6 @@
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { Route, Routes } from 'react-router-dom';
+import { screen } from '@testing-library/react';
+import { renderWithRouter } from 'tests';
 
 import { useCurrentUser } from '@/hooks';
 
@@ -9,9 +10,13 @@ jest.mock('@/hooks', () => ({
   useCurrentUser: jest.fn(),
 }));
 
-jest.mock('@/components', () => ({
-  Loader: () => <div data-testid="loader">Loading...</div>,
-}));
+jest.mock('@/components', () => {
+  const { MockLoader } = jest.requireActual('tests');
+
+  return {
+    Loader: MockLoader,
+  };
+});
 
 jest.mock('@/config', () => ({
   ROUTES: {
@@ -30,14 +35,13 @@ describe('PrivateRoutes', () => {
   it('shows Loader when isLoading is true', () => {
     (useCurrentUser as jest.Mock).mockReturnValue({ data: null, isLoading: true });
 
-    render(
-      <MemoryRouter initialEntries={['/protected']}>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/protected" element={<TestComponent />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
+    renderWithRouter(
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/protected" element={<TestComponent />} />
+        </Route>
+      </Routes>,
+      { initialEntries: ['/protected'] },
     );
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
@@ -47,14 +51,13 @@ describe('PrivateRoutes', () => {
   it('renders children when user is admin', () => {
     (useCurrentUser as jest.Mock).mockReturnValue({ data: { role: 'admin' }, isLoading: false });
 
-    render(
-      <MemoryRouter initialEntries={['/protected']}>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/protected" element={<TestComponent />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
+    renderWithRouter(
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/protected" element={<TestComponent />} />
+        </Route>
+      </Routes>,
+      { initialEntries: ['/protected'] },
     );
 
     expect(screen.getByTestId('protected-content')).toBeInTheDocument();
@@ -63,15 +66,14 @@ describe('PrivateRoutes', () => {
   it('redirects to admin login when user is not admin', () => {
     (useCurrentUser as jest.Mock).mockReturnValue({ data: { role: 'user' }, isLoading: false });
 
-    render(
-      <MemoryRouter initialEntries={['/protected']}>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/protected" element={<TestComponent />} />
-          </Route>
-          <Route path="/admin-login" element={<div data-testid="admin-login-page" />} />
-        </Routes>
-      </MemoryRouter>,
+    renderWithRouter(
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/protected" element={<TestComponent />} />
+        </Route>
+        <Route path="/admin-login" element={<div data-testid="admin-login-page" />} />
+      </Routes>,
+      { initialEntries: ['/protected'] },
     );
 
     expect(screen.getByTestId('admin-login-page')).toBeInTheDocument();
