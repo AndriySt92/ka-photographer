@@ -5,6 +5,7 @@ import { close } from '@/assets';
 import { Button, FancyboxAnchor, Icon } from '@/components';
 import { cn, fadeInScale } from '@/lib';
 import type { PhotoItem } from '@/types';
+import { getCloudinarySrcSet, getCloudinaryUrl } from '@/utils';
 
 interface AdminGalleryItemProps {
   photo: PhotoItem;
@@ -26,24 +27,34 @@ const AdminGalleryItem = ({ isAdmin, photo, onDelete }: AdminGalleryItemProps) =
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
     >
-      <FancyboxAnchor href={photo.photoUrl} gallery="gallery">
+      <FancyboxAnchor href={getCloudinaryUrl(photo.publicId, 1920)} gallery="gallery">
         {/* Loading placeholder */}
         {status === 'loading' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-primary" />
-          </div>
+          <div
+            className="absolute inset-0 animate-pulse bg-secondary/10"
+            data-testid="loading-skeleton"
+          ></div>
         )}
 
         {/* Error state */}
         {status === 'error' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-500">
-            <span className="text-white">Failed to load</span>
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-secondary/5"
+            data-testid="error-state"
+          >
+            <span className="text-sm text-secondary/80">Failed to load</span>
           </div>
         )}
 
         {/* Main img */}
         <img
-          src={photo.photoUrl}
+          src={getCloudinaryUrl(photo.publicId, 640)}
+          srcSet={getCloudinarySrcSet(photo.publicId)}
+          sizes="
+            (min-width: 1024px) 33vw,
+            (min-width: 640px) 50vw,
+            100vw
+          "
           alt="gallery-photo"
           loading="lazy"
           decoding="async"

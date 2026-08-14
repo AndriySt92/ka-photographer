@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 
 import { cn, fadeInScale } from '@/lib';
 import type { PhotoItem } from '@/types';
+import { getCloudinarySrcSet, getCloudinaryUrl } from '@/utils';
 
 import FancyboxAnchor from '../FancyboxAnchor';
 import FancyboxLayout from '../FancyboxLayout';
@@ -14,7 +15,7 @@ interface GalleryProps {
 }
 
 interface GalleryItemProps {
-  photoUrl: string;
+  publicId: string;
   className?: string;
 }
 
@@ -31,14 +32,14 @@ const Gallery = ({ photos, className, itemClassName }: GalleryProps) => {
         data-testid="gallery-grid"
       >
         {photos.map((photo) => (
-          <GalleryItem photoUrl={photo.photoUrl} key={photo._id} className={itemClassName} />
+          <GalleryItem publicId={photo.publicId} key={photo._id} className={itemClassName} />
         ))}
       </div>
     </FancyboxLayout>
   );
 };
 
-const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
+const GalleryItem = ({ publicId, className }: GalleryItemProps) => {
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
 
   const ref = useRef<HTMLDivElement>(null);
@@ -56,37 +57,41 @@ const GalleryItem = ({ photoUrl, className }: GalleryItemProps) => {
       animate={isInView ? 'visible' : 'hidden'}
       data-testid="gallery-item"
     >
-      <FancyboxAnchor href={photoUrl} gallery="gallery">
+      <FancyboxAnchor href={getCloudinaryUrl(publicId, 1920)} gallery="gallery">
         {/* Loading placeholder */}
         {status === 'loading' && (
           <div
-            className="absolute inset-0 flex items-center justify-center bg-gray-100"
-            data-testid="loading-spinner"
-          >
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-primary" />
-          </div>
+            className="absolute inset-0 animate-pulse bg-secondary/10"
+            data-testid="loading-skeleton"
+          ></div>
         )}
 
         {/* Error state */}
         {status === 'error' && (
           <div
-            className="absolute inset-0 flex items-center justify-center bg-gray-500"
+            className="absolute inset-0 flex items-center justify-center bg-secondary/5"
             data-testid="error-state"
           >
-            <span className="text-white">Failed to load</span>
+            <span className="text-sm text-secondary/80">Failed to load</span>
           </div>
         )}
 
         {/* Main img */}
         <img
-          src={photoUrl}
+          src={getCloudinaryUrl(publicId, 640)}
+          srcSet={getCloudinarySrcSet(publicId)}
+          sizes="
+            (min-width: 1024px) 33vw,
+            (min-width: 640px) 50vw,
+            100vw
+          "
           alt="gallery-photo"
           loading="lazy"
           decoding="async"
           onLoad={() => setStatus('loaded')}
           onError={() => setStatus('error')}
           className={cn(
-            'transition-scale h-full w-full object-cover duration-500 group-hover:scale-105',
+            'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
             status !== 'loaded' && 'opacity-0',
           )}
           data-testid="gallery-image"

@@ -1,7 +1,7 @@
 interface PhotoItem {
   _id: string;
   categories: string[];
-  photoUrl: string;
+  publicId: string;
 }
 
 export default PhotoItem;
