@@ -43,11 +43,18 @@ jest.mock('framer-motion', () => {
   };
 });
 
+jest.mock('@/utils', () => ({
+  getCloudinaryUrl: jest.fn((publicId: string, width: number) => {
+    return `https://cloudinary.test/${publicId}?width=${width}`;
+  }),
+  getCloudinarySrcSet: jest.fn(() => 'mock-srcset'),
+}));
+
 describe('Gallery', () => {
   const mockPhotos: PhotoItem[] = [
-    { _id: '1', photoUrl: 'photo1.jpg', categories: [] },
-    { _id: '2', photoUrl: 'photo2.jpg', categories: [] },
-    { _id: '3', photoUrl: 'photo3.jpg', categories: [] },
+    { _id: '1', publicId: 'photo1.jpg', categories: [] },
+    { _id: '2', publicId: 'photo2.jpg', categories: [] },
+    { _id: '3', publicId: 'photo3.jpg', categories: [] },
   ];
 
   beforeEach(() => {
@@ -95,33 +102,33 @@ describe('Gallery', () => {
   });
 
   describe('GalleryItem', () => {
-    const mockPhotoUrl = 'https://example.com/photo.jpg';
+    const mockPublicId = 'https://example.com/photo.jpg';
 
     // Helper to render a single GalleryItem via Gallery with one photo
     const renderItem = (options?: { className?: string }) => {
       render(
         <Gallery
-          photos={[{ _id: '1', photoUrl: mockPhotoUrl, categories: [] }]}
+          photos={[{ _id: '1', publicId: mockPublicId, categories: [] }]}
           itemClassName={options?.className}
         />,
       );
     };
 
-    it('renders loading spinner initially', () => {
+    it('renders loading skeleton initially', () => {
       renderItem();
 
-      expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+      expect(screen.getByTestId('loading-skeleton')).toBeInTheDocument();
       expect(screen.queryByTestId('error-state')).not.toBeInTheDocument();
       const img = screen.getByTestId('gallery-image');
       expect(img).toHaveClass('opacity-0');
     });
 
-    it('shows image and hides spinner on load', () => {
+    it('shows image and hides loading-skeleton on load', () => {
       renderItem();
 
       const img = screen.getByTestId('gallery-image');
       fireEvent.load(img);
-      expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('loading-skeleton')).not.toBeInTheDocument();
       expect(img).not.toHaveClass('opacity-0');
     });
 
@@ -130,7 +137,7 @@ describe('Gallery', () => {
 
       const img = screen.getByTestId('gallery-image');
       fireEvent.error(img);
-      expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('loading-skeleton')).not.toBeInTheDocument();
       expect(screen.getByTestId('error-state')).toBeInTheDocument();
     });
 
@@ -156,11 +163,13 @@ describe('Gallery', () => {
       expect(call[0].animate).toBe('hidden');
     });
 
-    it('passes correct href and gallery to FancyboxAnchor', () => {
+    it('passes optimized Cloudinary URL and gallery to FancyboxAnchor', () => {
       renderItem();
 
       const anchor = screen.getByTestId('fancybox-anchor');
-      expect(anchor).toHaveAttribute('href', mockPhotoUrl);
+
+      expect(anchor).toHaveAttribute('href', `https://cloudinary.test/${mockPublicId}?width=1920`);
+
       expect(anchor).toHaveAttribute('data-gallery', 'gallery');
     });
 
