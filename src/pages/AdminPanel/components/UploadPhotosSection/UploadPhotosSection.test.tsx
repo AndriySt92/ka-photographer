@@ -12,11 +12,14 @@ beforeAll(() => {
   window.scrollTo = jest.fn();
 });
 
-// Mock child components and hooks
-jest.mock('@/components', () => ({
-  ErrorMessage: jest.fn(({ error }) => <div data-testid="error-message">{error}</div>),
-  Typography: jest.fn(({ children }) => <div data-testid="typography">{children}</div>),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography, MockErrorMessage } = jest.requireActual('tests');
+
+  return {
+    ErrorMessage: MockErrorMessage,
+    Typography: MockTypography,
+  };
+});
 
 jest.mock('@/hooks', () => ({
   useUploadPhotos: jest.fn(),
@@ -94,13 +97,11 @@ jest.mock('@/config', () => ({
   ],
 }));
 
-// Mock URL methods
 const mockCreateObjectURL = jest.fn();
 const mockRevokeObjectURL = jest.fn();
-global.URL.createObjectURL = mockCreateObjectURL;
-global.URL.revokeObjectURL = mockRevokeObjectURL;
+window.URL.createObjectURL = mockCreateObjectURL;
+window.URL.revokeObjectURL = mockRevokeObjectURL;
 
-// File helpers
 const createMockFile = (name: string, sizeInMB: number, type = 'image/jpeg'): File => {
   const size = sizeInMB * 1024 * 1024;
   const blob = new Blob([new ArrayBuffer(size)], { type });
@@ -181,7 +182,6 @@ describe('UploadPhotos', () => {
       const rejectedSection = previewSections[1];
       expect(rejectedSection).toHaveAttribute('data-title', 'Некоректні фото:');
 
-      // Error message should appear inside the rejected section
       const errorMsg = await within(rejectedSection).findByText('File type not allowed');
       expect(errorMsg).toBeInTheDocument();
     });
@@ -335,24 +335,6 @@ describe('UploadPhotos', () => {
         expect(screen.queryByTestId('select')).not.toBeInTheDocument();
         expect(screen.queryByTestId('checkbox')).not.toBeInTheDocument();
       });
-    });
-  });
-
-  describe('cleanup', () => {
-    it('revokes object URLs on unmount', () => {
-      const { unmount } = renderComponent();
-      unmount();
-      expect(mockRevokeObjectURL).not.toHaveBeenCalled();
-    });
-
-    it('calls revokeObjectURL for each accepted file when component unmounts after files added', async () => {
-      const { unmount } = renderComponent();
-      await triggerFileDrop();
-
-      mockRevokeObjectURL.mockClear();
-      unmount();
-
-      expect(mockRevokeObjectURL).toHaveBeenCalledTimes(2);
     });
   });
 });

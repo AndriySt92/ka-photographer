@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { FileRejection } from 'react-dropzone';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -36,18 +36,9 @@ const UploadPhotos = ({ onUpload }: UploadPhotosProps) => {
   const files = watch('files');
   const sessionType = watch('sessionType');
 
-  // Cleanup object URLs
-  useEffect(() => {
-    return () => {
-      files.forEach((file) => {
-        URL.revokeObjectURL(URL.createObjectURL(file));
-      });
-    };
-  }, [files]);
-
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
-      if (acceptedFiles?.length) {
+      if (acceptedFiles.length) {
         const newFiles = [...files, ...acceptedFiles];
         const fileMap = new Map();
         const uniqueFiles: File[] = [];
@@ -75,7 +66,7 @@ const UploadPhotos = ({ onUpload }: UploadPhotosProps) => {
       }
 
       //Set rejected files
-      if (rejectedFiles?.length) {
+      if (rejectedFiles.length) {
         setRejected((previousFiles) => [...previousFiles, ...rejectedFiles]);
       }
     },
