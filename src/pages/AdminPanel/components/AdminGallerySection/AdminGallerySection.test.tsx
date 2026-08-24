@@ -15,48 +15,19 @@ jest.mock('@/hooks', () => ({
   useRemovePhoto: jest.fn(),
 }));
 
-jest.mock('@/components', () => ({
-  Button: jest.fn(({ children, onClick, isLoading, loadingText, size }) => (
-    <button onClick={onClick} disabled={isLoading} data-testid="button" data-size={size}>
-      {isLoading ? loadingText : children}
-    </button>
-  )),
-  ErrorMessage: jest.fn(({ error, size, animationKey }) => (
-    <div data-testid="error-message" data-size={size} data-animation={animationKey}>
-      Error: {error}
-    </div>
-  )),
-  GroupButtons: jest.fn(({ options, selectedOption, onChange, className }) => (
-    <div data-testid="group-buttons" className={className}>
-      {options.map((opt: { value: string; label: string }) => (
-        <button
-          key={opt.value}
-          data-selected={opt.value === selectedOption}
-          onClick={() => onChange(opt.value)}
-        >
-          {opt.label}
-        </button>
-      ))}
-    </div>
-  )),
-  Loader: jest.fn(() => <div data-testid="loader">Loading...</div>),
-  Modal: jest.fn(({ isOpen, onClose, title, children }) =>
-    isOpen ? (
-      <div data-testid="modal" role="dialog">
-        <h2>{title}</h2>
-        <button data-testid="modal-close" onClick={onClose}>
-          ×
-        </button>
-        {children}
-      </div>
-    ) : null,
-  ),
-  Typography: jest.fn(({ children, parentAs, size, align, className }) => (
-    <div data-testid="typography" data-size={size} data-align={align} className={className}>
-      {parentAs === 'h1' ? <h1>{children}</h1> : children}
-    </div>
-  )),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography, MockButton, MockErrorMessage, MockGroupButtons, MockLoader, MockModal } =
+    jest.requireActual('tests');
+
+  return {
+    Button: MockButton,
+    ErrorMessage: MockErrorMessage,
+    GroupButtons: MockGroupButtons,
+    Loader: MockLoader,
+    Modal: MockModal,
+    Typography: MockTypography,
+  };
+});
 
 jest.mock('@/config', () => ({
   allPhotoCategories: [
@@ -80,7 +51,6 @@ jest.mock('./AdminGallery', () => ({
   )),
 }));
 
-// Mocked hooks
 const mockUseCurrentUser = jest.mocked(useCurrentUser);
 const mockUseInfiniteScroll = jest.mocked(useInfiniteScroll);
 const mockUseModal = jest.mocked(useModal);
@@ -111,9 +81,26 @@ const createMockPhoto = (
   overrides = {},
 ): PhotoItem => ({
   _id: id,
-  photoUrl: 'a.jpg',
+  publicId: 'a.jpg',
   categories,
   ...overrides,
+});
+
+jest.mock('framer-motion', () => {
+  const { createMotionComponent } = jest.requireActual('tests');
+  const actual = jest.requireActual('framer-motion');
+
+  const motionFn = jest
+    .fn()
+    .mockImplementation((Component) => (props: any) => <Component {...props} />);
+  (motionFn as any).div = createMotionComponent('div');
+
+  return {
+    ...actual,
+    motion: motionFn,
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    useInView: jest.fn(),
+  };
 });
 
 describe('AdminGallerySection', () => {
@@ -143,7 +130,6 @@ describe('AdminGallerySection', () => {
     } as any);
   });
 
-  // Rendering tests
   it('renders the component with all props correctly', () => {
     mockUsePhotos.mockReturnValue(createMockPhotosReturn({ isFetching: true }));
     render(<AdminGallerySection {...defaultProps} />);
@@ -190,7 +176,7 @@ describe('AdminGallerySection', () => {
     );
 
     render(<AdminGallerySection {...defaultProps} />);
-    expect(screen.getByTestId('error-message')).toHaveTextContent(`Error: ${errorMessage}`);
+    expect(screen.getByTestId('error-message')).toHaveTextContent(`${errorMessage}`);
   });
 
   it('shows infinite scroll trigger when hasNextPage is true', () => {
@@ -218,7 +204,6 @@ describe('AdminGallerySection', () => {
     expect(screen.queryByTestId('infinite-scroll-trigger')).not.toBeInTheDocument();
   });
 
-  // User role tests
   it('passes isAdmin=false to AdminGallery when user is not admin', () => {
     mockUseCurrentUser.mockReturnValue({ data: { role: 'user' } } as any);
     mockUsePhotos.mockReturnValue(
@@ -232,7 +217,6 @@ describe('AdminGallerySection', () => {
     expect(screen.getByText('Is admin: false')).toBeInTheDocument();
   });
 
-  // Delete modal flow tests
   it('opens modal with photo details when delete button is clicked', async () => {
     const user = userEvent.setup();
     const openModal = jest.fn();
@@ -288,7 +272,6 @@ describe('AdminGallerySection', () => {
     expect(closeModal).toHaveBeenCalled();
   });
 
-  // Hook parameter tests
   it('passes category prop to usePhotos', () => {
     render(<AdminGallerySection {...defaultProps} />);
     expect(mockUsePhotos).toHaveBeenCalledWith({ category: 'individual' });

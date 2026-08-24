@@ -29,11 +29,11 @@ describe('usePhotos', () => {
   it('fetches photos and returns flattened data', async () => {
     const wrapper = queryClientWrapper();
     const mockPage1 = {
-      data: [{ _id: '1', photoUrl: 'url1' }],
+      data: [{ _id: '1', publicId: 'url1' }],
       pagination: { hasNextPage: true, currentPage: 1, totalPages: 2 },
     };
     const mockPage2 = {
-      data: [{ _id: '2', photoUrl: 'url2' }],
+      data: [{ _id: '2', publicId: 'url2' }],
       pagination: { hasNextPage: false, currentPage: 2, totalPages: 2 },
     };
     (api.get as jest.Mock).mockResolvedValueOnce(mockPage1).mockResolvedValueOnce(mockPage2);

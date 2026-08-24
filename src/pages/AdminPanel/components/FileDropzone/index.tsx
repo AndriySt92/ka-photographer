@@ -13,7 +13,7 @@ const FileDropzone = ({ onDrop, disabled }: FileDropzoneProps) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png', 'webp'],
+      'image/*': ['.jpeg', '.jpg', '.png', '.webp'],
     },
     maxSize: 1024 * 1024 * 10, // 10 MB in bytes
     multiple: true,
@@ -28,8 +28,9 @@ const FileDropzone = ({ onDrop, disabled }: FileDropzoneProps) => {
         isDragActive ? 'border-secondary/80 bg-secondary/10 ' : 'border-secondary/40',
         disabled ? 'opacity-40' : 'cursor-pointer hover:bg-secondary/10',
       )}
+      data-testid="file-dropzone"
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} data-testid="file-input" />
       <div className="mx-auto mb-4 h-16 w-16 text-secondary">
         <Icon icon={upload} name="upload-file" size="h-16 aspect-auto" />
       </div>

@@ -1,12 +1,8 @@
 import { motion } from 'framer-motion';
 
+import { BackgroundGradient, ContactInfo, SessionOrderForm, Typography } from '@/components/ui';
 import { contactInfo } from '@/config';
 import { fadeInLeft, fadeInWithOpacity, staggerContainer } from '@/lib';
-
-import BackgroundGradient from '../../ui/BackgroundGradient';
-import ContactInfo from '../../ui/ContactInfo';
-import SessionOrderForm from '../../ui/SessionOrderForm';
-import Typography from '../../ui/Typography';
 
 interface ContactsSectionProps {
   isPage?: boolean;

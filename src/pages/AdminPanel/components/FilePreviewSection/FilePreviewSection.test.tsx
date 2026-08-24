@@ -9,45 +9,23 @@ jest.mock('@/assets/icons', () => ({
   close: 'close-icon-mock',
 }));
 
-jest.mock('@/components', () => ({
-  Button: jest.fn(
-    ({ children, onClick, disabled, isLoading, loadingText, type, intent, className }) => (
-      <button
-        type={type === 'submit' ? 'submit' : 'button'}
-        onClick={onClick}
-        disabled={disabled || isLoading}
-        data-testid="button"
-        data-intent={intent}
-        className={className}
-      >
-        {isLoading ? loadingText : children}
-      </button>
-    ),
-  ),
-  Icon: jest.fn(({ name, icon, size }) => (
-    <span data-testid="icon" data-name={name} data-icon={icon} data-size={size}>
-      {name}
-    </span>
-  )),
-  Typography: jest.fn(({ children, parentAs, size, className }) => {
-    const Tag = parentAs || 'div';
-    return (
-      <Tag data-testid="typography" data-size={size} className={className}>
-        {children}
-      </Tag>
-    );
-  }),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography, MockButton, MockIcon } = jest.requireActual('tests');
+
+  return {
+    Button: MockButton,
+    Icon: MockIcon,
+    Typography: MockTypography,
+  };
+});
 
 jest.mock('@/lib', () => ({
   cn: (...args: any[]) => args.filter(Boolean).join(' '),
 }));
 
-// Mock URL.createObjectURL
 const mockCreateObjectURL = jest.fn();
-global.URL.createObjectURL = mockCreateObjectURL;
+window.URL.createObjectURL = mockCreateObjectURL;
 
-// Helper to create mock File objects
 const createMockFile = (name: string, sizeInMB: number, type = 'image/jpeg'): File => {
   const size = sizeInMB * 1024 * 1024;
   const blob = new Blob([new ArrayBuffer(size)], { type });
@@ -108,6 +86,7 @@ describe('FilePreviewSection', () => {
 
     it('displays file names and sizes', () => {
       renderComponent();
+
       expect(screen.getByText('photo1.jpg')).toBeInTheDocument();
       expect(screen.getByText('2.50 MB')).toBeInTheDocument();
       expect(screen.getByText('photo2.png')).toBeInTheDocument();
@@ -123,6 +102,7 @@ describe('FilePreviewSection', () => {
 
     it('calls URL.createObjectURL for each file', () => {
       renderComponent();
+
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(3);
       expect(mockCreateObjectURL).toHaveBeenCalledWith(mockFile1);
       expect(mockCreateObjectURL).toHaveBeenCalledWith(mockFile2);

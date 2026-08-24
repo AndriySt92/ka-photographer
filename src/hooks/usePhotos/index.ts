@@ -22,7 +22,7 @@ interface UsePhotosParams {
   limit?: number;
 }
 
-const usePhotos = ({ category, limit = 6 }: UsePhotosParams) => {
+const usePhotos = ({ category, limit = 9 }: UsePhotosParams) => {
   return useInfiniteQuery<PhotosResponse, AxiosError, PhotoItem[]>({
     queryKey: queryKeys.photos.photos(category),
     queryFn: ({ pageParam = 1 }) =>

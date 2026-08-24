@@ -167,8 +167,8 @@ describe('ShowcasePageLayout', () => {
 
   it('renders GallerySection when isSuccess and photos.length > 0', () => {
     const photos = [
-      { _id: '1', photoUrl: 'photo1.jpg' },
-      { _id: '2', photoUrl: 'photo2.jpg' },
+      { _id: '1', publicId: 'photo1.jpg', categories: [] },
+      { _id: '2', publicId: 'photo2.jpg', categories: [] },
     ];
     mockUsePhotos.mockReturnValue(
       createMockPhotosReturn({

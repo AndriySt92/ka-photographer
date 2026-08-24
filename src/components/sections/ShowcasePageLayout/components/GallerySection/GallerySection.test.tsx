@@ -48,8 +48,8 @@ jest.mock('@/lib', () => {
 describe('GallerySection', () => {
   const mockUseInView = useInView as jest.Mock;
   const mockPhotos = [
-    { _id: '1', photoUrl: 'photo1.jpg', categories: [] },
-    { _id: '2', photoUrl: 'photo2.jpg', categories: [] },
+    { _id: '1', publicId: 'photo1.jpg', categories: [] },
+    { _id: '2', publicId: 'photo2.jpg', categories: [] },
   ];
 
   beforeEach(() => {

@@ -12,7 +12,13 @@ jest.mock('framer-motion', () => {
     return React.forwardRef((props: any, ref: any) => <Component ref={ref} {...props} />);
   });
   (motionMock as any).span = createMotionComponent('span');
+
+  (motionMock as any).create = jest
+    .fn()
+    .mockImplementation((Component) => (props: any) => <Component {...props} />);
+
   const AnimatePresenceMock = ({ children }: any) => <>{children}</>;
+
   return {
     motion: motionMock,
     AnimatePresence: AnimatePresenceMock,

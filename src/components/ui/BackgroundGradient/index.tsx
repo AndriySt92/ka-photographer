@@ -25,6 +25,7 @@ const BackgroundGradient = ({
       className={cn('z-5 absolute h-full w-full opacity-40', className)}
       style={{ background: gradient, ...style }}
       {...(animated ? motionProps : {})}
+      data-testid="background-gradient"
     />
   );
 };

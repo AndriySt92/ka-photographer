@@ -6,39 +6,17 @@ import { getErrorMessage } from '@/utils';
 
 import SignIn from './';
 
-jest.mock('@/components', () => ({
-  Button: jest.fn(({ children, type, disabled, isLoading, loadingText, size }) => (
-    <button
-      type={type}
-      disabled={disabled || isLoading}
-      data-testid="button"
-      data-size={size}
-      data-loading={isLoading}
-    >
-      {isLoading ? loadingText : children}
-    </button>
-  )),
-  ErrorMessage: jest.fn(({ error }) => <div data-testid="error-message">{error}</div>),
-  FormField: jest.fn(({ label, name, type, register, error, validation }) => (
-    <div data-testid="form-field" data-name={name} data-label={label} data-type={type}>
-      <input
-        {...register(name, validation)}
-        type={type}
-        aria-label={label}
-        data-testid={`input-${name}`}
-      />
-      {error && <span data-testid={`error-${name}`}>{error}</span>}
-    </div>
-  )),
-  Typography: jest.fn(({ children, parentAs, size, align }) => {
-    const Tag = parentAs || 'div';
-    return (
-      <Tag data-testid="typography" data-size={size} data-align={align}>
-        {children}
-      </Tag>
-    );
-  }),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography, MockButton, MockErrorMessage, MockFormField } =
+    jest.requireActual('tests');
+
+  return {
+    Typography: MockTypography,
+    Button: MockButton,
+    ErrorMessage: MockErrorMessage,
+    FormField: MockFormField,
+  };
+});
 
 jest.mock('@/hooks/useLogin', () => ({
   __esModule: true,

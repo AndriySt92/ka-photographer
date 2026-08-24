@@ -5,41 +5,29 @@ import { useClickOutside } from '@/hooks';
 
 import Select from './';
 
-// Mock dependencies
-jest.mock('@/components', () => ({
-  Button: jest.fn(({ children, onClick, className, type }) => (
-    <button type={type} onClick={onClick} className={className}>
-      {children}
-    </button>
-  )),
-  Icon: jest.fn(({ name, icon, size, className }) => (
-    <div
-      data-testid="icon"
-      data-name={name}
-      data-icon={icon}
-      data-size={size}
-      className={className}
-    >
-      {name}
-    </div>
-  )),
-}));
+jest.mock('@/components', () => {
+  const { MockButton, MockIcon } = jest.requireActual('tests');
+
+  return {
+    Button: MockButton,
+    Icon: MockIcon,
+  };
+});
 
 jest.mock('@/hooks', () => ({
   useClickOutside: jest.fn(),
 }));
 
-// Mock framer-motion to avoid issues with AnimatePresence and motion
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, className, ...props }: any) => (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    ),
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-}));
+jest.mock('framer-motion', () => {
+  const { createMotionComponent, MockAnimatePresence } = jest.requireActual('tests');
+
+  return {
+    motion: {
+      div: createMotionComponent('div'),
+    },
+    AnimatePresence: MockAnimatePresence,
+  };
+});
 
 jest.mock('@/assets/icons', () => ({
   dropdownArrow: 'dropdown-arrow-mock',
@@ -56,7 +44,6 @@ describe('Select', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // Ensure useClickOutside returns the expected tuple
     (useClickOutside as jest.Mock).mockReturnValue([false, mockSetIsOpen]);
   });
 

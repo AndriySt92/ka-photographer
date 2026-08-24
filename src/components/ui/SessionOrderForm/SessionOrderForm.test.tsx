@@ -37,6 +37,10 @@ jest.mock('framer-motion', () => {
   (motionFn as any).label = createMotionComponent('label');
   (motionFn as any).span = createMotionComponent('span');
 
+  (motionFn as any).create = jest
+    .fn()
+    .mockImplementation((Component) => (props: any) => <Component {...props} />);
+
   return {
     motion: motionFn,
     AnimatePresence: ({ children }: any) => <>{children}</>,

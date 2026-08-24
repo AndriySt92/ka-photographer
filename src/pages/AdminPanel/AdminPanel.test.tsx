@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import AdminPanel from './';
 
-// Mock child components
 jest.mock('./components/UploadPhotosSection', () => ({
   __esModule: true,
   default: jest.fn(({ onUpload }) => (
@@ -34,7 +33,6 @@ jest.mock('./components/AdminGallerySection', () => {
   };
 });
 
-// Mock config
 jest.mock('@/config', () => ({
   allPhotoCategories: [
     { value: 'individual', label: 'індивідуальна' },
@@ -42,12 +40,14 @@ jest.mock('@/config', () => ({
   ],
 }));
 
-// Mock Typography component
-jest.mock('@/components', () => ({
-  Typography: jest.fn(({ children }) => <div data-testid="typography">{children}</div>),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography } = jest.requireActual('tests');
 
-// Mock scrollIntoView
+  return {
+    Typography: MockTypography,
+  };
+});
+
 beforeAll(() => {
   Element.prototype.scrollIntoView = jest.fn();
 });

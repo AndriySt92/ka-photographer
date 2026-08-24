@@ -3,32 +3,15 @@ import { render, screen } from '@testing-library/react';
 
 import FileDropzone from './';
 
-jest.mock('@/components', () => ({
-  Icon: jest.fn(({ name, icon, size, className }) => (
-    <div
-      data-testid="icon"
-      data-name={name}
-      data-icon={icon}
-      data-size={size}
-      className={className}
-    >
-      {name}
-    </div>
-  )),
-  Typography: jest.fn(({ children, parentAs, size, className }) => {
-    const Tag = parentAs || 'div';
-    return (
-      <Tag data-testid="typography" data-size={size} className={className}>
-        {children}
-      </Tag>
-    );
-  }),
-  Button: jest.fn(({ children, onClick, type, disabled }) => (
-    <button type={type} onClick={onClick} disabled={disabled}>
-      {children}
-    </button>
-  )),
-}));
+jest.mock('@/components', () => {
+  const { MockTypography, MockButton, MockIcon } = jest.requireActual('tests');
+
+  return {
+    Button: MockButton,
+    Icon: MockIcon,
+    Typography: MockTypography,
+  };
+});
 
 jest.mock('@/config', () => ({
   contactInfo: {},
@@ -71,9 +54,8 @@ describe('FileDropzone', () => {
   });
 
   it('has dimmed style when disabled', () => {
-    const { container } = render(<FileDropzone onDrop={mockOnDrop} disabled={true} />);
-    // eslint-disable-next-line testing-library/no-node-access
-    const div = container.firstChild as HTMLElement;
-    expect(div).toHaveClass('opacity-40');
+    render(<FileDropzone onDrop={mockOnDrop} disabled={true} />);
+    const element = screen.getByTestId('file-dropzone');
+    expect(element).toHaveClass('opacity-40');
   });
 });

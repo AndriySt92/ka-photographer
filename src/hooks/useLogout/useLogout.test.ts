@@ -12,6 +12,16 @@ jest.mock('@/api/clients', () => ({
   remove: jest.fn(),
 }));
 
+jest.mock('@/utils', () => ({
+  getCloudinaryUrl: jest.fn((publicId: string, width: number) => {
+    return `https://cloudinary.test/${publicId}?width=${width}`;
+  }),
+  getCloudinarySrcSet: jest.fn(() => 'mock-srcset'),
+  getErrorMessage: jest.fn((error: unknown) =>
+    error instanceof Error ? error.message : 'Unknown error',
+  ),
+}));
+
 jest.mock('@/api/endpoints', () => {
   const { mockEndpoints, mockQueryKeys } = jest.requireActual('tests');
   return {

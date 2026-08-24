@@ -12,6 +12,10 @@ jest.mock('@/api/clients', () => ({
   post: jest.fn(),
 }));
 
+jest.mock('@/utils', () => ({
+  getErrorMessage: jest.fn((error: Error) => error.message),
+}));
+
 jest.mock('@/api/endpoints', () => ({
   endpoints: {
     booking: {
@@ -74,12 +78,13 @@ describe('useCreateBooking', () => {
 
   it('shows error on failed request', async () => {
     const error = new Error('Network error');
+
     (api.post as jest.Mock).mockRejectedValue(error);
 
     const { result } = renderHook(() => useCreateBooking(), { wrapper });
 
     await act(async () => {
-      await expect(result.current.mutateAsync(bookingData)).rejects.toThrow();
+      await expect(result.current.mutateAsync(bookingData)).rejects.toThrow('Network error');
     });
 
     expect(mockShowError).toHaveBeenCalledWith('Network error');

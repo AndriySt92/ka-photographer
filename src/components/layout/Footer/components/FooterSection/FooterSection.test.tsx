@@ -2,13 +2,20 @@ import { render, screen } from '@testing-library/react';
 
 import FooterSection from './';
 
-jest.mock('@/components', () => {
+jest.mock('@/components/ui', () => {
   const { MockTypography } = jest.requireActual('tests');
 
   return {
     Typography: MockTypography,
   };
 });
+
+jest.mock('@/utils', () => ({
+  getCloudinaryUrl: jest.fn((publicId: string, width: number) => {
+    return `https://cloudinary.test/${publicId}?width=${width}`;
+  }),
+  getCloudinarySrcSet: jest.fn(() => 'mock-srcset'),
+}));
 
 jest.mock('@/lib', () => {
   const { mockCn } = jest.requireActual('tests');
@@ -49,6 +56,7 @@ describe('FooterSection', () => {
     render(<FooterSection {...defaultProps} />);
 
     const title = screen.getByTestId('typography');
+
     expect(title).toHaveAttribute('data-parent', 'h6');
     expect(title).toHaveAttribute('data-size', '2xl');
   });
