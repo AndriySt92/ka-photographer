@@ -35,7 +35,7 @@ export default tseslint.config(
         ...globals.es2022,
       },
       parserOptions: {
-        project: ['tsconfig.json', 'tsconfig.node.json'],
+        project: ['./tsconfig.json', './tsconfig.node.json'],
       },
     },
     plugins: {
@@ -86,6 +86,12 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/ban-ts-comment': 'warn',
+
+      // ... other rules ...
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+      ],
     },
     settings: {
       react: {
@@ -99,8 +105,15 @@ export default tseslint.config(
   },
   // ========== TESTING CONFIGURATIONS ==========
   {
-    files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+    files: [
+      '**/__tests__/**/*.[jt]s?(x)',
+      '**/?(*.)+(spec|test).[jt]s?(x)',
+      'tests/**/*.[jt]s?(x)',
+    ],
     languageOptions: {
+      parserOptions: {
+        project: './tsconfig.test.json',
+      },
       globals: {
         ...globals.jest,
       },
