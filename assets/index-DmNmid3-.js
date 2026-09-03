@@ -1,0 +1,1 @@
+import{j as s,H as a,C as e}from"./index-UodGGwCI.js";const r=()=>s.jsxs("div",{className:"margin-t relative overflow-hidden",children:[s.jsx(a,{withLogo:!0,className:"top-[7%] translate-x-[45%] sm:top-0 sm:translate-x-0"}),s.jsx("div",{className:"container",children:s.jsx("div",{className:"padding-y",children:s.jsx(e,{isPage:!0})})})]});export{r as default};
