@@ -11,6 +11,7 @@ const GalleryBannerContent = () => {
       <Typography
         parentAs="h1"
         size="extraLarge"
+        className="[@media(max-width:599px)]:!text-[60px]"
         animated
         parentMotionProps={{ variants: fadeInLeft }}
       >

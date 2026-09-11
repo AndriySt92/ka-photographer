@@ -1,4 +1,4 @@
-import { galleryBanner } from '@/assets';
+import { banner, bannerMobile } from '@/assets';
 import { ShowcasePageLayout } from '@/components';
 
 import { GalleryBannerContent } from './components/';
@@ -12,8 +12,11 @@ const Gallery = () => {
       category="gallery"
       descriptionProps={{ description: description, title: 'Найяскравіші моменти моїх зйомок' }}
       bannerProps={{
-        bannerPhoto: galleryBanner,
-        imageClassName: 'object-[36%_0%] sm:object-[0%_0%]',
+        bannerPhoto: banner,
+        bannerPhotoMobile: bannerMobile,
+        imageClassName: 'object-[45%_0%]',
+        overlayClassName: 'bg-primary/20 backdrop-blur-md',
+        showGradient: false,
       }}
     >
       {/* Banner text */}

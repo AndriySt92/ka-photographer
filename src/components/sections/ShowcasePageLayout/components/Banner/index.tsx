@@ -9,18 +9,29 @@ interface BannerProps {
   imageClassName?: string;
   bannerPhoto: string;
   bannerPhotoMobile?: string;
+  overlayClassName?: string;
+  showGradient?: boolean;
 }
 
-const Banner = ({ imageClassName, bannerPhoto, bannerPhotoMobile, bannerContent }: BannerProps) => {
+const Banner = ({
+  imageClassName,
+  bannerPhoto,
+  bannerPhotoMobile,
+  overlayClassName,
+  showGradient,
+  bannerContent,
+}: BannerProps) => {
   return (
     <BannerWrapper
       imageSrc={bannerPhoto}
       imageSrcMobile={bannerPhotoMobile}
       imageClassName={imageClassName}
+      overlayClassName={overlayClassName}
+      showGradient={showGradient}
       wrapperMotionProps={{
         initial: 'hidden',
         animate: 'visible',
-        variants: staggerContainer(0.2, 1),
+        variants: staggerContainer(0.2, 1.2),
       }}
       imageMotionProps={{
         variants: fadeIn,

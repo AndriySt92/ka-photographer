@@ -11,6 +11,9 @@ interface BannerProps {
   bannerPhoto: string;
   bannerPhotoMobile?: string;
   imageClassName?: string;
+  showGradient?: boolean;
+  imageSrcMobile?: string;
+  overlayClassName?: string;
 }
 
 interface DescriptionProps {

@@ -13,6 +13,7 @@ interface BannerWrapperProps {
   imageClassName?: string;
   overlayClassName?: string;
   contentClassName?: string;
+  showGradient?: boolean;
   wrapperMotionProps?: MotionProps & HTMLAttributes<HTMLDivElement>;
   imageMotionProps?: MotionProps & ImgHTMLAttributes<HTMLImageElement>;
 }
@@ -28,6 +29,7 @@ const BannerWrapper = ({
   contentClassName = '',
   wrapperMotionProps = {},
   imageMotionProps = {},
+  showGradient = true,
 }: BannerWrapperProps) => {
   // Ref for the banner wrapper to track scroll position
   const ref = useRef<HTMLDivElement | null>(null);
@@ -58,11 +60,6 @@ const BannerWrapper = ({
     >
       {/* Background image section */}
       <div className="absolute inset-0">
-        <div
-          className={cn('absolute z-10 h-full w-full', overlayClassName)}
-          data-testid="overlay-layer"
-        />
-
         <picture data-testid="banner-picture">
           {/* For screens above 640px */}
           <source media="(min-width: 640px)" srcSet={imageSrc} data-testid="source-desktop" />
@@ -81,13 +78,20 @@ const BannerWrapper = ({
             data-testid="banner-image"
           />
         </picture>
+
+        <div
+          className={cn('absolute z-10 h-full w-full', overlayClassName)}
+          data-testid="overlay-layer"
+        />
       </div>
 
       {/* Gradient overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-        data-testid="gradient-overlay"
-      />
+      {showGradient && (
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"
+          data-testid="gradient-overlay"
+        />
+      )}
 
       {/* Content section */}
       <div className={cn('relative z-20 h-full', contentClassName)} data-testid="content-wrapper">
