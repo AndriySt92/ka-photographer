@@ -1,10 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
-
 @font-face {
   font-family: 'HelveticaNeueCyr';
-  src:
-    url('./helveticaneuecyr_roman.woff2') format('woff2'),
-    url('./helveticaneuecyr_roman.woff') format('woff');
+  src: url('./helveticaneuecyr_roman.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,20 +8,32 @@
 
 @font-face {
   font-family: 'HelveticaNeueCyr';
-  src:
-    url('./helveticaneuecyr-medium.woff2') format('woff2'),
-    url('./helveticaneuecyr-medium.woff') format('woff');
+  src: url('./helveticaneuecyr-medium.woff2') format('woff2');
   font-weight: 500;
-  font-style: medium;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'HelveticaNeueCyr';
-  src:
-    url('./AnyConv.com__HelveticaNeueCyr-Heavy.woff2') format('woff2'),
-    url('./HelveticaNeueCyr-Heavy.woff') format('woff');
+  font-family: 'Montserrat';
+  src: url('./montserrat-v31-cyrillic_latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./montserrat-v31-cyrillic_latin-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./montserrat-v31-cyrillic_latin-600.woff2') format('woff2');
   font-weight: 600;
-  font-style: medium;
+  font-style: normal;
   font-display: swap;
 }
