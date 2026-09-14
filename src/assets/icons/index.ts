@@ -14,7 +14,6 @@ export { default as facebook } from './facebook.svg';
 export { default as instagram } from './instagram.svg';
 export { default as location } from './location.svg';
 export { default as locationBanner } from './location_banner.svg';
-export { default as logo } from './logo.png';
 export { default as logout } from './logout.svg';
 export { default as online } from './online.svg';
 export { default as payment } from './payment.svg';
