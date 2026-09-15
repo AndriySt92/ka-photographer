@@ -57,7 +57,7 @@ describe('FooterSection', () => {
 
     const title = screen.getByTestId('typography');
 
-    expect(title).toHaveAttribute('data-parent', 'h6');
+    expect(title).toHaveAttribute('data-parent', 'h2');
     expect(title).toHaveAttribute('data-size', '2xl');
   });
 

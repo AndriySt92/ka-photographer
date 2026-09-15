@@ -10,16 +10,39 @@ jest.mock('@/components', () => {
     ContactsSection: MockContactsSection,
     CursorFollower: MockCursorFollower,
     HoverCircles: MockHoverCircles,
+    LazySection: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   };
 });
 
 jest.mock('./components', () => ({
-  About: jest.fn(() => <div data-testid="about-section" />),
+  __esModule: true,
+
   Banner: jest.fn(() => <div data-testid="banner-section" />),
-  HomeGallery: jest.fn(() => <div data-testid="gallery-section" />),
-  Reviews: jest.fn(() => <div data-testid="reviews-section" />),
-  Services: jest.fn(() => <div data-testid="services-section" />),
-  Terms: jest.fn(() => <div data-testid="terms-section" />),
+}));
+
+jest.mock('./components/About', () => ({
+  __esModule: true,
+  default: jest.fn(() => <div data-testid="about-section" />),
+}));
+
+jest.mock('./components/Services', () => ({
+  __esModule: true,
+  default: jest.fn(() => <div data-testid="services-section" />),
+}));
+
+jest.mock('./components/HomeGallery', () => ({
+  __esModule: true,
+  default: jest.fn(() => <div data-testid="gallery-section" />),
+}));
+
+jest.mock('./components/Reviews', () => ({
+  __esModule: true,
+  default: jest.fn(() => <div data-testid="reviews-section" />),
+}));
+
+jest.mock('./components/Terms', () => ({
+  __esModule: true,
+  default: jest.fn(() => <div data-testid="terms-section" />),
 }));
 
 describe('Home', () => {
@@ -27,27 +50,28 @@ describe('Home', () => {
     jest.clearAllMocks();
   });
 
-  it('renders all main sections', () => {
+  it('renders all main sections', async () => {
     render(<Home />);
 
-    expect(screen.getByTestId('banner-section')).toBeInTheDocument();
-    expect(screen.getByTestId('about-section')).toBeInTheDocument();
-    expect(screen.getByTestId('services-section')).toBeInTheDocument();
-    expect(screen.getByTestId('gallery-section')).toBeInTheDocument();
-    expect(screen.getByTestId('reviews-section')).toBeInTheDocument();
-    expect(screen.getByTestId('terms-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('banner-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('about-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('services-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('gallery-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('reviews-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('terms-section')).toBeInTheDocument();
+
     expect(screen.getByTestId('contacts-section')).toBeInTheDocument();
   });
 
   it('renders two CursorFollower components', () => {
     render(<Home />);
-    const cursorFollowers = screen.getAllByTestId('cursor-follower');
-    expect(cursorFollowers).toHaveLength(2);
+
+    expect(screen.getAllByTestId('cursor-follower')).toHaveLength(2);
   });
 
   it('renders two HoverCircles components', () => {
     render(<Home />);
-    const hoverCircles = screen.getAllByTestId('hover-circles');
-    expect(hoverCircles).toHaveLength(2);
+
+    expect(screen.getAllByTestId('hover-circles')).toHaveLength(2);
   });
 });

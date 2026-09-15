@@ -72,14 +72,14 @@ describe('SessionOrderForm', () => {
     expect(screen.getByText(/обери тип зйомки/i)).toBeInTheDocument();
     expect(screen.getByTestId('field-sessionDate')).toBeInTheDocument();
     expect(screen.getByTestId('field-comment')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /замовити/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /відправити/i })).toBeInTheDocument();
   });
 
   it('displays validation errors when fields are empty on submit', async () => {
     const user = userEvent.setup();
     renderComponent();
 
-    const submitButton = screen.getByRole('button', { name: /замовити/i });
+    const submitButton = screen.getByRole('button', { name: /відправити/i });
     await user.click(submitButton);
 
     await waitFor(() => {
@@ -182,7 +182,7 @@ describe('SessionOrderForm', () => {
     await user.type(screen.getByTestId('field-sessionDate'), 'червень 2024');
     await user.type(screen.getByTestId('field-comment'), 'some comment');
 
-    await user.click(screen.getByRole('button', { name: /замовити/i }));
+    await user.click(screen.getByRole('button', { name: /відправити/i }));
 
     await waitFor(() => {
       expect(mockMutateAsync).toHaveBeenCalledWith({
@@ -205,7 +205,7 @@ describe('SessionOrderForm', () => {
     await user.type(screen.getByTestId('field-contact'), '@test');
     await user.click(screen.getByRole('button', { name: 'Портрет' }));
 
-    await user.click(screen.getByRole('button', { name: /замовити/i }));
+    await user.click(screen.getByRole('button', { name: /відправити/i }));
 
     await waitFor(() => {
       expect(screen.getByTestId('field-name')).toHaveValue('');
@@ -226,9 +226,9 @@ describe('SessionOrderForm', () => {
 
     renderComponent();
 
-    const submitButton = screen.getByRole('button', { name: /відправлення/i });
+    const submitButton = screen.getByRole('button', { name: /надсилання/i });
     expect(submitButton).toBeDisabled();
-    expect(submitButton).toHaveTextContent('Відправлення');
+    expect(submitButton).toHaveTextContent('Надсилання');
   });
 
   it('handles submission error and logs to console', async () => {
@@ -243,7 +243,7 @@ describe('SessionOrderForm', () => {
     await user.type(screen.getByTestId('field-contact'), '@test');
     await user.click(screen.getByRole('button', { name: 'Весільна' }));
 
-    await user.click(screen.getByRole('button', { name: /замовити/i }));
+    await user.click(screen.getByRole('button', { name: /відправити/i }));
 
     await waitFor(() => {
       expect(consoleErrorSpy).toHaveBeenCalledWith(error);

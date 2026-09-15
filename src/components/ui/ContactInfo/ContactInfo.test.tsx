@@ -98,11 +98,11 @@ describe('ContactInfo', () => {
       link: 'https://fb.com',
     });
     expect(socialIconCalls[1][0]).toMatchObject({
-      name: 'instagram',
-      icon: 'ig-icon',
+      name: 'telegram',
+      icon: 'tg-icon',
       size: mockContactInfoRoleStyles.footer.iconSize,
       as: 'link',
-      link: 'https://ig.com',
+      link: 'https://t.me',
     });
 
     // Verify Typography calls for each item

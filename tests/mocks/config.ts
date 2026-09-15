@@ -2,8 +2,8 @@ import type { ContactInfoItem } from '@/types';
 
 export const mockSocialMediaPlatforms = [
   { name: 'facebook', link: 'https://fb.com', icon: 'fb-icon' },
-  { name: 'instagram', link: 'https://ig.com', icon: 'ig-icon' },
   { name: 'telegram', link: 'https://t.me', icon: 'tg-icon' },
+  { name: 'instagram', link: 'https://instagram.com', icon: 'ig-icon' },
 ];
 
 export const mockNavigation = [

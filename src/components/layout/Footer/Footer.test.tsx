@@ -67,9 +67,12 @@ describe('Footer', () => {
     it('renders the special photographer link', () => {
       renderWithRouter(<Footer />);
 
-      const link = screen.getByRole('link', { name: 'telegram' });
+      const link = screen.getByRole('link', {
+        name: 'Instagram — фотограф Івано-Франківськ, Львів',
+      });
+
       expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute('href', 'https://t.me');
+      expect(link).toHaveAttribute('href', 'https://instagram.com');
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveTextContent('ФОТОГРАФ ІВАНО-ФРАНКІВСЬК, ЛЬВІВ');
     });
@@ -111,7 +114,7 @@ describe('Footer', () => {
   it('renders the copyright text', () => {
     renderWithRouter(<Footer />);
     const copyright = screen.getByText(
-      /Анастасія Кугіт - Фотограф в м. Івано-Франківськ, Львів. 2025 \| Політика конфіденційності/,
+      /Анастасія Кугіт - Фотограф в м. Івано-Франківськ, Львів. 2026 \| Політика конфіденційності/,
     );
     expect(copyright).toBeInTheDocument();
   });
