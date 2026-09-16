@@ -16,11 +16,6 @@ const routesConfig = [
   {
     path: ROUTES.HOME,
     element: <Layout />,
-    errorElement: (
-      <Suspense fallback={<Loader fullScreen />}>
-        <NotFound />
-      </Suspense>
-    ),
     children: [
       { index: true, element: <Home /> },
       { path: ROUTES.SERVICE_DETAILS, element: <ServiceDetails /> },
