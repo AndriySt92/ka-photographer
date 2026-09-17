@@ -28,16 +28,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "jest.setup.ts",
-    "tests",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.spec.ts",
-    "**/*.spec.tsx"
-  ],
+  "exclude": ["node_modules", "dist", "coverage", "tests"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
