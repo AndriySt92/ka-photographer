@@ -33,12 +33,7 @@ const ServiceBannerContent = ({ name, details, value }: ServiceBannerTextProps) 
   const isIndividual = name === 'Індивідуальна зйомка';
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={staggerContainer(0.7, 0.1, 0.3)}
-      className="flex flex-1 flex-col justify-between"
-    >
+    <div className="flex flex-1 flex-col justify-between">
       {/* Title */}
       <motion.div variants={fadeIn} className="text-center sm:text-left">
         {isGroupOrExpress && (
@@ -111,7 +106,7 @@ const ServiceBannerContent = ({ name, details, value }: ServiceBannerTextProps) 
           />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

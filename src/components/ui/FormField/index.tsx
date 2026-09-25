@@ -92,30 +92,6 @@ const FormField = <T extends FieldValues>({
       >
         {label}
       </motion.label>
-      {/* <label
-        htmlFor={name}
-        className="pointer-events-none absolute left-0 uppercase text-white opacity-70"
-        data-testid={`label-${name}`}
-      >
-        <motion.span
-          initial={false}
-          animate={{
-            y: hasFocusOrValue ? -16 : 10,
-            opacity: hasFocusOrValue ? 0.8 : 1,
-          }}
-          transition={{
-            duration: 0.8,
-            ease: 'easeOut',
-            type: 'spring',
-          }}
-          className={cn(
-            hasFocusOrValue ? 'text-sm xl:text-base' : 'text-sm xl:text-base',
-            labelClassName,
-          )}
-        >
-          {label}
-        </motion.span>
-      </label> */}
 
       <div className="relative">
         {as === 'input' ? (

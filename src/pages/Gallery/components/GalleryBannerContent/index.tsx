@@ -1,6 +1,8 @@
-import { MButton, SessionOrderModal, Typography } from '@/components';
+import { motion } from 'framer-motion';
+
+import { Button, SessionOrderModal, Typography } from '@/components';
 import { useModal } from '@/hooks';
-import { fadeIn, fadeInLeft, fadeInRight } from '@/lib';
+import { fadeIn, fadeInBottom, fadeInRight } from '@/lib';
 
 const GalleryBannerContent = () => {
   const { closeModal, openModal, isOpenModal } = useModal();
@@ -13,7 +15,7 @@ const GalleryBannerContent = () => {
         size="extraLarge"
         className="[@media(max-width:599px)]:!text-[60px]"
         animated
-        parentMotionProps={{ variants: fadeInLeft }}
+        parentMotionProps={{ variants: fadeIn }}
       >
         Галерея
       </Typography>
@@ -29,14 +31,11 @@ const GalleryBannerContent = () => {
         >
           Кожне фото — окрема історія.
         </Typography>
-        <MButton
-          onClick={openModal}
-          size="textLg"
-          variants={fadeIn}
-          className="self-center sm:self-start"
-        >
-          Замовити
-        </MButton>
+        <motion.div className="text-center sm:text-left" variants={fadeInBottom}>
+          <Button size="textLg" onClick={openModal}>
+            Замовити
+          </Button>
+        </motion.div>
 
         {/* Modal */}
         <SessionOrderModal onClose={closeModal} isOpen={isOpenModal} />

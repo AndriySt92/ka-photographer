@@ -25,7 +25,7 @@ const TextContent = () => {
         animate="visible"
         transition={{
           type: 'spring',
-          visualDuration: 0.6,
+          visualDuration: 0.1,
           bounce: 0.25,
         }}
       >
@@ -42,7 +42,7 @@ const TextContent = () => {
             }}
             animated
             parentMotionProps={{
-              variants: staggerContainer(),
+              variants: staggerContainer(0.2, 1.5),
             }}
             childrenVariants={fadeIn}
           />
@@ -57,9 +57,9 @@ const TextContent = () => {
               childrenClasses={{ 1: 'text-right' }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0.1),
+                variants: staggerContainer(0.35, 0.8, 0.2),
               }}
-              childrenVariants={fadeInBottom}
+              childrenVariants={fadeInLeft}
             />
             <motion.div className="ml-2" variants={fadeIn}>
               <Icon
@@ -81,7 +81,7 @@ const TextContent = () => {
             className="!leading-[0.9] sm:mb-0 2xl:text-2xl "
             animated
             parentMotionProps={{
-              variants: staggerContainer(0, 0.1),
+              variants: staggerContainer(0, 0.8, 0.2),
             }}
             childrenVariants={fadeInLeft}
           />
@@ -98,7 +98,7 @@ const TextContent = () => {
               }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0, 0.1),
+                variants: staggerContainer(0, 0.7, 0.2),
               }}
               childrenVariants={fadeInBottom}
             />

@@ -80,7 +80,7 @@ const About = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ amount: 0.2, once: true }}
-            variants={staggerContainer(0, 0.3, 0.3)}
+            variants={staggerContainer(0, 0.3, 0.2)}
             className="relative h-full w-full space-y-4 lg:-left-[56px] lg:-top-10 lg:w-[112%] lg:space-y-0 xl:-left-[76px] xl:-top-16"
           >
             {/* First text circle */}
@@ -115,7 +115,7 @@ const About = () => {
                 parentMotionProps={{
                   initial: 'hidden',
                   whileInView: 'visible',
-                  variants: staggerContainer(),
+                  variants: staggerContainer(0.3, 1, 0.2),
                   viewport: { amount: 0.2, once: true },
                 }}
                 childrenVariants={fadeInRight}

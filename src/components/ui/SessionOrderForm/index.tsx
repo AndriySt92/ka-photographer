@@ -160,7 +160,7 @@ const SessionOrderForm = ({ sessionType, className, onSubmitSuccess }: SessionOr
       />
 
       {/* Button */}
-      <motion.div layout className="w-fit self-center sm:self-end" variants={fadeInWithOpacity}>
+      <motion.div className="w-fit self-center sm:self-end" variants={fadeInWithOpacity}>
         <Button
           className="w-36 sm:w-[150px]"
           type="submit"

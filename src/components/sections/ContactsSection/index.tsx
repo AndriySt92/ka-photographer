@@ -23,7 +23,7 @@ const ContactsSection = ({ isPage }: ContactsSectionProps) => {
   return (
     <motion.div
       className="pointer-events-none relative"
-      variants={staggerContainer(0, 0.3, 0.2)}
+      variants={staggerContainer(0, 0.3, 0.13)}
       {...animationProps}
       data-testid="contacts-section-root"
     >
