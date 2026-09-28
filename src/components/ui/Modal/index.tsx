@@ -66,7 +66,7 @@ const Modal = ({ children, onClose, isOpen, title, withCloseButton = true }: Pro
             data-testid="modal-overlay"
           >
             <div
-              className="relative max-h-[95vh] w-full min-w-0 max-w-[360px] overflow-y-auto overflow-x-hidden rounded-2xl border border-secondary/90 bg-primary p-6 sm:mx-2 sm:max-w-xl"
+              className="relative flex max-h-[95vh] w-full min-w-0 max-w-[360px] flex-col overflow-hidden rounded-2xl border border-secondary/90 bg-primary p-6 sm:mx-2 sm:max-w-xl sm:p-8 xl:p-10"
               onClick={(e) => e.stopPropagation()}
               data-testid="modal-content"
             >
@@ -78,16 +78,19 @@ const Modal = ({ children, onClose, isOpen, title, withCloseButton = true }: Pro
                   aria-expanded={isOpen}
                   className="z-8 absolute right-2 top-2 h-8 w-8 rounded-lg bg-secondary/10 p-2 backdrop-blur-sm hover:scale-105 hover:bg-secondary/15"
                 >
-                  <Icon name="close" icon={close} size=" h-4 aspect-auto" />
+                  <Icon name="close" icon={close} size="h-4 aspect-auto" />
                 </Button>
               )}
 
-              <div className="mb-6 border-b border-secondary/30 pb-3 pt-1 sm:pb-4 sm:pt-2">
+              {/* Fixed header */}
+              <div className="shrink-0 border-b border-secondary/30 pb-3 pt-1 sm:pb-4 sm:pt-2">
                 <Typography parentAs="h2" size="2xl" align="center" className="text-xl">
                   {title}
                 </Typography>
               </div>
-              {children}
+
+              {/* Scrollable children */}
+              <div className="min-h-0 overflow-y-auto overflow-x-hidden pb-2 pt-5">{children}</div>
             </div>
           </motion.div>
         </>
