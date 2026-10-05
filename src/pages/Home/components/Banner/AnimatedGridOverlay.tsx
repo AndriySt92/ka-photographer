@@ -1,19 +1,21 @@
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 import { useAspectRatio } from '@/hooks';
-import { fadeIn } from '@/lib';
 
 const ROWS = 6;
 let COLUMNS = 12;
 
 const AnimatedSquare = () => (
-  <motion.div
-    className="hidden h-full w-full bg-primary lg:block"
-    initial={{ opacity: 1 }}
-    whileHover={{ opacity: 0, transition: { duration: 0.1 } }}
-    transition={{ opacity: { duration: 1.5 } }}
-  />
+  <div className="hidden h-full w-full bg-primary transition-opacity duration-[2000ms] hover:opacity-0 hover:duration-100 lg:block" />
 );
+
+const fadeInWithOpacity: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1, ease: 'easeOut' },
+  },
+};
 
 const AnimatedGridOverlay = () => {
   const aspectRatio = useAspectRatio();
@@ -38,7 +40,7 @@ const AnimatedGridOverlay = () => {
 
   return (
     <motion.div
-      variants={fadeIn}
+      variants={fadeInWithOpacity}
       initial="hidden"
       animate="visible"
       className="absolute inset-0 z-10 hidden w-full overflow-hidden lg:block [@media(pointer:fine)]:lg:block"

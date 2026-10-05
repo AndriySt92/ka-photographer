@@ -1,9 +1,36 @@
+import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 import { locationBanner } from '@/assets/icons';
 import { Icon, Typography } from '@/components';
 import { useWindowSize } from '@/hooks';
-import { fadeIn, fadeInBottom, fadeInLeft, staggerContainer } from '@/lib';
+import { staggerContainer } from '@/lib';
+
+const fadeInWithOpacity: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1, ease: 'easeOut' },
+  },
+};
+
+const fadeInLeft: Variants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1, ease: 'easeOut' },
+  },
+};
+
+const fadeInBottom: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: 'easeOut' },
+  },
+};
 
 const TextContent = () => {
   const { height, width } = useWindowSize();
@@ -42,9 +69,9 @@ const TextContent = () => {
             }}
             animated
             parentMotionProps={{
-              variants: staggerContainer(0.2, 1.5),
+              variants: staggerContainer(0.1, 1, 0.22),
             }}
-            childrenVariants={fadeIn}
+            childrenVariants={fadeInWithOpacity}
           />
 
           {/* Location section */}
@@ -57,11 +84,11 @@ const TextContent = () => {
               childrenClasses={{ 1: 'text-right' }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0.35, 0.8, 0.2),
+                variants: staggerContainer(0.2, 0.8, 0.2),
               }}
               childrenVariants={fadeInLeft}
             />
-            <motion.div className="ml-2" variants={fadeIn}>
+            <motion.div className="ml-2" variants={fadeInWithOpacity}>
               <Icon
                 icon={locationBanner}
                 name="location"
@@ -81,7 +108,7 @@ const TextContent = () => {
             className="!leading-[0.9] sm:mb-0 2xl:text-2xl "
             animated
             parentMotionProps={{
-              variants: staggerContainer(0, 0.8, 0.2),
+              variants: staggerContainer(0, 0.6, 0.15),
             }}
             childrenVariants={fadeInLeft}
           />
@@ -98,7 +125,7 @@ const TextContent = () => {
               }}
               animated
               parentMotionProps={{
-                variants: staggerContainer(0, 0.7, 0.2),
+                variants: staggerContainer(0, 0.5, 0.12),
               }}
               childrenVariants={fadeInBottom}
             />
