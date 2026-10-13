@@ -1,0 +1,45 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+coverage
+
+# Local environment files
+.env.local
+.env.*.local
+
+# Git & version control
+.git
+.gitignore
+
+# IDE / editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Logs & temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test & coverage
+__mocks__
+tests
+
+# Husky & git hooks
+.husky
+
+# Misc configs (optional – keep what you need for build)
+.prettierrc
+eslint.config.js
+jest.config.js
+
+# Readme & other docs
+README.md

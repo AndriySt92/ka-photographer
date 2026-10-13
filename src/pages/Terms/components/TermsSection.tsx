@@ -1,0 +1,99 @@
+import { motion } from 'framer-motion';
+
+import { Icon, Typography } from '@/components';
+import { terms } from '@/config';
+import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib';
+
+interface TermsItemProps {
+  icon: string;
+  title: string;
+  subtitle: string;
+  isEvenItem: boolean;
+  isLastItem: boolean;
+}
+
+const TermsItem = ({ icon, title, subtitle, isEvenItem, isLastItem }: TermsItemProps) => {
+  return (
+    <motion.div
+      variants={isEvenItem ? fadeInLeft : fadeInRight}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div className="flex flex-col gap-8 md:flex-row">
+        {/* Icon with connector */}
+        <div className="relative hidden w-16 flex-shrink-0 md:block">
+          <motion.div
+            className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/20 bg-black pb-1 text-2xl"
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          >
+            <Icon name={title} icon={icon} size="h-8 w-8" />
+          </motion.div>
+
+          {/* Vertical connector */}
+          {!isLastItem && (
+            <div className="absolute left-1/2 top-16 z-10 h-[calc(100%+2rem)] w-1 -translate-x-1/2 transform bg-accent/40 lg:h-[94%]"></div>
+          )}
+        </div>
+
+        {/* Term content */}
+        <motion.div
+          className="section-border flex-1 rounded-3xl bg-gradient-to-r from-accent/40 to-primary p-6 backdrop-blur-lg sm:p-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <div className="mb-6 flex items-center gap-4">
+            <Icon name={title} icon={icon} size="h-6 w-6" className="md:hidden" />
+
+            <div className="relative flex items-center py-2 sm:py-1">
+              <Typography
+                parentAs="h3"
+                size="5xl"
+                className="relative z-50 w-full uppercase leading-[1.1] sm:normal-case"
+              >
+                {title}
+              </Typography>
+            </div>
+          </div>
+
+          {subtitle.split('.').map((line, i) => (
+            <Typography key={i} parentAs="p" size="lg" className="mb-3 normal-case opacity-80">
+              {line}
+            </Typography>
+          ))}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+const TermsSection = () => {
+  return (
+    <motion.div
+      className="space-y-sm relative"
+      variants={staggerContainer(0.9, 0.3, 0.1)}
+      initial="hidden"
+      animate="visible"
+    >
+      {terms.map(({ icon, title, subtitle }, index) => {
+        const isEvenItem = (index + 1) % 2 === 0;
+        const isLastItem = index === terms.length - 1;
+
+        return (
+          <motion.div key={title} variants={isEvenItem ? fadeInLeft : fadeInRight}>
+            <TermsItem
+              isEvenItem={isEvenItem}
+              isLastItem={isLastItem}
+              icon={icon}
+              title={title}
+              subtitle={subtitle.desktop}
+            />
+          </motion.div>
+        );
+      })}
+    </motion.div>
+  );
+};
+
+export default TermsSection;

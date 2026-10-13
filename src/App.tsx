@@ -1,7 +1,13 @@
-import './App.css';
+import { Toast } from '@/components';
+import { AppRoutes } from '@/router';
 
 const App = () => {
-  return <div></div>;
+  return (
+    <>
+      <AppRoutes />
+      <Toast />
+    </>
+  );
 };
 
 export default App;

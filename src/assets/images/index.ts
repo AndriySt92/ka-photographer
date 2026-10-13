@@ -1,0 +1,12 @@
+export { default as avatar } from './avatar.webp';
+export { default as banner } from './banner.webp';
+export { default as bannerMobile } from './banner_mobile.webp';
+export { default as expressBanner } from './express_banner.webp';
+export { default as groupBanner } from './group_banner.webp';
+export { default as individualBanner } from './individual_banner.webp';
+export { default as logo } from './logo.webp';
+export { default as loveStoryBanner } from './love-story_banner.webp';
+export { default as servicesExpress } from './services_express.webp';
+export { default as servicesGroup } from './services_group.webp';
+export { default as servicesIndividual } from './services_individual.webp';
+export { default as servicesLoveStory } from './services_love-story.webp';

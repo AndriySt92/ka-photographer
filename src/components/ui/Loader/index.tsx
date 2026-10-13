@@ -1,0 +1,58 @@
+import { motion } from 'framer-motion';
+
+import { cn } from '@/lib';
+
+const DOT_COUNT = 3;
+
+const containerVariants = {
+  initial: { transition: { staggerChildren: 0.18 } },
+  animate: { transition: { staggerChildren: 0.18 } },
+};
+
+const dotVariants = {
+  initial: { y: '0%' },
+  animate: { y: '100%' },
+};
+
+interface LoaderProps {
+  fullScreen?: boolean;
+  className?: string;
+}
+
+const Loader = ({ fullScreen = false, className }: LoaderProps) => (
+  <div
+    className={cn(
+      'flex items-center justify-center',
+      fullScreen && 'min-h-screen items-center',
+      className,
+    )}
+    data-testid="loader"
+  >
+    <motion.div
+      className="flex h-4 w-20 items-start justify-around"
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      role="status"
+      aria-label="loading"
+    >
+      {Array.from({ length: DOT_COUNT }).map((_, i) => (
+        <motion.span
+          key={i}
+          aria-hidden
+          className="block h-3 w-3 rounded-full bg-white"
+          variants={dotVariants}
+          transition={{
+            duration: 0.6,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
+          }}
+          data-testid="loader-dot"
+        />
+      ))}
+    </motion.div>
+  </div>
+);
+
+export default Loader;

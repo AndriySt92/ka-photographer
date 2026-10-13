@@ -1,0 +1,103 @@
+import type { ReactNode } from 'react';
+import { useEffect, useMemo } from 'react';
+import ReactDOM from 'react-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { close } from '@/assets';
+import { useEventListener } from '@/hooks';
+import { modalVariants, overlayVariants } from '@/lib';
+
+import { Button } from '../Button';
+import Icon from '../Icon';
+import Typography from '../Typography';
+
+interface Props {
+  children: ReactNode;
+  onClose: () => void;
+  isOpen: boolean;
+  title: string;
+  withCloseButton?: boolean;
+}
+
+const Modal = ({ children, onClose, isOpen, title, withCloseButton = true }: Props) => {
+  const modalRoot = useMemo(() => document.getElementById('modal-root')!, []);
+
+  useEffect(() => {
+    // Disable scrolling when the modal is open
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen]);
+
+  const handleEscape = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  // Add listener for keydown event
+  useEventListener('keydown', handleEscape);
+
+  return ReactDOM.createPortal(
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop overlay */}
+          <motion.div
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-70"
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            data-testid="modal-backdrop"
+          />
+
+          {/* Modal content */}
+          <motion.div
+            className="fixed inset-0 z-[70] flex items-center justify-center overflow-hidden"
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={onClose}
+            data-testid="modal-overlay"
+          >
+            <div
+              className="relative flex max-h-[95vh] w-full min-w-0 max-w-[360px] flex-col overflow-hidden rounded-2xl border border-secondary/90 bg-primary p-6 sm:mx-2 sm:max-w-xl sm:p-8 xl:p-10"
+              onClick={(e) => e.stopPropagation()}
+              data-testid="modal-content"
+            >
+              {withCloseButton && (
+                <Button
+                  onClick={onClose}
+                  intent="minimal"
+                  aria-label="Закрити"
+                  aria-expanded={isOpen}
+                  className="z-8 absolute right-2 top-2 h-8 w-8 rounded-lg bg-secondary/10 p-2 backdrop-blur-sm hover:scale-105 hover:bg-secondary/15"
+                >
+                  <Icon name="close" icon={close} size="h-4 aspect-auto" />
+                </Button>
+              )}
+
+              {/* Fixed header */}
+              <div className="shrink-0 border-b border-secondary/30 pb-3 pt-1 sm:pb-4 sm:pt-2">
+                <Typography parentAs="h2" size="2xl" align="center" className="text-xl">
+                  {title}
+                </Typography>
+              </div>
+
+              {/* Scrollable children */}
+              <div className="min-h-0 overflow-y-auto overflow-x-hidden pb-2 pt-5">{children}</div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>,
+    modalRoot,
+  );
+};
+
+export default Modal;
